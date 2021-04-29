@@ -1,0 +1,305 @@
+//global includes
+#include<stdio.h>
+#include<stdbool.h>
+//project includes
+#include"menu.h"
+
+//prints the menus
+void printMainMenu(void){
+  printf("========================================\n");
+  printf("|     ========= MAIN MENU =========    |\n");
+  printf("|                                      |\n");
+  printf("|              1-File                  |\n");
+  printf("|              2-Books                 |\n");
+  printf("|              3-Clients               |\n");
+  printf("|              4-Orders                |\n");
+  printf("|              5-Operations            |\n");
+  printf("|              0-Exit Program          |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");
+}
+
+void printFileMenu(void){
+  printf("========================================\n");
+  printf("|     ========= FILE MENU =========    |\n");
+  printf("|                                      |\n");
+  printf("|              1-New                   |\n");
+  printf("|              2-Open                  |\n");
+  printf("|              3-Save                  |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");
+}
+
+void printBooksMenu(void){
+  printf("========================================\n");
+  printf("|    ========= BOOKS MENU =========    |\n");
+  standardOperations();
+}
+
+void printClientsMenu(void){
+  printf("========================================\n");
+  printf("|   ========= CLIENTS MENU =========   |\n");
+  standardOperations();
+}
+
+void standardOperations(void){
+  printf("|                                      |\n");
+  printf("|              1-Insert                |\n");
+  printf("|              2-Remove                |\n");
+  printf("|              3-Change                |\n");
+  printf("|              4-Consult               |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
+}
+
+void printOrdersMenu(void){
+  printf("========================================\n");
+  printf("|    ========= ORDER MENU =========    |\n");
+  printf("|                                      |\n");
+  printf("|              1-Insert                |\n");
+  printf("|              2-Remove                |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
+}
+
+void printOperationsMenu(void){
+  printf("========================================\n");
+  printf("|     ======== OPERATIONS ========     |\n");
+  printf("|                                      |\n");
+  printf("|              1-Operation             |\n");
+  printf("|              2-Operation             |\n");
+  printf("|              3-Operation             |\n");
+  printf("|              4-Operation             |\n");
+  printf("|              5-Operation             |\n");
+  printf("|              6-Operation             |\n");
+  printf("|              7-Operation             |\n");
+  printf("|              8-Operation             |\n");
+  printf("|              9-Operation             |\n");
+  printf("|              10-Operation            |\n");
+  printf("|              11-Operation            |\n");
+  printf("|              12-Operation            |\n");
+  printf("|              13-Operation            |\n");
+  printf("|              14-Operation            |\n");
+  printf("|              15-Operation            |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
+}
+
+//read option
+size_t getOption(void){
+  size_t option;
+  if(scanf("%zu",&option)==EOF){
+    if(ferror(stdin)){
+      perror("ERROR: There was an error reading the option!");
+    }
+    option=-1;
+  }
+  getchar(); 
+  return option; 
+}
+
+//menu handling
+void mainMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printMainMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        fileMenu();
+        break;
+      case 2:
+        bookMenu();
+        break;
+      case 3:
+        clientMenu();
+        break;
+      case 4:
+        orderMenu();
+        break;
+      case 5:
+        operationMenu();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    } 
+  }
+}
+
+void fileMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printFileMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        //newFile();
+        break;
+      case 2:
+        //openFile();
+        break;
+      case 3:
+        //saveFile();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+void bookMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printBooksMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        //insertBook();
+        break;
+      case 2:
+        //removeBook();
+        break;
+      case 3:
+        //changeBook();
+        break;
+      case 4:
+        //consultBook();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+void clientMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printClientsMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        //insertClient();
+        break;
+      case 2:
+        //removeClient();
+        break;
+      case 3:
+        //changeClient();
+        break;
+      case 4:
+        //consultClient();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+void orderMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printOrdersMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        //insertOrder();
+        break;
+      case 2:
+        //removeOrder();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+void operationMenu(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printOperationsMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        //operation1();
+        break;
+      case 2:
+        //operation2();
+        break;
+      case 3:
+        //operation3();
+        break;
+      case 4:
+        //operation4();
+        break;
+      case 5:
+        //operation5();
+        break;
+      case 6:
+        //operation6();
+        break;
+      case 7:
+        //operation7();
+        break;
+      case 8:
+        //operation8();
+        break;
+      case 9:
+        //operation9();
+        break;
+      case 10:
+        //operation10();
+        break;
+      case 11:
+        //operation11();
+        break;
+      case 12:
+        //operation12();
+        break;
+      case 13:
+        //operation13();
+        break;
+      case 14:
+        //operation14();
+        break;
+      case 15:
+        //operation15();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
