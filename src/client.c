@@ -96,27 +96,24 @@ size_t linkedlength(clientNODE *head){
   return count;
 }
 
-// /**
-//  * Searches for the specified value in the linked list (char version)
-//  * @param *head the address of the head
-//  * @param value the value to append
-//  * @return the index of the value in the linked list or -1 otherwise.
-//  */
-// int64_t clsearchlinked(cNODE *head,char value){
-//   if(head==NULL){
-//     fprintf(stderr,"ERROR: The list is empty!\n");
-//     exit(NULL_LIST);
-//   }
-//   int64_t count=0;
-//   while(head!=NULL){
-//     if(head->data==value){
-//       return count;
-//     }
-//     head=head->next;
-//     ++count;
-//   }
-//   return -1;
-// }
+/**
+ * Searches for the specified NIF in the clients' linked list
+ * @param *head the address of the head
+ * @param value the value to search for
+ * @return the client with the specified NIF or NULL if there isn't a client with that NIF
+ */
+bool lsearchlinked(clientNODE *head,uint32_t value){
+  if(head==NULL){
+    return false;
+  }
+  while(head!=NULL){
+    if(head->data.NIF==value){
+      return true;
+    }
+    head=head->next;
+  }
+  return false;
+}
 
 /**
  * Append element at the start of the client's linked list

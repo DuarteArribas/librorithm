@@ -15,6 +15,7 @@ clientNODE *createLinked(CLIENT value);
 void freelinked(clientNODE *head);
 bool isemptylist(clientNODE *head);
 size_t linkedlength(clientNODE *head);
+bool lsearchlinked(clientNODE *head,uint32_t value);
 void sappendlinked(clientNODE **head,CLIENT value);
 void eappendlinked(clientNODE *head,CLIENT value);
 #endif //client_h
