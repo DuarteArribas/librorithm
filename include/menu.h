@@ -1,14 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 //function prototypes
-void printMainMenu(void);
-void printFileMenu(void);
-void printBooksMenu(void);
-void printClientsMenu(void);
-void standardOperations(void);
-void printOrdersMenu(void);
-void printOperationsMenu(void);
-size_t getOption(void);
 void mainMenu(void);
 void fileMenu(void);
 void bookMenu(void);

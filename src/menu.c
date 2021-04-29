@@ -5,6 +5,7 @@
 #include"menu.h"
 
 //prints the menus
+static
 void printMainMenu(void){
   printf("========================================\n");
   printf("|     ========= MAIN MENU =========    |\n");
@@ -19,6 +20,7 @@ void printMainMenu(void){
   printf("========================================\n");
 }
 
+static
 void printFileMenu(void){
   printf("========================================\n");
   printf("|     ========= FILE MENU =========    |\n");
@@ -31,18 +33,7 @@ void printFileMenu(void){
   printf("========================================\n");
 }
 
-void printBooksMenu(void){
-  printf("========================================\n");
-  printf("|    ========= BOOKS MENU =========    |\n");
-  standardOperations();
-}
-
-void printClientsMenu(void){
-  printf("========================================\n");
-  printf("|   ========= CLIENTS MENU =========   |\n");
-  standardOperations();
-}
-
+static
 void standardOperations(void){
   printf("|                                      |\n");
   printf("|              1-Insert                |\n");
@@ -54,6 +45,21 @@ void standardOperations(void){
   printf("========================================\n");  
 }
 
+static
+void printBooksMenu(void){
+  printf("========================================\n");
+  printf("|    ========= BOOKS MENU =========    |\n");
+  standardOperations();
+}
+
+static
+void printClientsMenu(void){
+  printf("========================================\n");
+  printf("|   ========= CLIENTS MENU =========   |\n");
+  standardOperations();
+}
+
+static
 void printOrdersMenu(void){
   printf("========================================\n");
   printf("|    ========= ORDER MENU =========    |\n");
@@ -65,6 +71,7 @@ void printOrdersMenu(void){
   printf("========================================\n");  
 }
 
+static
 void printOperationsMenu(void){
   printf("========================================\n");
   printf("|     ======== OPERATIONS ========     |\n");
@@ -90,6 +97,7 @@ void printOperationsMenu(void){
 }
 
 //read option
+static
 size_t getOption(void){
   size_t option;
   if(scanf("%zu",&option)==EOF){

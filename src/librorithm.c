@@ -7,6 +7,9 @@
 #include"librorithm.h"
 #include"handlers.h"
 #include"menu.h"
+#include"client.h"
+
+extern clientNODE *clientlist;
 
 int main(void){
   //handle signals
