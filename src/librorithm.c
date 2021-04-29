@@ -26,5 +26,7 @@ int main(void){
   }
   //menu
   mainMenu();
+  //cleanup
+  freelinked(clientlist);
   return 0;
 }

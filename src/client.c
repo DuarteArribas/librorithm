@@ -1,6 +1,7 @@
 //global includes
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdbool.h>
 //project includes
 #include"mem.h"
 #include"clientOperations.h"
@@ -30,6 +31,15 @@ void freelinked(clientNODE *head){
     clnmem(head);
     head=temp;
   }
+}
+
+/**
+ * Checks if the list is empty
+ * @param *head the address of the head
+ * @return true if the list is empty and false otherwise
+ */
+bool isemptylist(clientNODE *head){
+  return head==NULL?true:false;
 }
 
 // /**
@@ -129,7 +139,7 @@ void sappendlinked(clientNODE **head,CLIENT value){
  * @param *head the address of the head
  * @param value the value to append
  */
-void ceappendlinked(clientNODE *head,CLIENT value){
+void eappendlinked(clientNODE *head,CLIENT value){
   if(head==NULL){
     fprintf(stderr,"ERROR: The list is empty!\n");
     exit(NULL_LIST);

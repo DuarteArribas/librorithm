@@ -3,6 +3,10 @@
 #include<stdbool.h>
 //project includes
 #include"menu.h"
+#include"clientOperations.h"
+#include"client.h"
+//globals
+extern clientNODE *clientlist;
 
 //prints the menus
 static
@@ -206,7 +210,13 @@ void clientMenu(void){
     option=getOption();
     switch(option){
       case 1:
-        //insertClient();
+        if(isemptylist(clientlist)){
+          clientlist=createLinked(newClient());
+        }
+        else{
+          eappendlinked(clientlist,newClient());
+        }
+        printf("\tClient added with success!\n");
         break;
       case 2:
         //removeClient();
