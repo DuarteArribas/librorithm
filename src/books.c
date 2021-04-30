@@ -9,40 +9,48 @@
 
 LIVRO createBook(void){
     LIVRO book;
-    printf("ISBN: \n");
-    scanf("%d", &book.ISBN);
-    printf("Title: \n");
+    printf("ISBN: ");
+    scanf("%ld", &book.ISBN);
+    while(book.ISBN<1000000000000 || book.ISBN>9999999999999){
+      printf("Wrong ISBN (Insert again): ");
+      scanf("%ld", &book.ISBN);
+    }
+    printf("Title: ");
     scanf("\n%[^\n]s",book.title);
-    printf("Language: \n");
+    printf("Language: ");
     scanf("\n%[^\n]s",book.language);
-    printf("First Author: \n");
+    printf("First Author: ");
     scanf("\n%[^\n]s",book.firstAuthor);
-    printf("Second Author: \n");
-    fgets(book.secondAuthor, 100, stdin);
-    printf("Editor: \n");
-    fgets(book.editor, 100, stdin);
-    printf("Year of publish: \n");
+    printf("Second Author: ");
+    scanf("\n%[^\n]s",book.secondAuthor);
+    printf("Editor: ");
+    scanf("\n%[^\n]s",book.editor);
+    printf("Year of publish: ");
     scanf("%d", &book.yearPublish);
-    printf("Cientific Area: \n");
-    fgets(book.cientificArea, 100, stdin);
-    printf("Price: \n");
+    printf("Cientific Area: ");
+    scanf("\n%[^\n]s",book.cientificArea);
+    printf("Price: ");
     scanf("%f", &book.price);
-    printf("Stock Quantity: \n");
+    printf("Stock Quantity: ");
     scanf("%d", &book.qtdStock);
     return book;
 }
 
 void showBook(LIVRO book){
-    printf("ISBN: %d\n", book.ISBN);
-    printf("Title: %s\n", book.title);
-    printf("Language: %s\n", book.language);
-    printf("First Author: %s\n", book.firstAuthor);
-    printf("Second Author: %s\n", book.secondAuthor);
-    printf("Editor: %s\n", book.editor);
-    printf("Year of publish: %d\n", book.yearPublish);
-    printf("Cientific Area: %s\n", book.cientificArea);
-    printf("Price: %f\n", book.price);
-    printf("Stock Quantity: %d\n", book.qtdStock);
+  printf("================ Book ==================\n");
+  printf("                                        \n");
+  printf("   ISBN:           %ld                  \n", book.ISBN);
+  printf("   Title:          %s                   \n", book.title);
+  printf("   Language:       %s                   \n", book.language);
+  printf("   First Author:   %s                   \n", book.firstAuthor);
+  printf("   Second Author:  %s                   \n", book.secondAuthor);
+  printf("   Editor:         %s                   \n", book.editor);
+  printf("   Year Publish:   %d                   \n", book.yearPublish);
+  printf("   Cientific Area: %s                   \n", book.cientificArea);
+  printf("   Price:          %.2f                   \n", book.price);
+  printf("   Stock Quantity: %d                   \n", book.qtdStock);
+  printf("                                        \n");  
+  printf("========================================\n");
 }
 
 int  CompareBooks (LIVRO X, LIVRO Y){  
@@ -56,7 +64,7 @@ int  CompareBooks (LIVRO X, LIVRO Y){
 /*
 * Devolve 0 caso sejam iguais
 */
-int  CompareBooksISBN (LIVRO X, int ISBN){  
+int  CompareBooksISBN (LIVRO X, long int ISBN){  
   if (X.ISBN > ISBN)
     return 1;
   if (X.ISBN < ISBN)

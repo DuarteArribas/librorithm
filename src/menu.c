@@ -5,8 +5,11 @@
 #include"menu.h"
 #include"clientOperations.h"
 #include"client.h"
+#include"booksOperations.h"
+#include"books.h"
 //globals
 extern clientNODE *clientlist;
+extern PNodoAB Books;
 
 //prints the menus
 static
@@ -54,6 +57,19 @@ void printBooksMenu(void){
   printf("========================================\n");
   printf("|    ========= BOOKS MENU =========    |\n");
   standardOperations();
+}
+
+static
+void printBookssubMenuConsult(void){
+  printf("========================================\n");
+  printf("|    ========= Show BOOKS =========    |\n");
+  printf("|              1-ISBN                  |\n");
+  printf("|              2-Título                |\n");
+  printf("|    3-First Author and year publish   |\n");
+  printf("|              4-Show All              |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
 }
 
 static
@@ -181,7 +197,7 @@ void bookMenu(void){
     option=getOption();
     switch(option){
       case 1:
-        //insertBook();
+        Books=insertBook(Books);
         break;
       case 2:
         //removeBook();
@@ -190,7 +206,47 @@ void bookMenu(void){
         //changeBook();
         break;
       case 4:
-        //consultBook();
+        booksubMenuShow();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+void booksubMenuShow(void){
+  bool exit=false;
+  size_t option;
+  long int ISBN;
+  int yearPublish;
+  char title[100], firstAuthor[100];
+  while(!exit){
+    printBookssubMenuConsult();
+    option=getOption();
+    switch(option){
+      case 1:
+        printf("Insert an ISBN: ");
+        scanf("%ld", &ISBN);
+        PesquisarABPISBN(Books, ISBN);
+        break;
+      case 2:
+        printf("Insert Title: ");
+        scanf("\n%[^\n]s",title);
+        PesquisarABPTitle(Books, title);
+        break;
+      case 3:
+        printf("First Author: ");
+        scanf("\n%[^\n]s",firstAuthor);
+        printf("Year Publish: ");
+        scanf("%d", &yearPublish);
+        PesquisarABPAuthorYear(Books, firstAuthor,yearPublish);
+        break;
+      case 4:
+        showALL(Books);
         break;
       case 0:
         exit=true;

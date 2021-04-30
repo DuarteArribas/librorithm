@@ -2,7 +2,7 @@
 #define BOOKS_H
 
 typedef struct{
-    int ISBN;
+    long int ISBN;
     char title[100];
     char language[50];
     char firstAuthor[100];
@@ -25,7 +25,7 @@ void showBook(LIVRO book);
 
 int CompareBooks(LIVRO X, LIVRO Y);
 
-int  CompareBooksISBN (LIVRO X, int ISBN);
+int  CompareBooksISBN (LIVRO X, long int ISBN);
 
 int  CompareBooksTitle (LIVRO X, char * title);
 

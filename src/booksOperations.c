@@ -7,6 +7,8 @@
 #include"booksOperations.h"
 #include"books.h"
 
+PNodoAB Books;
+
 PNodoAB CriarAB(void){ 
   PNodoAB T;
   T = NULL;
@@ -135,11 +137,12 @@ PNodoAB RemoverABP (PNodoAB T, LIVRO X) {
   if (CompareBooks(X, T->Elemento) == 0) {
     T = RemoverNodoABP(T);
     return T;
-  }    
+  }
   if (CompareBooks(X, T->Elemento) == -1)
     T->Esquerda = RemoverABP(T->Esquerda, X);
   else
     T->Direita = RemoverABP(T->Direita, X);
+  return T;
 }
 
 int AlturaAB (PNodoAB T) {
@@ -185,25 +188,25 @@ PNodoAB SubstituirNodoDireita (PNodoAB T, LIVRO *X){
   return T;
 }
 
-void PesquisarABPISBN(PNodoAB T, int ISBN){ 
+void PesquisarABPISBN(PNodoAB T, long int ISBN){ 
   if (T == NULL)
     return;
   if (CompareBooksISBN(T->Elemento, ISBN) == 0)
     showBook(T->Elemento);
   if (CompareBooksISBN(T->Elemento, ISBN)==-1)   
-    PesquisarABPISBN(T->Esquerda, ISBN);
-  else
     PesquisarABPISBN(T->Direita, ISBN);
+  else
+    PesquisarABPISBN(T->Esquerda, ISBN);
 }
 
-void PesquisarABPTitulo(PNodoAB T, char titulo[100]){
+void PesquisarABPTitle(PNodoAB T, char title[100]){
   if (T == NULL)
     return;
-  if (CompareBooksTitle(T->Elemento, titulo) == 0)
+  if (CompareBooksTitle(T->Elemento, title) == 0)
     showBook(T->Elemento);   
   
-  PesquisarABPTitulo(T->Esquerda, titulo);
-  PesquisarABPTitulo(T->Direita, titulo);
+  PesquisarABPTitle(T->Esquerda, title);
+  PesquisarABPTitle(T->Direita, title);
   
 }
 
@@ -245,9 +248,9 @@ PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN){
     return P;
   }
   if (CompareBooksISBN(T->Elemento, ISBN)==-1)   
-    return ChangeBookISBN(P,T->Esquerda, ISBN);
-  else
     return ChangeBookISBN(P,T->Direita, ISBN);
+  else
+    return ChangeBookISBN(P,T->Esquerda, ISBN);
 }
 
 PNodoAB RemoveBook(PNodoAB T, LIVRO X){
@@ -330,4 +333,38 @@ void cientificAreaWithMoreBooks(PNodoAB T, CIENTIFIC_QTD **cientific_qtd, int *n
   }
 
   printf("Area científica com mais livres: %s", cientificArea);
+}
+
+PNodoAB insertBook(PNodoAB T){
+  if(T==NULL){
+    T=CriarAB();
+    LIVRO X = createBook();
+    T=InserirABP(T,X);
+  }else{
+    LIVRO x = createBook();
+    while(PesquisarABP(T, x)==1){
+      printf("Book already exist\n");
+      x=createBook();
+    }
+    T=InserirABP(T, x);
+    if(verificarEquilibrio(T)!=1){
+      T=CriarABPEquilibradaIB(T);
+    }
+  }
+  return T;
+}
+
+void showALL(PNodoAB T){
+  if(T==NULL){
+    printf("saiu\n");
+    return;
+  }
+  
+  printf("Mostrou elemento \n");
+  showBook(T->Elemento);
+
+  printf("Esquerda\n");
+  showALL(T->Esquerda);
+  printf("Direita\n");
+  showALL(T->Direita);
 }

@@ -39,9 +39,9 @@ int verificarEquilibrio(PNodoAB T);
 
 PNodoAB SubstituirNodoDireita (PNodoAB T, LIVRO *X);
 
-void PesquisarABPISBN(PNodoAB T, int ISBN);
+void PesquisarABPISBN(PNodoAB T, long int ISBN);
 
-void PesquisarABPTitulo(PNodoAB T, char titulo[100]);
+void PesquisarABPTitle(PNodoAB T, char title[100]);
 
 void PesquisarABPAuthorYear(PNodoAB T, char firstAuthor[100], int yearPublish);
 
@@ -58,5 +58,9 @@ void showRecentBooksCientificArea(PNodoAB P, PNodoAB T, char cientificArea[100],
 void verifyIfExists(LIVRO X, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd);
 
 void cientificAreaWithMoreBooks(PNodoAB T, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd);
+
+PNodoAB insertBook(PNodoAB T);
+
+void showALL(PNodoAB T);
 
 #endif

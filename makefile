@@ -9,7 +9,7 @@ archiveDirectory:=archive
 flags:=-x -std=c17 -Wpedantic -Wall -Wextra
 flags+= -Wshadow -Wundef -Wstrict-prototypes -Wswitch-default -Wno-unused-result
 flags+= -I$(includeDirectory)
-libs:=-lm -lpthread -lyoz -L./libs
+libs:=-lm -lpthread -L./libs
 #sources
 SOURCES:=$(wildcard $(srcDirectory)/*.c)
 
