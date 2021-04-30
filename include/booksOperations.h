@@ -49,7 +49,7 @@ void PesquisarABPEditorCientificArea(PNodoAB T, char editor[100], char cientific
 
 PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN);
 
-PNodoAB RemoveBook(PNodoAB T, LIVRO X);
+PNodoAB RemoveBook(PNodoAB T, long int ISBN);
 
 int seeMostRecentDate(PNodoAB T, char cientificArea[100]);
 

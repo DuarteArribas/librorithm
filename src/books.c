@@ -92,4 +92,26 @@ int CompareBooksEditorCientificArea(LIVRO X,char editor[100], char cientificArea
   return 1;
 }
 
+void bookAlreadyExistsWarning(void){
+  printf("========================================\n"); 
+  printf("|                                      |\n");
+  printf("| Book Already Exists. Insert Another: |\n");
+  printf("|                                      |\n");
+  printf("========================================\n"); 
+}
 
+void bookRemovedWarning(void){
+  printf("========================================\n"); 
+  printf("|                                      |\n");
+  printf("|       Book Successfully Removed      |\n");
+  printf("|                                      |\n");
+  printf("========================================\n"); 
+}
+
+void unregisteredBookWarning(void){
+  printf("========================================\n"); 
+  printf("|                                      |\n");
+  printf("|          Unregistered Book           |\n");
+  printf("|                                      |\n");
+  printf("========================================\n"); 
+}
