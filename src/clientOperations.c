@@ -7,11 +7,14 @@
 //project includes
 #include"clientOperations.h"
 #include"client.h"
-
 //global variables
 extern clientNODE *clientlist;
-static char *plus="+";
+static const char *plus="+";
 
+/**
+ * Creates a new client
+ * @return the new client
+ */
 CLIENT newClient(void){
   //hold input info
   uint32_t NIF;
@@ -46,6 +49,10 @@ CLIENT newClient(void){
   return client;
 }
 
+/**
+ * Ask the user's NIF
+ * @return the NIF
+ */
 uint32_t getNIF(void){
   uint32_t NIF;
   char NIFtemp[100];
@@ -82,6 +89,10 @@ uint32_t getNIF(void){
   }
 }
 
+/**
+ * Asks the user's name
+ * @return the name
+ */
 void getName(char *name){
   char nameTemp[255];
   while(true){
@@ -104,6 +115,10 @@ void getName(char *name){
   }
 }
 
+/**
+ * Asks the user's address
+ * @return the address
+ */
 void getAddress(char *address){
   char addressTemp[255];
   while(true){
@@ -125,6 +140,10 @@ void getAddress(char *address){
   }
 }
 
+/**
+ * Asks the user's phone number
+ * @return the phone number
+ */
 void getPhoneNumber(char *phoneNumber){
   char phoneTemp[100],country[100];
   while(true){
@@ -215,9 +234,13 @@ void getPhoneNumber(char *phoneNumber){
   }
 }
 
+/**
+ * Prints a client's information
+ * @param client the client to print
+ */
 void printClient(CLIENT client){
   printf("===========================================\n");
-  printf("             |> %s                \n",client.name);
+  printf("             |> %s                   \n",client.name);
   printf("                                     \n");
   printf("                 NIF: %"PRIu32"      \n",client.NIF);
   printf("             ADDRESS: %s             \n",client.address);

@@ -8,7 +8,7 @@
 #include"handlers.h"
 #include"menu.h"
 #include"client.h"
-
+//global variables
 extern clientNODE *clientlist;
 
 int main(void){

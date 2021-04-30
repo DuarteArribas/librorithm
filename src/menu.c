@@ -14,18 +14,18 @@
 extern clientNODE *clientlist;
 extern PNodoAB Books;
 
-//prints the menus
+//print the menus
 static
 void printMainMenu(void){
   printf("========================================\n");
   printf("|     ========= MAIN MENU =========    |\n");
   printf("|                                      |\n");
-  printf("|              1-File                  |\n");
-  printf("|              2-Books                 |\n");
-  printf("|              3-Clients               |\n");
-  printf("|              4-Orders                |\n");
-  printf("|              5-Operations            |\n");
-  printf("|              0-Exit Program          |\n");
+  printf("|               1-File                 |\n");
+  printf("|               2-Books                |\n");
+  printf("|               3-Clients              |\n");
+  printf("|               4-Orders               |\n");
+  printf("|               5-Operations           |\n");
+  printf("|               0-Exit Program         |\n");
   printf("|                                      |\n");
   printf("========================================\n");
 }
@@ -35,10 +35,10 @@ void printFileMenu(void){
   printf("========================================\n");
   printf("|     ========= FILE MENU =========    |\n");
   printf("|                                      |\n");
-  printf("|              1-New                   |\n");
-  printf("|              2-Open                  |\n");
-  printf("|              3-Save                  |\n");
-  printf("|              0-Go Back               |\n");
+  printf("|               1-New                  |\n");
+  printf("|               2-Open                 |\n");
+  printf("|               3-Save                 |\n");
+  printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");
 }
@@ -46,11 +46,11 @@ void printFileMenu(void){
 static
 void standardOperations(void){
   printf("|                                      |\n");
-  printf("|              1-Insert                |\n");
-  printf("|              2-Remove                |\n");
-  printf("|              3-Change                |\n");
-  printf("|              4-Consult               |\n");
-  printf("|              0-Go Back               |\n");
+  printf("|               1-Insert               |\n");
+  printf("|               2-Remove               |\n");
+  printf("|               3-Change               |\n");
+  printf("|               4-Consult              |\n");
+  printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
 }
@@ -59,6 +59,13 @@ static
 void printBooksMenu(void){
   printf("========================================\n");
   printf("|    ========= BOOKS MENU =========    |\n");
+  standardOperations();
+}
+
+static
+void printClientsMenu(void){
+  printf("========================================\n");
+  printf("|   ========= CLIENTS MENU =========   |\n");
   standardOperations();
 }
 
@@ -76,22 +83,15 @@ void printBookssubMenuConsult(void){
 }
 
 static
-void printClientsMenu(void){
-  printf("========================================\n");
-  printf("|   ========= CLIENTS MENU =========   |\n");
-  standardOperations();
-}
-
-static
 void printConsultClientsMenu(void){
   printf("========================================\n");
   printf("|   ======== CONSULT CLIENT ========   |\n");
   printf("|                                      |\n");
-  printf("|              1-BY NIF                |\n");
-  printf("|              2-BY NAME               |\n");
-  printf("|              3-BY ADDRESS            |\n");
-  printf("|              4-ALL                   |\n");
-  printf("|              0-Go Back               |\n");
+  printf("|            1-BY NIF                  |\n");
+  printf("|            2-BY NAME                 |\n");
+  printf("|            3-BY ADDRESS              |\n");
+  printf("|            4-ALL CLIENTS             |\n");
+  printf("|            0-Go Back                 |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
 }
@@ -135,9 +135,9 @@ void printOperationsMenu(void){
 
 //read option
 static
-size_t getOption(void){
-  size_t option;
-  if(scanf("%zu",&option)==EOF){
+ssize_t getOption(void){
+  ssize_t option;
+  if(scanf("%zd",&option)==EOF){
     if(ferror(stdin)){
       perror("ERROR: There was an error reading the option!");
     }
@@ -150,7 +150,7 @@ size_t getOption(void){
 //menu handling
 void mainMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   while(!exit){
     printMainMenu();
     option=getOption();
@@ -182,7 +182,7 @@ void mainMenu(void){
 
 void fileMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   while(!exit){
     printFileMenu();
     option=getOption();
@@ -208,7 +208,7 @@ void fileMenu(void){
 
 void bookMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   while(!exit){
     printBooksMenu();
     option=getOption();
@@ -237,7 +237,7 @@ void bookMenu(void){
 
 void booksubMenuShow(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   long int ISBN;
   int yearPublish;
   char title[100], firstAuthor[100];
@@ -278,7 +278,7 @@ void booksubMenuShow(void){
 static
 void consultClient(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   char name[255],address[255];
   while(!exit){
     printConsultClientsMenu();
@@ -310,7 +310,7 @@ void consultClient(void){
 
 void clientMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   clientNODE *clientToChange;
   CLIENT client;
   while(!exit){
@@ -331,9 +331,7 @@ void clientMenu(void){
         break;
       case 3:
         clientToChange=getSearchlinked(clientlist,getNIF());
-        if(clientToChange==NULL){
-          continue;
-        }
+        if(clientToChange==NULL){continue;}
         client=clientToChange->data;
         changeClient(clientlist,client);
         break;
@@ -352,7 +350,7 @@ void clientMenu(void){
 
 void orderMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   while(!exit){
     printOrdersMenu();
     option=getOption();
@@ -375,7 +373,7 @@ void orderMenu(void){
 
 void operationMenu(void){
   bool exit=false;
-  size_t option;
+  ssize_t option;
   while(!exit){
     printOperationsMenu();
     option=getOption();

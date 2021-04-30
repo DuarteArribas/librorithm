@@ -8,8 +8,9 @@
 #include"mem.h"
 #include"clientOperations.h"
 #include"client.h"
-
+//global variables
 clientNODE *clientlist;
+
 /**
  * Creates a client linked list with the specified element
  * @param value the value to add to the head of the list
@@ -44,44 +45,6 @@ bool isemptylist(clientNODE *head){
   return head==NULL?true:false;
 }
 
-// /**
-//  * Prints the client's linked list by the specified type
-//  * @param *head the address of the head
-//  * @param type 1 to print horizontally as an array, 2 to print vertically
-//  */
-// void cprintlinked(cNODE *head,size_t type){
-//   if(head==NULL){
-//     fprintf(stderr,"ERROR: The list is empty!\n");
-//     exit(NULL_LIST);
-//   }
-//   switch(type){
-//     case 1:
-//       printf("[");
-//       while(head!=NULL){
-//         printf("%c,",head->data);
-//         head=head->next;
-//       }
-//       printf("\b]\n");
-//       break;
-//     case 2:
-//       while(head!=NULL){
-//         printf("%c\n",head->data);
-//         head=head->next;
-//       }
-//       break;
-//     case 3:
-//       while(head!=NULL){
-//         printf("%c",head->data);
-//         head=head->next;
-//       }
-//       printf("\n");
-//       break;
-//     default:
-//       printf("ERROR: Wrong print type.\n");
-//       break;
-//   }
-// }
-
 /**
  * Gets the length of the client's linked list
  * @param *head the address of the head
@@ -101,8 +64,8 @@ size_t linkedlength(clientNODE *head){
 /**
  * Searches for the specified NIF in the clients' linked list
  * @param *head the address of the head
- * @param value the value to search for
- * @return the client with the specified NIF or NULL if there isn't a client with that NIF
+ * @param value the NIF to search for
+ * @return true if the NIF is in the list or false otherwise
  */
 bool lsearchlinked(clientNODE *head,uint32_t value){
   if(head==NULL){
@@ -136,6 +99,11 @@ clientNODE *getSearchlinked(clientNODE *head,uint32_t value){
   return NULL;
 }
 
+/**
+ * Changes the specified client's properties for the new ones in the clients' linked list
+ * @param *head the address of the head
+ * @param client the client to change
+ */
 void changeClient(clientNODE *head,CLIENT client){
   if(head==NULL){
     return;
@@ -159,7 +127,7 @@ void changeClient(clientNODE *head,CLIENT client){
 }
 
 /**
- * Remove the element at start position
+ * Remove the client at the start position
  * @param **head the address of the address of the head
  */
 void sremovelinked(clientNODE **head){
@@ -175,7 +143,7 @@ void sremovelinked(clientNODE **head){
  */
 void removelinked(clientNODE **head,size_t index){
   if(index+1>linkedlength(*head)){
-    fprintf(stderr,"ERROR: There was an error removing the specified client! %zu\n",linkedlength(*head));
+    fprintf(stderr,"ERROR: There was an error removing the specified client!\n");
     return;
   }
   if(index==0){
@@ -191,6 +159,11 @@ void removelinked(clientNODE **head,size_t index){
   clnmem(temp);
 }
 
+/**
+ * Removes the client with the specified NIF
+ * @param **head the address of the address of the head
+ * @param NIF the NIF of the client to remove
+ */
 void removeClient(clientNODE **head,uint32_t NIF){
   if(*head==NULL){
     return;
@@ -206,6 +179,11 @@ void removeClient(clientNODE **head,uint32_t NIF){
   }
 }
 
+/**
+ * Consults the client with the specified NIF
+ * @param *head the address of the head
+ * @param NIF the NIF of the client to remove
+ */
 void consultClientNIF(clientNODE *head,uint32_t NIF){
   if(head==NULL){
     fprintf(stderr,"ERROR: There are no clients on the system!\n");
@@ -247,6 +225,11 @@ void printClientNumber(size_t *userCount){
   printf("\n");
 }
 
+/**
+ * Consults the client with the specified name
+ * @param *head the address of the head
+ * @param *name the name of the client to remove
+ */
 void consultClientName(clientNODE *head,char *name){
   if(head==NULL){
     fprintf(stderr,"ERROR: There are no clients on the system!\n");
@@ -269,6 +252,11 @@ void consultClientName(clientNODE *head,char *name){
   return;
 }
 
+/**
+ * Consults the client with the specified address
+ * @param *head the address of the head
+ * @param *address the address of the client to remove
+ */
 void consultClientAddress(clientNODE *head,char *address){
   if(head==NULL){
     fprintf(stderr,"ERROR: There are no clients on the system!\n");
@@ -291,6 +279,10 @@ void consultClientAddress(clientNODE *head,char *address){
   return;
 }
 
+/**
+ * Consults every client
+ * @param *head the address of the head
+ */
 void consultAll(clientNODE *head){
   if(head==NULL){
     fprintf(stderr,"ERROR: There are no clients on the system!\n");
