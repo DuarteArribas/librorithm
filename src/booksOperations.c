@@ -140,6 +140,7 @@ PNodoAB RemoverABP (PNodoAB T, LIVRO X) {
     T->Esquerda = RemoverABP(T->Esquerda, X);
   else
     T->Direita = RemoverABP(T->Direita, X);
+  return T;
 }
 
 int AlturaAB (PNodoAB T) {
