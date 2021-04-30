@@ -15,7 +15,7 @@ static char *plus="+";
 CLIENT newClient(void){
   //hold input info
   uint32_t NIF;
-  char name[255],address[255],phoneNumber[17];
+  char name[255],address[255],phoneNumber[18];
   //header
   printf("=========================================\n");
   printf("      ========= NEW CLIENT =========     \n");
@@ -168,6 +168,7 @@ void getPhoneNumber(char *phoneNumber){
           //add the country's phone code number to the phone number
           strcpy(phoneNumber,plus);
           strcat(phoneNumber,temp2);
+          strcat(phoneNumber," ");
           printf("        What is the phone number?        \n");
           //get phone number input
           if(fgets(phoneTemp,100,stdin)==NULL){

@@ -90,6 +90,7 @@ void printConsultClientsMenu(void){
   printf("|              1-BY NIF                |\n");
   printf("|              2-BY NAME               |\n");
   printf("|              3-BY ADDRESS            |\n");
+  printf("|              4-ALL                   |\n");
   printf("|              0-Go Back               |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
@@ -278,6 +279,7 @@ static
 void consultClient(void){
   bool exit=false;
   size_t option;
+  char name[255],address[255];
   while(!exit){
     printConsultClientsMenu();
     option=getOption();
@@ -286,10 +288,15 @@ void consultClient(void){
         consultClientNIF(clientlist,getNIF());
         break;
       case 2:
-        //consultClientName(clientlist);
+        getName(name);
+        consultClientName(clientlist,name);
         break;
       case 3:
-        //consultClientAddress(clientlist);
+        getAddress(address);
+        consultClientAddress(clientlist,address);
+        break;
+      case 4:
+        consultAll(clientlist);
         break;
       case 0:
         exit=true;
@@ -304,6 +311,8 @@ void consultClient(void){
 void clientMenu(void){
   bool exit=false;
   size_t option;
+  clientNODE *clientToChange;
+  CLIENT client;
   while(!exit){
     printClientsMenu();
     option=getOption();
@@ -315,14 +324,18 @@ void clientMenu(void){
         else{
           eappendlinked(clientlist,newClient());
         }
-        printf("%s\n",clientlist->data.address);
         printf("\tClient added with success!\n");
         break;
       case 2:
-        //removeClient();
+        removeClient(&clientlist,getNIF());
         break;
       case 3:
-        //changeClient();
+        clientToChange=getSearchlinked(clientlist,getNIF());
+        if(clientToChange==NULL){
+          continue;
+        }
+        client=clientToChange->data;
+        changeClient(clientlist,client);
         break;
       case 4:
         consultClient();

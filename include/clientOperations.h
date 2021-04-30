@@ -4,7 +4,7 @@
 //structs
 typedef struct CLIENT{
   uint32_t NIF;
-  char name[255],address[255],phoneNumber[17];
+  char name[255],address[255],phoneNumber[18];
 }CLIENT;
 //function prototypes
 CLIENT   newClient      (void);
