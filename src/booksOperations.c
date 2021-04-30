@@ -52,9 +52,9 @@ int PesquisarABP (PNodoAB T, LIVRO X){   // 0 = nao existe; 1 = existe
   if (CompareBooks(X, T->Elemento) == 0)
     return 1;
   if (CompareBooks(X, T->Elemento) == -1)   // X.NIF < (T->Elemento).NIF)
-    return PesquisarABP(T->Esquerda, X);
-  else
     return PesquisarABP(T->Direita, X);
+  else
+    return PesquisarABP(T->Esquerda, X);
 }
 
 void ABPEqInsercaoBinaria (PNodoAB *TE, LIVRO L[], int inicio, int fim){
@@ -236,7 +236,7 @@ PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN){
   if (CompareBooksISBN(T->Elemento, ISBN) == 0){
     LIVRO X = createBook();
     while(PesquisarABP(P,X)!=1){
-      printf("Livro já existente introduza outro\n");
+      bookAlreadyExistsWarning();
       X=createBook();  
     }
     
@@ -253,13 +253,15 @@ PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN){
     return ChangeBookISBN(P,T->Esquerda, ISBN);
 }
 
-PNodoAB RemoveBook(PNodoAB T, LIVRO X){
+PNodoAB RemoveBook(PNodoAB T, long int ISBN){
+  LIVRO X;
+  X.ISBN=ISBN;
   if(PesquisarABP(T,X)!=1){
-    printf("Livro não registado!\n");
+    unregisteredBookWarning();
     return T;
   }
-
   T=RemoverABP(T,X);
+  bookRemovedWarning();
   if(verificarEquilibrio(T)==0){
     T=CriarABPEquilibradaIB(T);
   }
@@ -343,7 +345,7 @@ PNodoAB insertBook(PNodoAB T){
   }else{
     LIVRO x = createBook();
     while(PesquisarABP(T, x)==1){
-      printf("Book already exist\n");
+      bookAlreadyExistsWarning();
       x=createBook();
     }
     T=InserirABP(T, x);

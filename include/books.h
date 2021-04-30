@@ -33,4 +33,10 @@ int  CompareBooksFirstAuthorYear (LIVRO X, char firstAuthor[100], int yearPublis
 
 int CompareBooksEditorCientificArea(LIVRO X, char editor[100], char cientificArea[100]);
 
+void bookAlreadyExistsWarning(void);
+
+void bookRemovedWarning(void);
+
+void unregisteredBookWarning(void);
+
 #endif
