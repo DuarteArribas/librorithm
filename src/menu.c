@@ -1,6 +1,9 @@
 //global includes
 #include<stdio.h>
 #include<stdbool.h>
+#include<inttypes.h>
+#include<string.h>
+#include<ctype.h>
 //project includes
 #include"menu.h"
 #include"clientOperations.h"
@@ -77,6 +80,19 @@ void printClientsMenu(void){
   printf("========================================\n");
   printf("|   ========= CLIENTS MENU =========   |\n");
   standardOperations();
+}
+
+static
+void printConsultClientsMenu(void){
+  printf("========================================\n");
+  printf("|   ======== CONSULT CLIENT ========   |\n");
+  printf("|                                      |\n");
+  printf("|              1-BY NIF                |\n");
+  printf("|              2-BY NAME               |\n");
+  printf("|              3-BY ADDRESS            |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
 }
 
 static
@@ -258,6 +274,33 @@ void booksubMenuShow(void){
   }
 }
 
+static
+void consultClient(void){
+  bool exit=false;
+  size_t option;
+  while(!exit){
+    printConsultClientsMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        consultClientNIF(clientlist,getNIF());
+        break;
+      case 2:
+        //consultClientName(clientlist);
+        break;
+      case 3:
+        //consultClientAddress(clientlist);
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"ERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
 void clientMenu(void){
   bool exit=false;
   size_t option;
@@ -272,6 +315,7 @@ void clientMenu(void){
         else{
           eappendlinked(clientlist,newClient());
         }
+        printf("%s\n",clientlist->data.address);
         printf("\tClient added with success!\n");
         break;
       case 2:
@@ -281,7 +325,7 @@ void clientMenu(void){
         //changeClient();
         break;
       case 4:
-        //consultClient();
+        consultClient();
         break;
       case 0:
         exit=true;

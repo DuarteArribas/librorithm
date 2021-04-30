@@ -115,6 +115,24 @@ bool lsearchlinked(clientNODE *head,uint32_t value){
   return false;
 }
 
+void consultClientNIF(clientNODE *head,uint32_t NIF){
+  if(head==NULL){
+    fprintf(stderr,"ERROR: There are not clients on the system!\n");
+    return;
+  }
+  while(head!=NULL){
+    if(head->data.NIF==NIF){
+      printClient(head->data);
+      char dummy[1000];
+      fgets(dummy,1000,stdin);
+      return;
+    }
+    head=head->next;
+  }
+  fprintf(stderr,"ERROR: There isn't a client with the specified NIF! Please try again.\n");
+  return;
+}
+
 /**
  * Append element at the start of the client's linked list
  * @param **head the address of the address of the head

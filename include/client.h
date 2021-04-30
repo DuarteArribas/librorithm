@@ -12,10 +12,12 @@ typedef struct clientNODE{
 }clientNODE;
 //function prototypes
 clientNODE *createLinked(CLIENT value);
-void freelinked(clientNODE *head);
-bool isemptylist(clientNODE *head);
+void   freelinked(clientNODE *head);
+bool   isemptylist(clientNODE *head);
 size_t linkedlength(clientNODE *head);
-bool lsearchlinked(clientNODE *head,uint32_t value);
-void sappendlinked(clientNODE **head,CLIENT value);
-void eappendlinked(clientNODE *head,CLIENT value);
+bool   lsearchlinked(clientNODE *head,uint32_t value);
+void consultClientNIF(clientNODE *head,uint32_t NIF);
+void   sappendlinked(clientNODE **head,CLIENT value);
+void   eappendlinked(clientNODE *head,CLIENT value);
+void   consultClientNIF(clientNODE *head,uint32_t NIF);
 #endif //client_h

@@ -7,5 +7,10 @@ typedef struct CLIENT{
   char name[255],address[255],phoneNumber[17];
 }CLIENT;
 //function prototypes
-CLIENT newClient(void);
+CLIENT   newClient      (void);
+uint32_t getNIF         (void);
+void     getName        (char *name);
+void     getAddress     (char *address);
+void     getPhoneNumber (char *phoneNumber);
+void     printClient    (CLIENT client);
 #endif //clientOperations_h
