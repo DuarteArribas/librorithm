@@ -47,9 +47,9 @@ void PesquisarABPAuthorYear(PNodoAB T, char firstAuthor[100], int yearPublish);
 
 void PesquisarABPEditorCientificArea(PNodoAB T, char editor[100], char cientificArea[100]);
 
-PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN);
+PNodoAB changeBookISBN(PNodoAB P, PNodoAB T, long int ISBN);
 
-PNodoAB RemoveBook(PNodoAB T, long int ISBN);
+PNodoAB removeBook(PNodoAB T, long int ISBN);
 
 int seeMostRecentDate(PNodoAB T, char cientificArea[100]);
 

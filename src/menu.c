@@ -209,6 +209,7 @@ void fileMenu(void){
 void bookMenu(void){
   bool exit=false;
   ssize_t option;
+  long int ISBN;
   while(!exit){
     printBooksMenu();
     option=getOption();
@@ -217,10 +218,14 @@ void bookMenu(void){
         Books=insertBook(Books);
         break;
       case 2:
-        //removeBook();
+        printf("Insert an ISBN: ");
+        scanf("%ld", &ISBN);
+        Books=removeBook(Books, ISBN);
         break;
       case 3:
-        //changeBook();
+        printf("Insert an ISBN: ");
+        scanf("%ld", &ISBN);
+        Books=changeBookISBN(Books,Books, ISBN);
         break;
       case 4:
         booksubMenuShow();

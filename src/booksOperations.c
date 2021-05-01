@@ -230,12 +230,12 @@ void PesquisarABPEditorCientificArea(PNodoAB T, char editor[100], char cientific
   PesquisarABPEditorCientificArea(T->Direita, editor, cientificArea);
 }
 
-PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN){
+PNodoAB changeBookISBN(PNodoAB P, PNodoAB T, long int ISBN){
   if (T == NULL)
     return P;
   if (CompareBooksISBN(T->Elemento, ISBN) == 0){
     LIVRO X = createBook();
-    while(PesquisarABP(P,X)!=1){
+    while(PesquisarABP(P,X)==1){
       bookAlreadyExistsWarning();
       X=createBook();  
     }
@@ -247,13 +247,14 @@ PNodoAB ChangeBookISBN(PNodoAB P, PNodoAB T, int ISBN){
     }
     return P;
   }
+
   if (CompareBooksISBN(T->Elemento, ISBN)==-1)   
-    return ChangeBookISBN(P,T->Direita, ISBN);
+    return changeBookISBN(P,T->Direita, ISBN);
   else
-    return ChangeBookISBN(P,T->Esquerda, ISBN);
+    return changeBookISBN(P,T->Esquerda, ISBN);
 }
 
-PNodoAB RemoveBook(PNodoAB T, long int ISBN){
+PNodoAB removeBook(PNodoAB T, long int ISBN){
   LIVRO X;
   X.ISBN=ISBN;
   if(PesquisarABP(T,X)!=1){
@@ -358,15 +359,12 @@ PNodoAB insertBook(PNodoAB T){
 
 void showALL(PNodoAB T){
   if(T==NULL){
-    printf("saiu\n");
     return;
   }
   
-  printf("Mostrou elemento \n");
   showBook(T->Elemento);
 
-  printf("Esquerda\n");
   showALL(T->Esquerda);
-  printf("Direita\n");
+  
   showALL(T->Direita);
 }
