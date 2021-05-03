@@ -53,11 +53,17 @@ PNodoAB removeBook(PNodoAB T, long int ISBN);
 
 int seeMostRecentDate(PNodoAB T, char cientificArea[100]);
 
-void showRecentBooksCientificArea(PNodoAB P, PNodoAB T, char cientificArea[100], int k);
+void showRecentBooksCientificArea(PNodoAB P, int year, char cientificArea[100], int k);
 
-void verifyIfExists(LIVRO X, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd);
+void verifyIfExistsCientificArea(LIVRO X);
 
-void cientificAreaWithMoreBooks(PNodoAB T, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd);
+void verifyIfExistsYear(LIVRO X);
+
+void cientificAreaAndYearWithMoreBooks(PNodoAB T, int option);
+
+void showCientificAreaWithMoreBooks(void);
+
+void showYearWithMorePublications(void);
 
 PNodoAB insertBook(PNodoAB T);
 

@@ -1,13 +1,18 @@
 //global includes
 #include<stdio.h>
-#include<stdlib.h>
+#include <stdlib.h>
 #include<stdbool.h>
 #include<string.h>
 //project includes
 #include"booksOperations.h"
 #include"books.h"
+#include"mem.h"
 
 PNodoAB Books;
+CIENTIFIC_QTD *cientific_qtd=NULL;
+PUBLISH_YEAR *publish_year=NULL;
+int num_cientific_qtd;
+int num_publish_year;
 
 PNodoAB CriarAB(void){ 
   PNodoAB T;
@@ -16,7 +21,7 @@ PNodoAB CriarAB(void){
 }
 
 PNodoAB CriarNodoAB(LIVRO X){
-  PNodoAB P = (PNodoAB) malloc(sizeof(struct NodoAB));
+  PNodoAB P = (PNodoAB) memalloc(sizeof(struct NodoAB));
   if (P == NULL)
     return  NULL;
   P->Elemento = X;
@@ -90,7 +95,7 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T){
   Num = NumeroNodosAB(T);
   if (T == NULL)
     return NULL;
-  Lista = (LIVRO *) malloc(Num * sizeof(LIVRO));
+  Lista = (LIVRO *) memalloc(Num * sizeof(LIVRO));
   if (Lista == NULL)
     return NULL;
   CriarSequenciaEmOrdem(T, Lista, &N);
@@ -101,7 +106,7 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T){
 PNodoAB LibertarNodoAB(PNodoAB P){
   P->Esquerda = NULL;
   P->Direita = NULL;
-  free(P);
+  clnmem(P);
   P = NULL;
   return P;
 }
@@ -273,11 +278,12 @@ int seeMostRecentDate(PNodoAB T, char cientificArea[100]){
   int esq,dir;
   if (T == NULL)
     return 0;
-  if (strcmp(cientificArea, T->Elemento.cientificArea) == 1)
+  if (strcmp(cientificArea, T->Elemento.cientificArea) == 0)
     return T->Elemento.yearPublish;  
-
+    
   esq=seeMostRecentDate(T->Esquerda, cientificArea);
   dir=seeMostRecentDate(T->Direita, cientificArea);
+  
   
   if(esq>dir){
     return esq;
@@ -286,57 +292,123 @@ int seeMostRecentDate(PNodoAB T, char cientificArea[100]){
   }
 }
 
-void showRecentBooksCientificArea(PNodoAB P, PNodoAB T, char cientificArea[100], int k){
-  int year=seeMostRecentDate(P,cientificArea);
-
-  if (T == NULL)
+//K _FEITO AQUI
+void showRecentBooksCientificArea(PNodoAB P, int year, char cientificArea[100], int k){
+  if (P == NULL)
     return;
-  if (k>0 && strcmp(cientificArea, T->Elemento.cientificArea) == 0 && year==T->Elemento.yearPublish){
-    showBook(T->Elemento);
+
+  if (k>0 && strcmp(cientificArea, P->Elemento.cientificArea) == 0 && year==(P->Elemento.yearPublish)){
+    showBook(P->Elemento);
     k--;
   }
-  showRecentBooksCientificArea(P,T->Esquerda, cientificArea, k);
-  showRecentBooksCientificArea(P,T->Direita, cientificArea,k);
+  showRecentBooksCientificArea(P->Esquerda, year, cientificArea, k);
+  showRecentBooksCientificArea(P->Direita, year, cientificArea,k);
 }
 
-void verifyIfExists(LIVRO X, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd){
-  if(*num_cientific_qtd == 0){
-    return;
+void verifyIfExistsCientificArea(LIVRO X)
+{
+  bool exists=false;
+  for(int i=0;i<num_cientific_qtd;i++)
+  {
+    if(strcmp(X.cientificArea, cientific_qtd[i].cientificArea)==0)
+    {
+      printf("---- %s\n", cientific_qtd[i].cientificArea);
+      cientific_qtd[i].qtd++;
+      printf("-----%d\n", cientific_qtd[i].qtd);
+      exists=true;
+      break;
+    }
   }
-  for(int i=0;i<*num_cientific_qtd;i++){
-    if(strcmp(X.cientificArea, (*cientific_qtd)[i].cientificArea)==0){
-      (* cientific_qtd)[*num_cientific_qtd-1].qtd++;
-    }
-    if(strcmp(X.cientificArea, (*cientific_qtd)[i].cientificArea)!=0){
-      (*num_cientific_qtd)++;
-      (*cientific_qtd)=realloc((*cientific_qtd), (*num_cientific_qtd)*sizeof(CIENTIFIC_QTD));
-      strcpy((* cientific_qtd)[*num_cientific_qtd-1].cientificArea, X.cientificArea);
-      (* cientific_qtd)[*num_cientific_qtd-1].qtd=1;
-    }
+  if(!exists)
+  {
+    num_cientific_qtd++;
+    cientific_qtd=memrealloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
+    strcpy(cientific_qtd[num_cientific_qtd-1].cientificArea, X.cientificArea);
+    cientific_qtd[num_cientific_qtd-1].qtd=1;
+    printf("****%s\n", cientific_qtd[num_cientific_qtd-1].cientificArea);
+    printf("****%d\n", cientific_qtd[num_cientific_qtd-1].qtd);
   }
 }
 
-void cientificAreaWithMoreBooks(PNodoAB T, CIENTIFIC_QTD **cientific_qtd, int *num_cientific_qtd){
-  if(T==NULL){
+void verifyIfExistsYear(LIVRO X){
+  bool exists=false;
+  for(int i=0;i<num_publish_year;i++)
+  {
+    if(X.yearPublish==publish_year[i].year)
+    {
+      exists=true;
+      publish_year[i].qtd++;
+      break;
+    }
+  }
+  if(!exists)
+  {
+    num_publish_year++;
+    publish_year=memrealloc(publish_year, num_publish_year*sizeof(PUBLISH_YEAR));
+    publish_year[num_publish_year-1].year=X.yearPublish;
+    publish_year[num_publish_year-1].qtd=1;
+ }
+}
+
+void cientificAreaAndYearWithMoreBooks(PNodoAB T, int option){
+  if(T==NULL)
+  {
     return;
   }
+  
+  switch (option)
+  {
+    case 1:
+      verifyIfExistsCientificArea(T->Elemento);
+      break;
+    case 2:
+      verifyIfExistsYear(T->Elemento);
+      break;
+    default:
+      printf("ERROR!\n");
+  }
+  
 
-  //É assim que passo para a função?? o cientific_qtd
-  verifyIfExists(T->Elemento, cientific_qtd, num_cientific_qtd);
-  cientificAreaWithMoreBooks(T->Esquerda, cientific_qtd, num_cientific_qtd);
-  cientificAreaWithMoreBooks(T->Direita, cientific_qtd, num_cientific_qtd);
+  cientificAreaAndYearWithMoreBooks(T->Esquerda, option);
+  cientificAreaAndYearWithMoreBooks(T->Direita, option);
+}
 
+void showCientificAreaWithMoreBooks(void){
   int maior=0;
   char cientificArea[100];
-  for(int i=0;i<*num_cientific_qtd;i++){
-    if(cientific_qtd[i]->qtd > maior){
-      maior=cientific_qtd[i]->qtd;
-      strcpy(cientificArea, cientific_qtd[i]->cientificArea);
+  for(int i=0;i<num_cientific_qtd;i++){
+    if(cientific_qtd[i].qtd > maior){
+      maior=cientific_qtd[i].qtd;
+      strcpy(cientificArea, cientific_qtd[i].cientificArea);
     }
   }
 
-  printf("Area científica com mais livres: %s", cientificArea);
+  printf("===============================================\n");
+  printf("                                               \n");
+  printf(" Cientific Area with More Books: %s            \n", cientificArea);
+  printf("                                               \n");
+  printf("===============================================\n");
 }
+
+void showYearWithMorePublications(void){
+  int year=0;
+  int qtd=0;
+  for(int i=0;i<num_publish_year;i++){
+    if(publish_year[i].qtd > qtd){
+      year=publish_year[i].year;
+      qtd=publish_year[i].qtd;
+    }
+  }
+
+  printf("=========================================\n");
+  printf("                                         \n");
+  printf("   Year with more publications: %d       \n", year);
+  printf("                                         \n");
+  printf("=========================================\n");
+
+  
+}
+
 
 PNodoAB insertBook(PNodoAB T){
   if(T==NULL){

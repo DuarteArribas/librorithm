@@ -1,18 +1,24 @@
 //global includes
 #include<stdio.h>
 #include<stdbool.h>
+#include<stdlib.h>
 #include<inttypes.h>
 #include<string.h>
 #include<ctype.h>
 //project includes
 #include"menu.h"
+#include"mem.h"
 #include"clientOperations.h"
 #include"client.h"
 #include"booksOperations.h"
 #include"books.h"
 //globals
 extern clientNODE *clientlist;
+extern CIENTIFIC_QTD *cientific_qtd;
+extern int num_cientific_qtd;
 extern PNodoAB Books;
+extern PUBLISH_YEAR *publish_year;
+extern int num_publish_year;
 
 //print the menus
 static
@@ -118,10 +124,10 @@ void printOperationsMenu(void){
   printf("|              3-Operation             |\n");
   printf("|              4-Operation             |\n");
   printf("|              5-Operation             |\n");
-  printf("|              6-Operation             |\n");
+  printf("|   6-Cientific area with more books   |\n");
   printf("|              7-Operation             |\n");
   printf("|              8-Operation             |\n");
-  printf("|              9-Operation             |\n");
+  printf("|        9-Year with more books        |\n");
   printf("|              10-Operation            |\n");
   printf("|              11-Operation            |\n");
   printf("|              12-Operation            |\n");
@@ -178,6 +184,8 @@ void mainMenu(void){
         break;
     } 
   }
+  clnmem(publish_year);
+  clnmem(cientific_qtd);
 }
 
 void fileMenu(void){
@@ -379,6 +387,8 @@ void orderMenu(void){
 void operationMenu(void){
   bool exit=false;
   ssize_t option;
+  char cientificArea[100];
+  int k;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -393,13 +403,22 @@ void operationMenu(void){
         //operation3();
         break;
       case 4:
-        //operation4();
+        printf("How many books? ");
+        scanf("%d", &k);
+        printf("Cientific Area: ");
+        scanf("\n%[^\n]s",cientificArea);
+        int year=seeMostRecentDate(Books,cientificArea);
+        showRecentBooksCientificArea(Books,year, cientificArea,k);
         break;
       case 5:
         //operation5();
         break;
       case 6:
-        //operation6();
+        num_cientific_qtd=1;
+        cientific_qtd=memalloc(num_cientific_qtd * sizeof(CIENTIFIC_QTD));
+        cientificAreaAndYearWithMoreBooks(Books,1);
+        showCientificAreaWithMoreBooks();
+        free(cientific_qtd);
         break;
       case 7:
         //operation7();
@@ -408,7 +427,11 @@ void operationMenu(void){
         //operation8();
         break;
       case 9:
-        //operation9();
+        num_publish_year=1;
+        publish_year=memalloc(num_publish_year * sizeof(PUBLISH_YEAR));
+        cientificAreaAndYearWithMoreBooks(Books, 2);
+        showYearWithMorePublications();
+        free(publish_year);
         break;
       case 10:
         //operation10();

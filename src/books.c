@@ -6,7 +6,7 @@
 //project includes
 #include"books.h"
 
-
+//Corrigir esta bugado
 LIVRO createBook(void){
     LIVRO book;
     printf("ISBN: ");

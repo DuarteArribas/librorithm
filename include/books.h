@@ -19,6 +19,11 @@ typedef struct{
     int qtd;
 }CIENTIFIC_QTD;
 
+typedef struct{
+    int year;
+    int qtd;
+}PUBLISH_YEAR;
+
 LIVRO createBook(void);
 
 void showBook(LIVRO book);
