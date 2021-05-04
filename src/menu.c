@@ -179,8 +179,6 @@ void mainMenu(void){
     } 
   }
   //TODO: prob change this to main
-  clnmem(publish_year);
-  clnmem(cientific_qtd);
 }
 
 void fileMenu(void){
