@@ -122,7 +122,7 @@ void printOperationsMenu(void){
   printf("|              1-Operation             |\n");
   printf("|              2-Operation             |\n");
   printf("|              3-Operation             |\n");
-  printf("|              4-Operation             |\n");
+  printf("|  4-Recent books of a cientific area  |\n");
   printf("|              5-Operation             |\n");
   printf("|   6-Cientific area with more books   |\n");
   printf("|              7-Operation             |\n");
@@ -419,6 +419,7 @@ void operationMenu(void){
         cientificAreaAndYearWithMoreBooks(Books,1);
         showCientificAreaWithMoreBooks();
         free(cientific_qtd);
+        num_cientific_qtd=1;
         break;
       case 7:
         //operation7();
@@ -432,6 +433,7 @@ void operationMenu(void){
         cientificAreaAndYearWithMoreBooks(Books, 2);
         showYearWithMorePublications();
         free(publish_year);
+        num_cientific_qtd=1;
         break;
       case 10:
         //operation10();

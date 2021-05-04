@@ -275,21 +275,23 @@ PNodoAB removeBook(PNodoAB T, long int ISBN){
 }
 
 int seeMostRecentDate(PNodoAB T, char cientificArea[100]){
-  int esq,dir;
+  int esq=0,dir=0, maior=0;
   if (T == NULL)
     return 0;
   if (strcmp(cientificArea, T->Elemento.cientificArea) == 0)
-    return T->Elemento.yearPublish;  
+    maior=T->Elemento.yearPublish;  
     
   esq=seeMostRecentDate(T->Esquerda, cientificArea);
   dir=seeMostRecentDate(T->Direita, cientificArea);
   
   
-  if(esq>dir){
-    return esq;
-  }else{
-    return dir;
+  if(maior < esq){
+    maior=esq;
   }
+  if(maior < dir){
+    maior = dir;
+  }
+  return maior;
 }
 
 //K _FEITO AQUI
