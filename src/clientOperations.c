@@ -5,6 +5,7 @@
 #include<string.h>
 #include<ctype.h>
 //project includes
+#include"orderOperations.h"
 #include"clientOperations.h"
 #include"client.h"
 //global variables
@@ -23,7 +24,7 @@ CLIENT newClient(void){
   printf("=========================================\n");
   printf("      ========= NEW CLIENT =========     \n");
   //NIF input
-  while(1){
+  while(true){
     NIF=getNIF();
     if(lsearchlinked(clientlist,NIF)){
       fprintf(stderr,"The NIF you entered is not unique, which might mean the user is already on the system.\n");
@@ -41,8 +42,7 @@ CLIENT newClient(void){
   //footer
   printf("=========================================\n");
   //create and return client
-  CLIENT client;
-  client.NIF=NIF;
+  CLIENT client={.NIF=NIF,.numOfOrders=0,.orders=NULL};
   strcpy(client.name,name);
   strcpy(client.address,address);
   strcpy(client.phoneNumber,phoneNumber);
@@ -60,7 +60,7 @@ uint32_t getNIF(void){
     //header
     printf("             What's the NIF?             \n");
     //get NIF input
-    if(fgets(NIFtemp,255,stdin)==NULL){
+    if(fgets(NIFtemp,100,stdin)==NULL){
       if(ferror(stdin)){
         perror("ERROR: There was an error reading the NIF!");
       }
@@ -234,17 +234,69 @@ void getPhoneNumber(char *phoneNumber){
   }
 }
 
+static void printRegularProperties(CLIENT client){
+  printf("===========================================\n");
+  printf("             -> %s                   \n",client.name);
+  printf("                                     \n");
+  printf("                 NIF: %"PRIu32"      \n",client.NIF);
+  printf("             ADDRESS: %s             \n",client.address);
+  printf("        PHONE NUMBER: %s             \n",client.phoneNumber);  
+}
+
+static bool canShowOrders(void){
+  char checkOrders[255];
+  while(true){
+    //print show orders
+    printf("  == DO YOU WANT TO SEE THE ORDERS (y/n)? ==  \n");
+    //get orders input
+    if(fgets(checkOrders,255,stdin)==NULL){
+      if(ferror(stdin)){
+        perror("ERROR: There was an error reading your answer!");
+      }
+      strcpy(checkOrders,"");
+      continue;
+    }
+    else{
+      //remove newline
+      checkOrders[strcspn(checkOrders,"\n")]=0;
+      //change the input to lowercase
+      checkOrders[0]=tolower(checkOrders[0]);
+      //validate input
+      if(strlen(checkOrders)!=1||(checkOrders[0]!='y'&&checkOrders[0]!='n')){
+        fprintf(stderr,"ERROR: The answer must either by a `y` or a `n`!\n");
+        continue;
+      }
+      break;
+    }
+  }
+  return checkOrders[0]=='y'?true:false;
+}
+
+static void showOrders(CLIENT client){
+  if(client.numOfOrders==0){
+    fprintf(stderr,"There are no orders for this user!\n");
+  }
+  else{
+    for(size_t i=0;i<client.numOfOrders;i++){
+      printOrder(client.orders[i],i);
+    }
+  } 
+}
+
 /**
  * Prints a client's information
  * @param client the client to print
  */
 void printClient(CLIENT client){
-  printf("===========================================\n");
-  printf("             |> %s                   \n",client.name);
-  printf("                                     \n");
-  printf("                 NIF: %"PRIu32"      \n",client.NIF);
-  printf("             ADDRESS: %s             \n",client.address);
-  printf("        PHONE NUMBER: %s             \n",client.phoneNumber);
+  printRegularProperties(client);
+  if(client.numOfOrders==0){
+    fprintf(stderr,"There are no orders for this user!\n");
+  }
+  else{
+    if(canShowOrders()){
+      showOrders(client);
+    }
+  }
   printf("        == PRESS ENTER TO EXIT ==    \n");
-  printf("===========================================\n"); 
+  printf("===========================================\n");
 }

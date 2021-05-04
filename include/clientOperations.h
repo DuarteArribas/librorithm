@@ -1,10 +1,13 @@
-#include"inttypes.h"
+#include<inttypes.h>
+#include"orderOperations.h"
 #ifndef CLIENTOPERATIONS_H
 #define CLIENTOPERATIONS_H
 //structs
 typedef struct CLIENT{
   uint32_t NIF;
   char name[255],address[255],phoneNumber[18];
+  size_t numOfOrders;
+  ORDER *orders;
 }CLIENT;
 //function prototypes
 CLIENT   newClient      (void);

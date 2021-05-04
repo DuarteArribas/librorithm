@@ -8,8 +8,10 @@
 #include"handlers.h"
 #include"menu.h"
 #include"client.h"
+#include"order.h"
 //global variables
 extern clientNODE *clientlist;
+extern ORDER_NODE_QUEUE *orderQueue;
 
 int main(void){
   //handle signals
@@ -28,5 +30,6 @@ int main(void){
   mainMenu();
   //cleanup
   freelinked(clientlist);
+  freequeue(&orderQueue);
   return 0;
 }

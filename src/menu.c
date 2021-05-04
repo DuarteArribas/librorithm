@@ -10,10 +10,15 @@
 #include"mem.h"
 #include"clientOperations.h"
 #include"client.h"
+#include"orderOperations.h"
+#include"order.h"
+#include"clientOrder.h"
 #include"booksOperations.h"
 #include"books.h"
 //globals
 extern clientNODE *clientlist;
+extern ORDER_NODE_QUEUE *orderQueue;
+
 extern CIENTIFIC_QTD *cientific_qtd;
 extern int num_cientific_qtd;
 extern PNodoAB Books;
@@ -21,8 +26,7 @@ extern PUBLISH_YEAR *publish_year;
 extern int num_publish_year;
 
 //print the menus
-static
-void printMainMenu(void){
+static void printMainMenu(void){
   printf("========================================\n");
   printf("|     ========= MAIN MENU =========    |\n");
   printf("|                                      |\n");
@@ -36,8 +40,7 @@ void printMainMenu(void){
   printf("========================================\n");
 }
 
-static
-void printFileMenu(void){
+static void printFileMenu(void){
   printf("========================================\n");
   printf("|     ========= FILE MENU =========    |\n");
   printf("|                                      |\n");
@@ -49,8 +52,7 @@ void printFileMenu(void){
   printf("========================================\n");
 }
 
-static
-void standardOperations(void){
+static void standardOperations(void){
   printf("|                                      |\n");
   printf("|               1-Insert               |\n");
   printf("|               2-Remove               |\n");
@@ -61,22 +63,19 @@ void standardOperations(void){
   printf("========================================\n");  
 }
 
-static
-void printBooksMenu(void){
+static void printBooksMenu(void){
   printf("========================================\n");
   printf("|    ========= BOOKS MENU =========    |\n");
   standardOperations();
 }
 
-static
-void printClientsMenu(void){
+static void printClientsMenu(void){
   printf("========================================\n");
   printf("|   ========= CLIENTS MENU =========   |\n");
   standardOperations();
 }
 
-static
-void printBookssubMenuConsult(void){
+static void printBookssubMenuConsult(void){
   printf("========================================\n");
   printf("|    ========= Show BOOKS =========    |\n");
   printf("|              1-ISBN                  |\n");
@@ -88,8 +87,7 @@ void printBookssubMenuConsult(void){
   printf("========================================\n");  
 }
 
-static
-void printConsultClientsMenu(void){
+static void printConsultClientsMenu(void){
   printf("========================================\n");
   printf("|   ======== CONSULT CLIENT ========   |\n");
   printf("|                                      |\n");
@@ -102,8 +100,7 @@ void printConsultClientsMenu(void){
   printf("========================================\n");  
 }
 
-static
-void printOrdersMenu(void){
+static void printOrdersMenu(void){
   printf("========================================\n");
   printf("|    ========= ORDER MENU =========    |\n");
   printf("|                                      |\n");
@@ -114,34 +111,32 @@ void printOrdersMenu(void){
   printf("========================================\n");  
 }
 
-static
-void printOperationsMenu(void){
-  printf("========================================\n");
-  printf("|     ======== OPERATIONS ========     |\n");
-  printf("|                                      |\n");
-  printf("|              1-Operation             |\n");
-  printf("|              2-Operation             |\n");
-  printf("|              3-Operation             |\n");
-  printf("|  4-Recent books of a cientific area  |\n");
-  printf("|              5-Operation             |\n");
-  printf("|   6-Cientific area with more books   |\n");
-  printf("|              7-Operation             |\n");
-  printf("|              8-Operation             |\n");
-  printf("|        9-Year with more books        |\n");
-  printf("|              10-Operation            |\n");
-  printf("|              11-Operation            |\n");
-  printf("|              12-Operation            |\n");
-  printf("|              13-Operation            |\n");
-  printf("|              14-Operation            |\n");
-  printf("|              15-Operation            |\n");
-  printf("|              0-Go Back               |\n");
-  printf("|                                      |\n");
-  printf("========================================\n");  
+static void printOperationsMenu(void){
+  printf("================================================================\n");
+  printf("|                 ======== OPERATIONS ========                 |\n");
+  printf("|                                                              |\n");
+  printf("|                          1-Operation                         |\n");
+  printf("|                          2-Operation                         |\n");
+  printf("|                          3-Operation                         |\n");
+  printf("|                          4-Recent books of a cientific area  |\n");
+  printf("|                          5-Operation                         |\n");
+  printf("|                          6-Cientific area with more books    |\n");
+  printf("|                          7-Operation                         |\n");
+  printf("|                          8-Operation                         |\n");
+  printf("|                          9-Year with more books              |\n");
+  printf("|                          10-Operation                        |\n");
+  printf("|                          11-Operation                        |\n");
+  printf("|                          12-Operation                        |\n");
+  printf("|                          13-Operation                        |\n");
+  printf("|                          14-Operation                        |\n");
+  printf("|                          15-Check memory wasted              |\n");
+  printf("|                          0-Go Back                           |\n");
+  printf("|                                                              |\n");
+  printf("================================================================\n");  
 }
 
 //read option
-static
-ssize_t getOption(void){
+static ssize_t getOption(void){
   ssize_t option;
   if(scanf("%zd",&option)==EOF){
     if(ferror(stdin)){
@@ -184,6 +179,7 @@ void mainMenu(void){
         break;
     } 
   }
+  //TODO: prob change this to main
   clnmem(publish_year);
   clnmem(cientific_qtd);
 }
@@ -288,8 +284,7 @@ void booksubMenuShow(void){
   }
 }
 
-static
-void consultClient(void){
+static void consultClient(void){
   bool exit=false;
   ssize_t option;
   char name[255],address[255];
@@ -341,12 +336,14 @@ void clientMenu(void){
         break;
       case 2:
         removeClient(&clientlist,getNIF());
+        printf("\tClient removed with success!\n");
         break;
       case 3:
         clientToChange=getSearchlinked(clientlist,getNIF());
         if(clientToChange==NULL){continue;}
         client=clientToChange->data;
         changeClient(clientlist,client);
+        printf("\tClient changed with success!\n");
         break;
       case 4:
         consultClient();
@@ -369,10 +366,27 @@ void orderMenu(void){
     option=getOption();
     switch(option){
       case 1:
-        //insertOrder();
+        if(isemptyqueue(orderQueue)){
+          orderQueue=createqueue(newOrder());
+        }
+        else{
+          enqueue(&orderQueue,newOrder());
+        }
+        printf("\tOrder added with success!\n");
         break;
       case 2:
-        //removeOrder();
+        if(isemptyqueue(orderQueue)){
+          fprintf(stderr,"ERROR: There are no orders!\n");
+        }
+        else{
+          //remove from queue
+          ORDER orderRemoved=dequeue(&orderQueue);
+          //remove the order from the client
+          size_t pos;
+          clientNODE *client=getSearchlinkedByOrder(clientlist,orderRemoved,&pos);
+          removeFromArray(&(client->data.numOfOrders),&(client->data.orders),pos);
+          printf("\tOrder removed with success!\n");
+        }
         break;
       case 0:
         exit=true;
@@ -384,11 +398,18 @@ void orderMenu(void){
   }
 }
 
+static uint64_t computeMemoryWaste(void){
+  uint64_t memoryWasteBytes=0;
+  memoryWasteBytes+=getMemoryWasteClients(clientlist);
+  return memoryWasteBytes;
+}
+
 void operationMenu(void){
   bool exit=false;
   ssize_t option;
   char cientificArea[100];
   int k;
+  uint64_t memWastedBytes;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -451,7 +472,13 @@ void operationMenu(void){
         //operation14();
         break;
       case 15:
-        //operation15();
+        memWastedBytes=computeMemoryWaste();
+        printf("======= This program has wasted %"PRIu64" bytes (~= %.3lfkb, ~= %.3lfmb, ~= %.3lfgb) of memory =======\n",
+          memWastedBytes,
+          (double)memWastedBytes/1024,
+          (double)memWastedBytes/1024/1024,
+          (double)memWastedBytes/1024/1024/1024
+        );
         break;
       case 0:
         exit=true;

@@ -11,20 +11,22 @@ typedef struct clientNODE{
   struct clientNODE *next;
 }clientNODE;
 //function prototypes
-clientNODE *createLinked        (CLIENT value);
-void       freelinked           (clientNODE *head);
-bool       isemptylist          (clientNODE *head);
-size_t     linkedlength         (clientNODE *head);
-bool       lsearchlinked        (clientNODE *head,uint32_t value);
-clientNODE *getSearchlinked     (clientNODE *head,uint32_t value);
-void       changeClient         (clientNODE *head,CLIENT client);
-void       sremovelinked        (clientNODE **head);
-void       removelinked         (clientNODE **head,size_t index);
-void       removeClient         (clientNODE **head,uint32_t NIF);
-void       consultClientNIF     (clientNODE *head,uint32_t NIF);
-void       consultClientName    (clientNODE *head,char *name);
-void       consultClientAddress (clientNODE *head,char *address);
-void       consultAll           (clientNODE *head);
-void       sappendlinked        (clientNODE **head,CLIENT value);
-void       eappendlinked        (clientNODE *head,CLIENT value);
+clientNODE *createLinked           (CLIENT value);
+void       freelinked              (clientNODE *head);
+bool       isemptylist             (clientNODE *head);
+size_t     linkedlength            (clientNODE *head);
+bool       lsearchlinked           (clientNODE *head,uint32_t value);
+clientNODE *getSearchlinked        (clientNODE *head,uint32_t value);
+clientNODE *getSearchlinkedByOrder (clientNODE *head,ORDER value,size_t *pos);
+void       changeClient            (clientNODE *head,CLIENT client);
+void       sremovelinked           (clientNODE **head);
+void       removelinked            (clientNODE **head,size_t index);
+void       removeClient            (clientNODE **head,uint32_t NIF);
+void       consultClientNIF        (clientNODE *head,uint32_t NIF);
+void       consultClientName       (clientNODE *head,char *name);
+void       consultClientAddress    (clientNODE *head,char *address);
+void       consultAll              (clientNODE *head);
+void       sappendlinked           (clientNODE **head,CLIENT value);
+void       eappendlinked           (clientNODE *head,CLIENT value);
+uint64_t   getMemoryWasteClients   (clientNODE *head);
 #endif //client_h

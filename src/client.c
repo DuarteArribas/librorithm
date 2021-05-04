@@ -6,6 +6,7 @@
 #include<math.h>
 //project includes
 #include"mem.h"
+#include"orderOperations.h"
 #include"clientOperations.h"
 #include"client.h"
 //global variables
@@ -31,6 +32,7 @@ void freelinked(clientNODE *head){
   clientNODE *temp=head;
   while(head!=NULL){
     temp=head->next;
+    clnmem(head->data.orders);
     clnmem(head);
     head=temp;
   }
@@ -42,7 +44,7 @@ void freelinked(clientNODE *head){
  * @return true if the list is empty and false otherwise
  */
 bool isemptylist(clientNODE *head){
-  return head==NULL?true:false;
+  return head==NULL;
 }
 
 /**
@@ -93,6 +95,29 @@ clientNODE *getSearchlinked(clientNODE *head,uint32_t value){
   while(head!=NULL){
     if(head->data.NIF==value){
       return head;
+    }
+    head=head->next;
+  }
+  return NULL;
+}
+
+/**
+ * Searches for the specified ORDER in the clients' linked list's orders' array
+ * @param *head the address of the head
+ * @param value the value to search for
+ * @param *pos the index of that ORDER in the client's orders' array
+ * @return the client with the specified ORDER or NULL if there isn't a client with that ORDER
+ */
+clientNODE *getSearchlinkedByOrder(clientNODE *head,ORDER value,size_t *pos){
+  if(head==NULL){
+    return NULL;
+  }
+  while(head!=NULL){
+    for(size_t i=0;i<head->data.numOfOrders;i++){
+      if(isSameOrder((head->data.orders)[i],value)){
+        *pos=i;
+        return head;
+      }
     }
     head=head->next;
   }
@@ -202,8 +227,7 @@ void consultClientNIF(clientNODE *head,uint32_t NIF){
   return;
 }
 
-static
-void printClientNumber(size_t *userCount){
+static void printClientNumber(size_t *userCount){
   size_t maxEqual=13+floor(log10(*userCount))+1;
   size_t maxSpace=2+floor(log10(*userCount))+1;
   for(size_t i=0;i<maxEqual;i++){
@@ -335,4 +359,20 @@ void eappendlinked(clientNODE *head,CLIENT value){
   newElement->data=value;
   newElement->next=NULL;
   head->next=newElement;
+}
+
+/**
+ * Computes the memory waste from the clients' list
+ * @param *head the address of the head
+ */
+uint64_t getMemoryWasteClients(clientNODE *head){
+  uint64_t memoryWaste=0;
+  while(head!=NULL){
+    memoryWaste+=(255-strlen(head->data.name)+255-strlen(head->data.address)+18-strlen(head->data.phoneNumber));
+    for(size_t i=0;i<head->data.numOfOrders;i++){
+      memoryWaste+=(11-strlen(head->data.orders[i].date));
+    }
+    head=head->next;
+  }
+  return memoryWaste;
 }
