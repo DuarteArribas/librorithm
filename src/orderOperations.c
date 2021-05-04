@@ -16,19 +16,6 @@ extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
 static const char *dateSeparator="-";
 
-
-static void updateClientOrders(uint32_t NIF,ORDER order){
-  clientNODE *clientToChange=getSearchlinked(clientlist,NIF);
-  if(clientToChange->data.orders==NULL){
-    clientToChange->data.numOfOrders=1;
-    clientToChange->data.orders=memalloc(sizeof(ORDER));
-  }
-  else{
-    clientToChange->data.numOfOrders++;
-    clientToChange->data.orders=memrealloc(clientToChange->data.orders,clientToChange->data.numOfOrders*sizeof(ORDER));  
-  }
-  (clientToChange->data.orders)[clientToChange->data.numOfOrders-1]=order;  
-}
 /**
  * Creates a new order
  * @return the new order
@@ -68,9 +55,25 @@ ORDER newOrder(void){
   //create order
   ORDER order={.ISBN=ISBN,.NIF=NIF,.quantity=quantity,.totalPrice=totalPrice};
   strcpy(order.date,date);
-  //update the client with the specified NIF's orders
-  updateClientOrders(NIF,order);
   return order;
+}
+
+/**
+ * Updates the clients' orders
+ * @param NIF the NIF of the client to be updated
+ * @param order the ORDER array to be updated
+ */
+void updateClientOrders(uint32_t NIF,ORDER order){
+  clientNODE *clientToChange=getSearchlinked(clientlist,NIF);
+  if(clientToChange->data.orders==NULL){
+    clientToChange->data.numOfOrders=1;
+    clientToChange->data.orders=memalloc(sizeof(ORDER));
+  }
+  else{
+    clientToChange->data.numOfOrders++;
+    clientToChange->data.orders=memrealloc(clientToChange->data.orders,clientToChange->data.numOfOrders*sizeof(ORDER));  
+  }
+  (clientToChange->data.orders)[clientToChange->data.numOfOrders-1]=order;  
 }
 
 static uint8_t getLastDayOfMonth(const uint8_t month,const uint16_t year){

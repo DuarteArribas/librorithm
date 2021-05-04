@@ -12,7 +12,6 @@
 #include"client.h"
 #include"orderOperations.h"
 #include"order.h"
-#include"clientOrder.h"
 #include"booksOperations.h"
 #include"books.h"
 //globals
@@ -381,10 +380,9 @@ void orderMenu(void){
         else{
           //remove from queue
           ORDER orderRemoved=dequeue(&orderQueue);
-          //remove the order from the client
-          size_t pos;
-          clientNODE *client=getSearchlinkedByOrder(clientlist,orderRemoved,&pos);
-          removeFromArray(&(client->data.numOfOrders),&(client->data.orders),pos);
+          //update the client with the specified NIF's orders
+          clientNODE *client=getSearchlinked(clientlist,orderRemoved.NIF);
+          updateClientOrders(client->data.NIF,orderRemoved);
           printf("\tOrder removed with success!\n");
         }
         break;

@@ -9,9 +9,10 @@ typedef struct ORDER{
   double totalPrice;
 }ORDER;
 //function prototypes
-ORDER    newOrder    (void);
-void     getDate     (char *date);
-uint16_t getQuantity (void);
-bool     isSameOrder (ORDER order1,ORDER order2);
-void     printOrder  (ORDER order,size_t orderNum);
+ORDER    newOrder           (void);
+void     updateClientOrders (uint32_t NIF,ORDER order);
+void     getDate            (char *date);
+uint16_t getQuantity        (void);
+bool     isSameOrder        (ORDER order1,ORDER order2);
+void     printOrder         (ORDER order,size_t orderNum);
 #endif //orderOperations_h

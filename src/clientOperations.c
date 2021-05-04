@@ -289,10 +289,7 @@ static void showOrders(CLIENT client){
  */
 void printClient(CLIENT client){
   printRegularProperties(client);
-  if(client.numOfOrders==0){
-    fprintf(stderr,"There are no orders for this user!\n");
-  }
-  else{
+  if(client.numOfOrders!=0){
     if(canShowOrders()){
       showOrders(client);
     }
