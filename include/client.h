@@ -29,4 +29,10 @@ void       consultAll              (clientNODE *head);
 void       sappendlinked           (clientNODE **head,CLIENT value);
 void       eappendlinked           (clientNODE *head,CLIENT value);
 uint64_t   getMemoryWasteClients   (clientNODE *head);
+void       showClientsDec          (void);
+CLIENT     clientWithMostBooks     (void);
+size_t     getNumOfBooks           (char *monthTemp,char *yearTemp);
+void       latestDateByBook        (long int ISBN);
+void       numBooksByClient        (uint32_t NIF);
+void       clientThatWastedMore    (uint8_t month,uint16_t year);
 #endif //client_h

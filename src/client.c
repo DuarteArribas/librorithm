@@ -376,3 +376,211 @@ uint64_t getMemoryWasteClients(clientNODE *head){
   }
   return memoryWaste;
 }
+
+static void copylinkedlist(clientNODE **dest,clientNODE *src){
+  *dest=createLinked(src->data);
+  src=src->next;
+  while(src!=NULL){
+    eappendlinked(*dest,src->data);
+    src=src->next;
+  }
+}
+
+static clientNODE* mergeHelper(clientNODE* list1,clientNODE* list2){
+  clientNODE *temp=NULL;
+  //base cases
+  if(list1==NULL){
+    return list2;
+  }
+  else if(list2==NULL){
+    return list1;
+  }
+  //recursive cases
+  //check if number of orders (purchases) is lower than the other
+  if(list1->data.numOfOrders<=list2->data.numOfOrders){
+    temp=list1;
+    temp->next=mergeHelper(list1->next,list2);
+  }
+  else{
+    temp=list2;
+    temp->next=mergeHelper(list1,list2->next);
+  }
+  return temp;
+}
+
+static void splitMerge(clientNODE *src,clientNODE **front,clientNODE **back){
+  clientNODE *l1=src->next;
+  clientNODE *l2=src;
+  while(l1!=NULL){
+    l1=l1->next;
+    if(l1!=NULL){
+      l2=l2->next;
+      l1=l1->next;
+    }
+  }
+  *front=src;
+  *back=l2->next;
+  l2->next=NULL;
+}
+
+static void MergeSort(struct clientNODE **list){
+  clientNODE *head=*list;
+  clientNODE *left;
+  clientNODE *right;
+  //base case
+  if((head==NULL)||(head->next==NULL)){
+    return;
+  }
+  //recursive
+  splitMerge(head, &left, &right);
+  MergeSort(&left);
+  MergeSort(&right);
+  *list=mergeHelper(left,right);
+}
+
+static void printReverse(clientNODE *head){
+  if(head==NULL){
+    return;
+  }
+  printReverse(head->next);
+  printClientReverse(head->data);
+}
+
+/**
+ * Shows the clients in reverse order of number of purchases
+ */
+void showClientsDec(void){
+  clientNODE *clientTemp=NULL;
+  copylinkedlist(&clientTemp,clientlist);
+  MergeSort(&clientTemp);
+  printReverse(clientTemp);
+  clnmem(clientTemp);
+}
+
+/**
+ * Gets the client with most books
+ * @return the client with most books
+ */
+CLIENT clientWithMostBooks(void){
+  size_t max=0,maxTemp=0;
+  CLIENT maxClient;
+  clientNODE *clientTemp=clientlist;
+  while(clientTemp!=NULL){
+    for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
+      maxTemp+=clientTemp->data.orders[i].quantity;
+    }
+    if(maxTemp>max){
+      max=maxTemp;
+      maxClient=clientTemp->data;
+    }
+    maxTemp=0;
+    clientTemp=clientTemp->next;
+  }
+  return maxClient;
+}
+
+/**
+ * Gets the number of books at the specified date month/year
+ * @param *monthTemp the month
+ * @param *year the year
+ * @return the number of books at the specified date
+ */
+size_t getNumOfBooks(char *monthTemp,char *yearTemp){
+  size_t numOfBooks=0;
+  clientNODE *clientTemp=clientlist;
+  while(clientTemp!=NULL){
+    for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
+      if(clientTemp->data.orders[i].date[3]==monthTemp[0]&&clientTemp->data.orders[i].date[4]==monthTemp[1]){
+        bool canCount=true;
+        for(size_t j=0;j<strlen(clientTemp->data.orders[i].date)-6;j++){
+          if(clientTemp->data.orders[i].date[j+6]!=yearTemp[j]){
+            canCount=false;
+            break;
+          }
+        }
+        if(canCount){
+          numOfBooks+=clientTemp->data.orders[i].quantity;
+        }
+      }
+    }
+    clientTemp=clientTemp->next;
+  }
+  return numOfBooks;
+}
+
+/**
+ * Prints the latest date, given an ISBN
+ * @param ISBN the specified ISBN
+ */
+void latestDateByBook(long int ISBN){
+  clientNODE *clientTemp=clientlist;
+  char maxDate[11]="00-00-0000";
+  const char defaultDate[11]="00-00-0000";
+  while(clientTemp!=NULL){
+    for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
+      if(clientTemp->data.orders[i].ISBN==ISBN){
+        if(compareDates(clientTemp->data.orders[i].date,maxDate)==1){
+          strcpy(maxDate,clientTemp->data.orders[i].date);
+        }  
+      }
+    }
+    clientTemp=clientTemp->next;
+  }
+  if(strcmp(defaultDate,maxDate)==0){
+    fprintf(stderr,"ERROR: There aren't any books ordered with that ISBN!\n");
+  }
+  else{
+    printf("======= DATE: %s =======\n",maxDate);
+  }
+}
+
+/**
+ * Prints the number of books of a given client, given the NIF
+ * @param NIF the specified NIF
+ */
+void numBooksByClient(uint32_t NIF){
+   clientNODE *clientTemp=clientlist;
+   size_t numOfBooks=0;
+   while(clientTemp!=NULL){
+    if(clientTemp->data.NIF==NIF){
+      for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
+        numOfBooks+=clientTemp->data.orders[i].quantity;
+      }  
+    }
+    clientTemp=clientTemp->next;
+  }
+  printf("======= NUM OF BOOKS: %zu =======\n",numOfBooks);
+}
+
+/**
+ * Prints the client that wasted more money in the specified date
+ * @param month the specified month
+ * @param year the specified year
+ */
+void clientThatWastedMore(uint8_t month,uint16_t year){
+   clientNODE *clientTemp=clientlist;
+   CLIENT client;
+   double totalPrice=0,maxTotalPrice=-1;
+   uint8_t currMonth,currDay;
+   uint16_t currYear;
+   while(clientTemp!=NULL){
+    for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
+      getDayMonthYear(clientTemp->data.orders[i].date,&currDay,&currMonth,&currYear);
+      if(currMonth==month&&currYear==year){
+        totalPrice+=clientTemp->data.orders[i].totalPrice;
+      }
+    }
+    if(totalPrice>maxTotalPrice){
+      maxTotalPrice=totalPrice;
+      client=clientTemp->data;
+    }
+    totalPrice=0;
+    clientTemp=clientTemp->next;
+  }
+  if(fabs(maxTotalPrice-1)<0.001){
+    fprintf(stderr,"ERROR: There aren't any clients that wasted money on that date!\n");
+  }
+  else{
+    printClient(client);
+  }
+}

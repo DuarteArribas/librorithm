@@ -7,6 +7,7 @@
 #include<ctype.h>
 //project includes
 #include"menu.h"
+#include"fileHandling.h"
 #include"mem.h"
 #include"clientOperations.h"
 #include"client.h"
@@ -43,9 +44,10 @@ static void printFileMenu(void){
   printf("========================================\n");
   printf("|     ========= FILE MENU =========    |\n");
   printf("|                                      |\n");
-  printf("|               1-New                  |\n");
-  printf("|               2-Open                 |\n");
-  printf("|               3-Save                 |\n");
+  printf("|               1-New Data Structures  |\n");
+  printf("|               2-New Files            |\n");
+  printf("|               3-Open                 |\n");
+  printf("|               4-Save                 |\n");
   printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");
@@ -111,27 +113,27 @@ static void printOrdersMenu(void){
 }
 
 static void printOperationsMenu(void){
-  printf("================================================================\n");
-  printf("|                 ======== OPERATIONS ========                 |\n");
-  printf("|                                                              |\n");
-  printf("|                          1-Operation                         |\n");
-  printf("|                          2-Operation                         |\n");
-  printf("|                          3-Operation                         |\n");
-  printf("|                          4-Recent books of a cientific area  |\n");
-  printf("|                          5-Operation                         |\n");
-  printf("|                          6-Cientific area with more books    |\n");
-  printf("|                          7-Operation                         |\n");
-  printf("|                          8-Operation                         |\n");
-  printf("|                          9-Year with more books              |\n");
-  printf("|                          10-Operation                        |\n");
-  printf("|                          11-Operation                        |\n");
-  printf("|                          12-Operation                        |\n");
-  printf("|                          13-Operation                        |\n");
-  printf("|                          14-Operation                        |\n");
-  printf("|                          15-Check memory wasted              |\n");
-  printf("|                          0-Go Back                           |\n");
-  printf("|                                                              |\n");
-  printf("================================================================\n");  
+  printf("======================================================================\n");
+  printf("|                    ======== OPERATIONS ========                    |\n");
+  printf("|                                                                    |\n");
+  printf("|                             1-Num of Books sold at date            |\n");
+  printf("|                             2-Latest date of the specified ISBN    |\n");
+  printf("|                             3-Number of Books by client            |\n");
+  printf("|                             4-Recent books of a cientific area     |\n");
+  printf("|                             5-Operation                            |\n");
+  printf("|                             6-Cientific area with more books       |\n");
+  printf("|                             7-Client with most books               |\n");
+  printf("|                             8-Show clients by num of purchases dec |\n");
+  printf("|                             9-Year with more books                 |\n");
+  printf("|                             10-Client that wasted more             |\n");
+  printf("|                             11-Check memory wasted                 |\n");
+  printf("|                             12-Operation                           |\n");
+  printf("|                             13-Operation                           |\n");
+  printf("|                             14-Operation                           |\n");
+  printf("|                             15-Operation                           |\n");
+  printf("|                             0-Go Back                              |\n");
+  printf("|                                                                    |\n");
+  printf("======================================================================\n");  
 }
 
 //read option
@@ -189,13 +191,16 @@ void fileMenu(void){
     option=getOption();
     switch(option){
       case 1:
-        //newFile();
+        newDataStructures();
         break;
       case 2:
-        //openFile();
+        newFile();
         break;
       case 3:
-        //saveFile();
+        openFile();
+        break;
+      case 4:
+        saveFile();
         break;
       case 0:
         exit=true;
@@ -406,26 +411,31 @@ void operationMenu(void){
   char cientificArea[100];
   int k;
   uint64_t memWastedBytes;
+  char yearTemp[255],monthTemp[255];
+  uint16_t year;
+  uint8_t month;
   while(!exit){
     printOperationsMenu();
     option=getOption();
     switch(option){
       case 1:
-        //operation1();
+        getYear(yearTemp,&year);
+        getMonth(monthTemp,&month);
+        printf("======= %zu books were sold on %"PRIu8"/%"PRIu16" =======\n",getNumOfBooks(monthTemp,yearTemp),month,year);
         break;
       case 2:
-        //operation2();
+        latestDateByBook(1234567);
         break;
       case 3:
-        //operation3();
+        numBooksByClient(getNIF());
         break;
       case 4:
         printf("How many books? ");
         scanf("%d", &k);
         printf("Cientific Area: ");
         scanf("\n%[^\n]s",cientificArea);
-        int year=seeMostRecentDate(Books,cientificArea);
-        showRecentBooksCientificArea(Books,year, cientificArea,k);
+        int year2=seeMostRecentDate(Books,cientificArea);
+        showRecentBooksCientificArea(Books,year2,cientificArea,k);
         break;
       case 5:
         //operation5();
@@ -439,10 +449,10 @@ void operationMenu(void){
         num_cientific_qtd=1;
         break;
       case 7:
-        //operation7();
+        printClient(clientWithMostBooks());
         break;
       case 8:
-        //operation8();
+        showClientsDec();
         break;
       case 9:
         num_publish_year=1;
@@ -453,10 +463,18 @@ void operationMenu(void){
         num_cientific_qtd=1;
         break;
       case 10:
-        //operation10();
+        getYear(yearTemp,&year);
+        getMonth(monthTemp,&month);
+        clientThatWastedMore(month,year);
         break;
       case 11:
-        //operation11();
+        memWastedBytes=computeMemoryWaste();
+        printf("======= This program has wasted %"PRIu64" bytes (~= %.3lfkb, ~= %.3lfmb, ~= %.3lfgb) of memory =======\n",
+          memWastedBytes,
+          (double)memWastedBytes/1024,
+          (double)memWastedBytes/1024/1024,
+          (double)memWastedBytes/1024/1024/1024
+        );
         break;
       case 12:
         //operation12();
@@ -468,13 +486,7 @@ void operationMenu(void){
         //operation14();
         break;
       case 15:
-        memWastedBytes=computeMemoryWaste();
-        printf("======= This program has wasted %"PRIu64" bytes (~= %.3lfkb, ~= %.3lfmb, ~= %.3lfgb) of memory =======\n",
-          memWastedBytes,
-          (double)memWastedBytes/1024,
-          (double)memWastedBytes/1024/1024,
-          (double)memWastedBytes/1024/1024/1024
-        );
+        
         break;
       case 0:
         exit=true;

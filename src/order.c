@@ -39,6 +39,7 @@ void enqueue(ORDER_NODE_QUEUE **front,ORDER value){
   }
   ORDER_NODE_QUEUE *newBack=createqueue(value);
   temp->previous=newBack;
+  temp=temp->previous;
 }
 
 /**
@@ -61,6 +62,12 @@ ORDER dequeue(ORDER_NODE_QUEUE **front){
     exit(EMPTY_QUEUE);
   }
   ORDER_NODE_QUEUE *temp=*front;
+  if((*front)->previous==NULL){
+    ORDER tempNum=(*front)->data;
+    free(*front);
+    *front=NULL;
+    return tempNum;
+  }
   *front=temp->previous;
   ORDER tempNum=temp->data;
   clnmem(temp);

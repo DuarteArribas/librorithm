@@ -98,9 +98,37 @@ void getDate(char *date){
   char dayTemp[255],monthTemp[255],yearTemp[255];
   uint8_t day,month;
   uint16_t year;
+  //ask the year
+  getYear(yearTemp,&year);
+  //ask the month
+  getMonth(monthTemp,&month);
+  //get last day of month
+  const uint8_t MAX_DAY=getLastDayOfMonth(month,year);
+  //ask the day
+  getDay(dayTemp,&day,MAX_DAY);
+  //copy to date
+  if(strlen(dayTemp)==1){
+    strcpy(date,"0");
+    strcat(date,dayTemp);  
+  }
+  else{ 
+    strcpy(date,dayTemp);
+  }
+  strcat(date,dateSeparator);
+  if(strlen(monthTemp)==1){
+    strcat(date,"0");  
+    strcat(date,monthTemp);  
+  }
+  else{ 
+    strcat(date,monthTemp);
+  }
+  strcat(date,dateSeparator);
+  strcat(date,yearTemp);
+}
+
+void getYear(char *yearTemp,uint16_t *year){
   time_t currTime = time(NULL);
   struct tm tm = *localtime(&currTime);
-  //ask the year
   while(true){
     //header
     printf("            What's the year?            \n");
@@ -121,8 +149,8 @@ void getDate(char *date){
           goto YEARNUMBERLABEL;
         }
       }
-      sscanf(yearTemp,"%"SCNu16,&year);
-      if(year>tm.tm_year+1900){
+      sscanf(yearTemp,"%"SCNu16,year);
+      if(*year>tm.tm_year+1900){
         fprintf(stderr,"ERROR: The year is invalid\n");
         continue;
       }
@@ -131,7 +159,9 @@ void getDate(char *date){
       continue;
     }
   }
-  //ask the month
+}
+
+void getMonth(char *monthTemp,uint8_t *month){
   while(true){
     //header
     printf("            What's the month?            \n");
@@ -152,8 +182,8 @@ void getDate(char *date){
           goto MONTHNUMBERLABEL;
         }
       }
-      sscanf(monthTemp,"%"SCNu8,&month);
-      if(month<1||month>12){
+      sscanf(monthTemp,"%"SCNu8,month);
+      if(*month<1||*month>12){
         fprintf(stderr,"ERROR: The month is invalid\n");
         continue;
       }
@@ -162,8 +192,9 @@ void getDate(char *date){
       continue;
     }
   }
-  const uint8_t MAX_DAY=getLastDayOfMonth(month,year);
-  //ask the day
+}
+
+void getDay(char *dayTemp,uint8_t *day,const uint8_t MAX_DAY){
   while(true){
     //header
     printf("            What's the day?            \n");
@@ -184,8 +215,8 @@ void getDate(char *date){
           goto DAYNUMBERLABEL;
         }
       }
-      sscanf(dayTemp,"%"SCNu8,&day);
-      if(day<1||day>MAX_DAY){
+      sscanf(dayTemp,"%"SCNu8,day);
+      if(*day<1||*day>MAX_DAY){
         fprintf(stderr,"ERROR: The day is invalid\n");
         continue;
       }
@@ -194,24 +225,6 @@ void getDate(char *date){
       continue;
     }
   }
-  if(strlen(dayTemp)==1){
-    strcpy(date,"0");
-    strcat(date,dayTemp);  
-  }
-  else{ 
-    strcpy(date,dayTemp);
-  }
-
-  strcat(date,dateSeparator);
-  if(strlen(monthTemp)==1){
-    strcat(date,"0");  
-    strcat(date,monthTemp);  
-  }
-  else{ 
-    strcat(date,monthTemp);
-  }
-  strcat(date,dateSeparator);
-  strcat(date,yearTemp);
 }
 
 /**

@@ -4,6 +4,7 @@
 #include<inttypes.h>
 #include<string.h>
 #include<ctype.h>
+#include<math.h>
 //project includes
 #include"orderOperations.h"
 #include"clientOperations.h"
@@ -296,4 +297,68 @@ void printClient(CLIENT client){
   }
   printf("        == PRESS ENTER TO EXIT ==    \n");
   printf("===========================================\n");
+}
+
+/**
+ * Prints a client's information for purchases
+ * @param client the client to print
+ */
+void printClientReverse(CLIENT client){
+  printRegularProperties(client);
+  printf("        NUM PURCHASES: %zu            \n",client.numOfOrders); 
+  printf("===========================================\n");
+}
+
+/**
+ * Gets the day, month, and year from the given date string
+ * @param *date the given date
+ * @param *day the new day
+ * @param *month the new month
+ * @param *year the new year
+ */
+void getDayMonthYear(char *date,uint8_t *day,uint8_t *month,uint16_t *year){
+  *day=((uint8_t)date[0]-48)*10+((uint8_t)date[1]-48);
+  *month=((uint8_t)date[3]-48)*10+((uint8_t)date[4]-48);
+  *year=0;
+  for(size_t i=0;i<strlen(date)-6;i++){
+    *year+=((uint16_t)date[i+6]-48)*(uint16_t)(pow(10,strlen(date)-7-i));
+  }
+}
+
+/**
+ * Compares date1 with date2
+ * @param *date1 the first date
+ * @param *date2 the second date
+ * @return 1 if date1>date2, -1 if date1<date2, 0 if date1==date2
+ */
+int8_t compareDates(char *date1,char *date2){
+  uint8_t day1,month1,day2,month2;
+  uint16_t year1,year2;
+  getDayMonthYear(date1,&day1,&month1,&year1);
+  getDayMonthYear(date2,&day2,&month2,&year2);
+  if(year1>year2){
+    return 1;
+  }
+  else if(year1<year2){
+    return -1;
+  }
+  else{
+    if(month1>month2){
+      return 1;
+    }
+    else if(month1<month2){
+      return -1;
+    }
+    else{
+      if(day1>day2){
+        return 1;
+      }
+      else if(day1<day2){
+        return -1;
+      }
+      else{
+        return 0;
+      }
+    }
+  }
 }

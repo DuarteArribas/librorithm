@@ -314,9 +314,7 @@ void verifyIfExistsCientificArea(LIVRO X)
   {
     if(strcmp(X.cientificArea, cientific_qtd[i].cientificArea)==0)
     {
-      printf("---- %s\n", cientific_qtd[i].cientificArea);
       cientific_qtd[i].qtd++;
-      printf("-----%d\n", cientific_qtd[i].qtd);
       exists=true;
       break;
     }
@@ -327,8 +325,6 @@ void verifyIfExistsCientificArea(LIVRO X)
     cientific_qtd=memrealloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
     strcpy(cientific_qtd[num_cientific_qtd-1].cientificArea, X.cientificArea);
     cientific_qtd[num_cientific_qtd-1].qtd=1;
-    printf("****%s\n", cientific_qtd[num_cientific_qtd-1].cientificArea);
-    printf("****%d\n", cientific_qtd[num_cientific_qtd-1].qtd);
   }
 }
 
