@@ -96,3 +96,30 @@ ORDER peekqueue(ORDER_NODE_QUEUE **front){
   }
   return (*front)->data;
 }
+
+/**
+ * Gets the number of orders left to fulfill
+ * @param **ordersQueue the orders queue
+ * @return the number of orders left to fulfill
+ */
+size_t getOrdersLeftToFulfill(ORDER_NODE_QUEUE **ordersQueue){
+  ORDER_NODE_QUEUE *queue=NULL;
+  size_t ordersCount=0;
+  while(*ordersQueue!=NULL){
+    ++ordersCount;
+    if(isemptyqueue(queue)){
+      queue=createqueue(dequeue(ordersQueue));
+      continue;
+    }
+    enqueue(&queue,dequeue(ordersQueue));
+  }
+  while(queue!=NULL){
+    if(isemptyqueue(*ordersQueue)){
+      *ordersQueue=createqueue(dequeue(&queue));
+      continue;
+    }
+    enqueue(ordersQueue,dequeue(&queue));
+  }
+  freequeue(&queue);
+  return ordersCount;
+}

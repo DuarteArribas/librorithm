@@ -4,6 +4,7 @@
 #include<stdbool.h>
 #include<string.h>
 #include<math.h>
+#include<ctype.h>
 //project includes
 #include"mem.h"
 #include"orderOperations.h"
@@ -583,4 +584,124 @@ void clientThatWastedMore(uint8_t month,uint16_t year){
   else{
     printClient(client);
   }
+}
+
+/**
+ * Prints every character that starts with the specified character
+ */
+void clientsThatStartWithChar(void){
+  char startingChar;
+  printf("            What's the first character?            \n");
+  scanf("%c",&startingChar);
+  getchar();
+  clientNODE *clientTemp=clientlist;
+  bool noneFound=true;
+  while(clientTemp!=NULL){
+    if(tolower(clientTemp->data.name[0])==tolower(startingChar)){
+      printClient(clientTemp->data);
+      if(noneFound){noneFound=false;}
+    }
+    clientTemp=clientTemp->next;
+  }
+  if(noneFound){
+    fprintf(stderr,"ERROR: There are no clients with the specified character as their name's starting character!\n");
+  }
+}
+
+/**
+ * Searches the array for the given value. (uint32_t version)
+ * @param size the size of the array
+ * @param *array the array to search
+ * @param value the value to search for
+ * @return the first index of value in the array or -1 if it doesn't exit
+ */
+int64_t ui32lsearch(size_t size,uint32_t *array,uint32_t value){
+  for(size_t i=0;i<size;i++){
+    if(array[i]==value){
+      return i;
+    }
+  }
+  return -1;
+}
+
+typedef struct BEST_SOLD{
+  uint32_t ISBN;
+  size_t count; 
+}BEST_SOLD;
+
+/**
+ * Sorts the array in ascending order (uint32_t version)
+ * @param size the size of the array
+ * @param *array the array to sort
+ */
+void bestSoldisort(size_t size,BEST_SOLD *array){
+  if(size==1){return;}
+  register size_t currentIndex;
+  BEST_SOLD temp;
+  for(register size_t i=1;i<size;++i){
+    currentIndex=i;
+    for(register int64_t j=i-1;j>=0;--j){
+      if(array[currentIndex].ISBN<array[j].ISBN){
+        temp=array[j];
+        array[j]=array[currentIndex];
+        array[currentIndex]=temp;
+        --currentIndex;
+      }
+      else{
+        break;
+      }
+    }
+  }
+}
+void showBestSoldBooks(clientNODE *clients,size_t amount){
+  size_t alreadyMaxSize=1;
+  uint32_t *alreadyMax=memalloc(sizeof(uint32_t));
+  uint32_t count=0,currISBN;
+  clientNODE *clientlistTemp=clients;
+  size_t bestSoldSize=1;
+  BEST_SOLD *bestSoldArray=memalloc(sizeof(BEST_SOLD));
+  while(true){
+    currISBN=0;
+    while(clientlistTemp!=NULL){
+      for(size_t i=0;i<clientlistTemp->data.numOfOrders;i++){
+        if(currISBN==0){
+          if(ui32lsearch(alreadyMaxSize,alreadyMax,clientlistTemp->data.orders[i].ISBN)==-1){
+            currISBN=clientlistTemp->data.orders[i].ISBN;
+            alreadyMax[alreadyMaxSize-1]=currISBN;
+            alreadyMaxSize++;
+            alreadyMax=realloc(alreadyMax,alreadyMaxSize*sizeof(uint32_t));
+          }
+        }
+        if(clientlistTemp->data.orders[i].ISBN==currISBN){
+          count+=clientlistTemp->data.orders[i].quantity;
+        }
+      }
+      clientlistTemp=clientlistTemp->next;
+    }
+    bestSoldArray[bestSoldSize-1]=(BEST_SOLD){currISBN,count};
+    if(currISBN==0){
+      break;
+    }
+    else{
+      count=0;
+      bestSoldSize++;
+      bestSoldArray=realloc(bestSoldArray,bestSoldSize*sizeof(BEST_SOLD));
+      clientlistTemp=clients;
+    }
+  }
+  bestSoldSize--;
+  bestSoldArray=realloc(bestSoldArray,bestSoldSize*sizeof(BEST_SOLD));
+  bestSoldisort(bestSoldSize,bestSoldArray);
+  if(amount>bestSoldSize){
+    for(size_t i=0;i<bestSoldSize;i++){
+      printf("%zu\n",bestSoldArray[i].count);
+    }  
+  }
+  else{
+    for(size_t i=0;i<amount;i++){
+      printf("%zu\n",bestSoldArray[i].count);
+    }
+  }
+  clnmem(alreadyMax);
+  clnmem(bestSoldArray);
 }

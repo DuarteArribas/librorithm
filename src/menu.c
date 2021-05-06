@@ -18,10 +18,10 @@
 //globals
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
+extern PNodoAB Books;
 
 extern CIENTIFIC_QTD *cientific_qtd;
 extern int num_cientific_qtd;
-extern PNodoAB Books;
 extern PUBLISH_YEAR *publish_year;
 extern int num_publish_year;
 
@@ -127,8 +127,8 @@ static void printOperationsMenu(void){
   printf("|                             9-Year with more books                 |\n");
   printf("|                             10-Client that wasted more             |\n");
   printf("|                             11-Check memory wasted                 |\n");
-  printf("|                             12-Operation                           |\n");
-  printf("|                             13-Operation                           |\n");
+  printf("|                             12-Show clients starting with char     |\n");
+  printf("|                             13-Number of orders left to fulfill    |\n");
   printf("|                             14-Operation                           |\n");
   printf("|                             15-Operation                           |\n");
   printf("|                             0-Go Back                              |\n");
@@ -180,7 +180,6 @@ void mainMenu(void){
         break;
     } 
   }
-  //TODO: prob change this to main
 }
 
 void fileMenu(void){
@@ -438,7 +437,7 @@ void operationMenu(void){
         showRecentBooksCientificArea(Books,year2,cientificArea,k);
         break;
       case 5:
-        //operation5();
+        showBestSoldBooks(clientlist,3);
         break;
       case 6:
         num_cientific_qtd=1;
@@ -477,10 +476,10 @@ void operationMenu(void){
         );
         break;
       case 12:
-        //operation12();
+        clientsThatStartWithChar();
         break;
       case 13:
-        //operation13();
+        printf("======= %zu orders are left to fulfill =======\n",getOrdersLeftToFulfill(&orderQueue));
         break;
       case 14:
         //operation14();
