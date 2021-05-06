@@ -6,12 +6,20 @@
 #include<ctype.h>
 #include<math.h>
 //project includes
+#include"librorithm.h"
 #include"orderOperations.h"
 #include"clientOperations.h"
 #include"client.h"
 //global variables
 extern clientNODE *clientlist;
 static const char *plus="+";
+//static function prototypes
+static void   printContainer         (const size_t type);
+static bool   getUniqueNIF           (uint32_t *NIF);
+static CLIENT buildClient            (const uint32_t NIF,const char *name,const char *address,const char *phoneNumber);
+static void   printRegularProperties (const CLIENT client);
+static bool   canShowOrders          (void);
+static void   showOrders             (const CLIENT client);
 
 /**
  * Creates a new client
@@ -22,137 +30,183 @@ CLIENT newClient(void){
   uint32_t NIF;
   char name[255],address[255],phoneNumber[18];
   //header
-  printf("=========================================\n");
-  printf("      ========= NEW CLIENT =========     \n");
-  //NIF input
+  printContainer(HEADER);
+  //input and validation
+  if(!getUniqueNIF(&NIF)||!getName(name)||!getAddress(address)||!getPhoneNumber(phoneNumber)){
+    fprintf(stderr,"\tACTION CANCELED: No user was created!\n");
+    return (CLIENT){.NIF=0};
+  }
+  //footer
+  printContainer(FOOTER);
+  //create and return client
+  return buildClient(NIF,name,address,phoneNumber);
+}
+
+/**
+ * Prints a container
+ * @param type the type of the container (1:Header,2:Footer)
+ */
+static void printContainer(const size_t type){
+  if(type==1){
+    printf("=========================================\n");
+    printf("      ========= NEW CLIENT =========     \n");  
+  }
+  else if(type==2){
+    printf("=========================================\n");
+  }
+}
+
+/**
+ * Gets a unique NIF
+ * @param *NIF the unique NIF
+ * @return true if the NIF was asked successfully and false if it was canceled
+ */
+static bool getUniqueNIF(uint32_t *NIF){
   while(true){
-    NIF=getNIF();
-    if(lsearchlinked(clientlist,NIF)){
-      fprintf(stderr,"The NIF you entered is not unique, which might mean the user is already on the system.\n");
+    if(!getNIF(NIF)){
+      return false;
+    }
+    if(lsearchlinked(clientlist,*NIF)){
+      fprintf(stderr,"\tThe NIF you entered is not unique, which might mean the user is already on the system.\n");
     }
     else{
-      break;
+      return true;
     }
   }
-  //name input
-  getName(name);
-  //address input
-  getAddress(address);
-  //phone input
-  getPhoneNumber(phoneNumber);
-  //footer
-  printf("=========================================\n");
-  //create and return client
+}
+
+/**
+ * Builds and returns the client
+ * @param NIF the client's NIF
+ * @param *name the client's name
+ * @param *address the client's address
+ * @param *phoneNumber the client's phone number
+ * @return the new client
+ */
+static CLIENT buildClient(const uint32_t NIF,const char *name,const char *address,const char *phoneNumber){
   CLIENT client={.NIF=NIF,.numOfOrders=0,.orders=NULL};
   strcpy(client.name,name);
   strcpy(client.address,address);
   strcpy(client.phoneNumber,phoneNumber);
-  return client;
+  return client; 
 }
 
 /**
  * Ask the user's NIF
- * @return the NIF
+ * @param *NIF the user's NIF
+ * @return true if the NIF was asked successfully and false if it was canceled
  */
-uint32_t getNIF(void){
-  uint32_t NIF;
+bool getNIF(uint32_t *NIF){
   char NIFtemp[100];
   while(true){
     //header
-    printf("             What's the NIF?             \n");
+    printf("     What's the NIF? (0 to CANCEL)     \n");
+    printPrompt();
     //get NIF input
     if(fgets(NIFtemp,100,stdin)==NULL){
       if(ferror(stdin)){
-        perror("ERROR: There was an error reading the NIF!");
+        perror("\tERROR: There was an error reading the NIF!");
       }
       strcpy(NIFtemp,"");
       continue;
     }
+    if(strlen(NIFtemp)==2&&NIFtemp[0]=='0'){
+      return false;
+    }
     //check if NIF is a string
     for(size_t i=0;i<strlen(NIFtemp)-1;i++){
       if(!isdigit(NIFtemp[i])){
-        fprintf(stderr,"ERROR: The NIF must be a number!\n");
+        fprintf(stderr,"\tERROR: The NIF must be a number!\n");
         goto NIFNUMBERLABEL;
       }
     }
     //transform NIF into integer
-    sscanf(NIFtemp,"%"SCNu32,&NIF);
+    sscanf(NIFtemp,"%"SCNu32,NIF);
     //verify input
     if(strlen(NIFtemp)-1!=9){
-      fprintf(stderr,"ERROR: The NIF must be a 9 digit number!\n");
+      fprintf(stderr,"\tERROR: The NIF must be a 9 digit number!\n");
       NIFNUMBERLABEL:
       strcpy(NIFtemp,"");
       continue;
     }
     else{
-      return NIF;
+      return true;
     }
   }
 }
 
 /**
  * Asks the user's name
- * @return the name
+ * @param *name the user's name
+ * @return true if the name was asked successfully and false if it was canceled
  */
-void getName(char *name){
+bool getName(char *name){
   char nameTemp[255];
   while(true){
     //header
-    printf("            What is the name?            \n");
+    printf("     What is the name? (0 to CANCEL)     \n");
     //get name input
     if(fgets(nameTemp,255,stdin)==NULL){
       if(ferror(stdin)){
-        perror("ERROR: There was an error reading the name!");
+        perror("\tERROR: There was an error reading the name!");
       }
       strcpy(nameTemp,"");
       continue;
     }
     else{
+      if(strlen(nameTemp)==2&&nameTemp[0]=='0'){
+        return false;
+      }
       //remove newline and verify input
       nameTemp[strcspn(nameTemp,"\n")]=0;
       strcpy(name,nameTemp);
-      return;
+      return true;
     }
   }
 }
 
 /**
  * Asks the user's address
- * @return the address
+ * @param *address the user's address
+ * @return true if the address number was asked successfully and false if it was canceled
  */
-void getAddress(char *address){
+bool getAddress(char *address){
   char addressTemp[255];
   while(true){
-    printf("           What's the address?           \n");
+    printf("     What's the address? (0 to CANCEL)     \n");
     //get address input
     if(fgets(addressTemp,255,stdin)==NULL){
       if(ferror(stdin)){
-        perror("ERROR: There was an error reading the address!");
+        perror("\tERROR: There was an error reading the address!");
       }
       strcpy(addressTemp,"");
       continue;
     }
     else{
+      if(strlen(addressTemp)==2&&addressTemp[0]=='0'){
+        return false;
+      }
       //remove newline and verify input
       addressTemp[strcspn(addressTemp,"\n")]=0;
       strcpy(address,addressTemp);
-      return;
+      return true;
     }
   }
 }
 
 /**
  * Asks the user's phone number
- * @return the phone number
+ * @param *phoneNumber the user's phone number
+ * @return true if the phone number was asked successfully and false if it was canceled
  */
-void getPhoneNumber(char *phoneNumber){
+bool getPhoneNumber(char *phoneNumber){
   char phoneTemp[100],country[100];
   while(true){
-    printf("           What's the country?           \n");
+    printf("     What's the country? (0 to CANCEL)     \n");
     //get country input to check the phone code number
     if(fgets(country,100,stdin)==NULL){
       if(ferror(stdin)){
-        perror("ERROR: There was an error reading the country!");
+        perror("\tERROR: There was an error reading the country!");
       }
       strcpy(phoneTemp,"");
       strcpy(country,"");
@@ -160,6 +214,9 @@ void getPhoneNumber(char *phoneNumber){
       continue;
     }
     else{
+      if(strlen(country)==2&&country[0]=='0'){
+        return false;
+      }
       //format country string
       country[strcspn(country,"\n")]=0;
       for(size_t i=0;i<strlen(country)-1;i++){
@@ -168,7 +225,7 @@ void getPhoneNumber(char *phoneNumber){
       //check countries
       FILE *fileCountry=fopen("in/countries","r");
       if(fileCountry==NULL){
-        perror("ERROR: There was an error checking the countries!");
+        perror("\tERROR: There was an error checking the countries!");
         strcpy(phoneTemp,"");
         strcpy(country,"");
         strcpy(phoneNumber,"");
@@ -189,11 +246,11 @@ void getPhoneNumber(char *phoneNumber){
           strcpy(phoneNumber,plus);
           strcat(phoneNumber,temp2);
           strcat(phoneNumber," ");
-          printf("        What is the phone number?        \n");
+          printf("     What is the phone number? (0 to CANCEL)     \n");
           //get phone number input
           if(fgets(phoneTemp,100,stdin)==NULL){
             if(ferror(stdin)){
-              perror("ERROR: There was an error reading the phone number!");
+              perror("\tERROR: There was an error reading the phone number!");
             }
             strcpy(phoneTemp,"");
             strcpy(country,"");
@@ -201,10 +258,13 @@ void getPhoneNumber(char *phoneNumber){
             goto PHONE_ERROR_LABEL;
           }
           else{
+            if(strlen(phoneTemp)==2&&phoneTemp[0]=='0'){
+              return false;
+            }
             //check if phone number is a string
             for(size_t i=0;i<strlen(phoneTemp)-1;i++){
               if(!isdigit(phoneTemp[i])){
-                fprintf(stderr,"ERROR: The Phone Number must be a number!\n");
+                fprintf(stderr,"\tERROR: The Phone Number must be a number!\n");
                 strcpy(phoneTemp,"");
                 strcpy(country,"");
                 strcpy(phoneNumber,"");
@@ -223,36 +283,33 @@ void getPhoneNumber(char *phoneNumber){
         }
       }
       if(!countryAvailable){
-        fprintf(stderr,"ERROR: The country is not correct!\n");
+        fprintf(stderr,"\tERROR: The country is not correct!\n");
         PHONE_ERROR_LABEL:
         strcpy(phoneTemp,"");
         strcpy(country,"");
         strcpy(phoneNumber,"");
         continue;
       }
-      return;
+      return true;
     }
   }
 }
 
-static void printRegularProperties(CLIENT client){
-  printf("===========================================\n");
-  printf("             -> %s                   \n",client.name);
-  printf("                                     \n");
-  printf("                 NIF: %"PRIu32"      \n",client.NIF);
-  printf("             ADDRESS: %s             \n",client.address);
-  printf("        PHONE NUMBER: %s             \n",client.phoneNumber);  
-}
 
+/**
+ * Checks whether or not the user wants to check the user's orders
+ * @return true if yes and false if no
+ */
 static bool canShowOrders(void){
   char checkOrders[255];
   while(true){
     //print show orders
-    printf("  == DO YOU WANT TO SEE THE ORDERS (y/n)? ==  \n");
+    printf("  == Do you want to see the orders (y/n)? ==  \n");
+    printPrompt();
     //get orders input
     if(fgets(checkOrders,255,stdin)==NULL){
       if(ferror(stdin)){
-        perror("ERROR: There was an error reading your answer!");
+        perror("\tERROR: There was an error reading your answer!");
       }
       strcpy(checkOrders,"");
       continue;
@@ -264,18 +321,22 @@ static bool canShowOrders(void){
       checkOrders[0]=tolower(checkOrders[0]);
       //validate input
       if(strlen(checkOrders)!=1||(checkOrders[0]!='y'&&checkOrders[0]!='n')){
-        fprintf(stderr,"ERROR: The answer must either by a `y` or a `n`!\n");
+        fprintf(stderr,"\tERROR: The answer must either by a `y` or a `n`!\n");
         continue;
       }
       break;
     }
   }
-  return checkOrders[0]=='y'?true:false;
+  return checkOrders[0]=='y';
 }
 
-static void showOrders(CLIENT client){
+/**
+ * Prints the client's orders
+ * @param clients the client to show the orders
+ */
+static void showOrders(const CLIENT client){
   if(client.numOfOrders==0){
-    fprintf(stderr,"There are no orders for this user!\n");
+    fprintf(stderr,"\tThere are no orders for this user!\n");
   }
   else{
     for(size_t i=0;i<client.numOfOrders;i++){
@@ -288,7 +349,7 @@ static void showOrders(CLIENT client){
  * Prints a client's information
  * @param client the client to print
  */
-void printClient(CLIENT client){
+void printClient(const CLIENT client){
   printRegularProperties(client);
   if(client.numOfOrders!=0){
     if(canShowOrders()){
@@ -303,10 +364,23 @@ void printClient(CLIENT client){
  * Prints a client's information for purchases
  * @param client the client to print
  */
-void printClientReverse(CLIENT client){
+void printClientReverse(const CLIENT client){
   printRegularProperties(client);
   printf("        NUM PURCHASES: %zu            \n",client.numOfOrders); 
   printf("===========================================\n");
+}
+
+/**
+ * Prints a client's regular properties
+ * @param client the client to print
+ */
+static void printRegularProperties(const CLIENT client){
+  printf("===========================================\n");
+  printf("             -> %s                   \n",client.name);
+  printf("                                     \n");
+  printf("                 NIF: %"PRIu32"      \n",client.NIF);
+  printf("             ADDRESS: %s             \n",client.address);
+  printf("        PHONE NUMBER: %s             \n",client.phoneNumber);  
 }
 
 /**

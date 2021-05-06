@@ -12,13 +12,20 @@
 #include"client.h"
 //global variables
 clientNODE *clientlist;
+//static function prototypes
+static void       printClientNumber (size_t *userCount);
+static void       copylinkedlist    (clientNODE **dest,clientNODE *src);
+static clientNODE *mergeHelper      (clientNODE* list1,clientNODE* list2);
+static void       splitMerge        (clientNODE *src,clientNODE **front,clientNODE **back);
+static void       mergeSort         (clientNODE **list);
+static void       printReverse      (clientNODE *head);
 
 /**
  * Creates a client linked list with the specified element
  * @param value the value to add to the head of the list
  * @return the address of the head
  */
-clientNODE *createLinked(CLIENT value){
+clientNODE *createLinked(const CLIENT value){
   clientNODE *head=memalloc(sizeof(clientNODE));
   head->data=value;
   head->next=NULL;
@@ -44,7 +51,7 @@ void freelinked(clientNODE *head){
  * @param *head the address of the head
  * @return true if the list is empty and false otherwise
  */
-bool isemptylist(clientNODE *head){
+bool isemptylist(const clientNODE *head){
   return head==NULL;
 }
 
@@ -70,7 +77,7 @@ size_t linkedlength(clientNODE *head){
  * @param value the NIF to search for
  * @return true if the NIF is in the list or false otherwise
  */
-bool lsearchlinked(clientNODE *head,uint32_t value){
+bool lsearchlinked(clientNODE *head,const uint32_t value){
   if(head==NULL){
     return false;
   }
@@ -89,7 +96,7 @@ bool lsearchlinked(clientNODE *head,uint32_t value){
  * @param value the value to search for
  * @return the client with the specified NIF or NULL if there isn't a client with that NIF
  */
-clientNODE *getSearchlinked(clientNODE *head,uint32_t value){
+clientNODE *getSearchlinked(clientNODE *head,const uint32_t value){
   if(head==NULL){
     return NULL;
   }
@@ -109,7 +116,7 @@ clientNODE *getSearchlinked(clientNODE *head,uint32_t value){
  * @param *pos the index of that ORDER in the client's orders' array
  * @return the client with the specified ORDER or NULL if there isn't a client with that ORDER
  */
-clientNODE *getSearchlinkedByOrder(clientNODE *head,ORDER value,size_t *pos){
+clientNODE *getSearchlinkedByOrder(clientNODE *head,const ORDER value,size_t *pos){
   if(head==NULL){
     return NULL;
   }
@@ -130,22 +137,23 @@ clientNODE *getSearchlinkedByOrder(clientNODE *head,ORDER value,size_t *pos){
  * @param *head the address of the head
  * @param client the client to change
  */
-void changeClient(clientNODE *head,CLIENT client){
+void changeClient(clientNODE *head,const CLIENT client){
   if(head==NULL){
     return;
   }
   uint32_t newNIF;
   char newName[255],newAddress[255],newPhoneNumber[18];
-  newNIF=getNIF();
-  getName(newName);
-  getAddress(newAddress);
-  getPhoneNumber(newPhoneNumber);
+  if(!getNIF(&newNIF)||!getName(newName)||!getAddress(newAddress)||!getPhoneNumber(newPhoneNumber)){
+    fprintf(stderr,"\tACTION CANCELED: No user was changed!\n");
+    return;
+  }
   while(head!=NULL){
     if(head->data.NIF==client.NIF){
       head->data.NIF=newNIF;
       strcpy(head->data.name,newName);
       strcpy(head->data.address,newAddress);
       strcpy(head->data.phoneNumber,newPhoneNumber);
+      //return so that it's more efficient (doesn't have to keep searching for another NIF, as it's unique)
       return;
     }
     head=head->next;
@@ -169,7 +177,7 @@ void sremovelinked(clientNODE **head){
  */
 void removelinked(clientNODE **head,size_t index){
   if(index+1>linkedlength(*head)){
-    fprintf(stderr,"ERROR: There was an error removing the specified client!\n");
+    fprintf(stderr,"\tERROR: There was an error removing the specified client!\n");
     return;
   }
   if(index==0){
@@ -190,7 +198,7 @@ void removelinked(clientNODE **head,size_t index){
  * @param **head the address of the address of the head
  * @param NIF the NIF of the client to remove
  */
-void removeClient(clientNODE **head,uint32_t NIF){
+void removeClient(clientNODE **head,const uint32_t NIF){
   if(*head==NULL){
     return;
   }
@@ -210,9 +218,9 @@ void removeClient(clientNODE **head,uint32_t NIF){
  * @param *head the address of the head
  * @param NIF the NIF of the client to remove
  */
-void consultClientNIF(clientNODE *head,uint32_t NIF){
+void consultClientNIF(clientNODE *head,const uint32_t NIF){
   if(head==NULL){
-    fprintf(stderr,"ERROR: There are no clients on the system!\n");
+    fprintf(stderr,"\tERROR: There are no clients on the system!\n");
     return;
   }
   while(head!=NULL){
@@ -224,10 +232,88 @@ void consultClientNIF(clientNODE *head,uint32_t NIF){
     }
     head=head->next;
   }
-  fprintf(stderr,"ERROR: There isn't a client with the specified NIF! Please try again.\n");
+  fprintf(stderr,"\tERROR: There isn't a client with the specified NIF! Please try again.\n");
   return;
 }
 
+/**
+ * Consults the client with the specified name
+ * @param *head the address of the head
+ * @param *name the name of the client to remove
+ */
+void consultClientName(clientNODE *head,const char *name){
+  if(head==NULL){
+    fprintf(stderr,"\tERROR: There are no clients on the system!\n");
+    return;
+  }
+  bool existUsers=false;
+  size_t userCount=1;
+  while(head!=NULL){
+    if(strcmp(head->data.name,name)==0){
+      printClientNumber(&userCount);
+      existUsers=true;
+      printClient(head->data);
+      char dummy[1000];
+      fgets(dummy,1000,stdin);
+    }
+    head=head->next;
+  }
+  if(existUsers){return;}
+  fprintf(stderr,"\tERROR: There isn't a client with the specified name! Please try again.\n");
+  return;
+}
+
+/**
+ * Consults the client with the specified address
+ * @param *head the address of the head
+ * @param *address the address of the client to remove
+ */
+void consultClientAddress(clientNODE *head,const char *address){
+  if(head==NULL){
+    fprintf(stderr,"\tERROR: There are no clients on the system!\n");
+    return;
+  }
+  bool existUsers=false;
+  size_t userCount=1;
+  while(head!=NULL){
+    if(strcmp(head->data.address,address)==0){
+      printClientNumber(&userCount);
+      existUsers=true;
+      printClient(head->data);
+      char dummy[1000];
+      fgets(dummy,1000,stdin);
+    }
+    head=head->next;
+  }
+  if(existUsers){return;}
+  fprintf(stderr,"\tERROR: There isn't a client with the specified address! Please try again.\n");
+  return;
+}
+
+/**
+ * Consults every client
+ * @param *head the address of the head
+ */
+void consultAll(clientNODE *head){
+  if(head==NULL){
+    fprintf(stderr,"\tERROR: There are no clients on the system!\n");
+    return;
+  }
+  size_t userCount=1;
+  while(head!=NULL){
+    printClientNumber(&userCount);
+    printClient(head->data);
+    char dummy[1000];
+    fgets(dummy,1000,stdin);
+    head=head->next;
+  }
+  return;
+}
+
+/**
+ * Prints the client's number, according to their inserted order
+ * @param *userCount the current user count
+ */
 static void printClientNumber(size_t *userCount){
   size_t maxEqual=13+floor(log10(*userCount))+1;
   size_t maxSpace=2+floor(log10(*userCount))+1;
@@ -251,87 +337,13 @@ static void printClientNumber(size_t *userCount){
 }
 
 /**
- * Consults the client with the specified name
- * @param *head the address of the head
- * @param *name the name of the client to remove
- */
-void consultClientName(clientNODE *head,char *name){
-  if(head==NULL){
-    fprintf(stderr,"ERROR: There are no clients on the system!\n");
-    return;
-  }
-  bool existUsers=false;
-  size_t userCount=1;
-  while(head!=NULL){
-    if(strcmp(head->data.name,name)==0){
-      printClientNumber(&userCount);
-      existUsers=true;
-      printClient(head->data);
-      char dummy[1000];
-      fgets(dummy,1000,stdin);
-    }
-    head=head->next;
-  }
-  if(existUsers){return;}
-  fprintf(stderr,"ERROR: There isn't a client with the specified name! Please try again.\n");
-  return;
-}
-
-/**
- * Consults the client with the specified address
- * @param *head the address of the head
- * @param *address the address of the client to remove
- */
-void consultClientAddress(clientNODE *head,char *address){
-  if(head==NULL){
-    fprintf(stderr,"ERROR: There are no clients on the system!\n");
-    return;
-  }
-  bool existUsers=false;
-  size_t userCount=1;
-  while(head!=NULL){
-    if(strcmp(head->data.address,address)==0){
-      printClientNumber(&userCount);
-      existUsers=true;
-      printClient(head->data);
-      char dummy[1000];
-      fgets(dummy,1000,stdin);
-    }
-    head=head->next;
-  }
-  if(existUsers){return;}
-  fprintf(stderr,"ERROR: There isn't a client with the specified address! Please try again.\n");
-  return;
-}
-
-/**
- * Consults every client
- * @param *head the address of the head
- */
-void consultAll(clientNODE *head){
-  if(head==NULL){
-    fprintf(stderr,"ERROR: There are no clients on the system!\n");
-    return;
-  }
-  size_t userCount=1;
-  while(head!=NULL){
-    printClientNumber(&userCount);
-    printClient(head->data);
-    char dummy[1000];
-    fgets(dummy,1000,stdin);
-    head=head->next;
-  }
-  return;
-}
-
-/**
  * Append element at the start of the client's linked list
  * @param **head the address of the address of the head
  * @param value the value to append
  */
-void sappendlinked(clientNODE **head,CLIENT value){
+void sappendlinked(clientNODE **head,const CLIENT value){
   if(*head==NULL){
-    fprintf(stderr,"ERROR: The list is empty!\n");
+    fprintf(stderr,"\tERROR: The list is empty!\n");
     exit(NULL_LIST);
   }
   clientNODE *newElement=memalloc(sizeof(clientNODE));
@@ -345,9 +357,9 @@ void sappendlinked(clientNODE **head,CLIENT value){
  * @param *head the address of the head
  * @param value the value to append
  */
-void eappendlinked(clientNODE *head,CLIENT value){
+void eappendlinked(clientNODE *head,const CLIENT value){
   if(head==NULL){
-    fprintf(stderr,"ERROR: The list is empty!\n");
+    fprintf(stderr,"\tERROR: The list is empty!\n");
     exit(NULL_LIST);
   }
   while(head!=NULL){
@@ -365,6 +377,7 @@ void eappendlinked(clientNODE *head,CLIENT value){
 /**
  * Computes the memory waste from the clients' list
  * @param *head the address of the head
+ * @return the memory wasted by the clients in bytes
  */
 uint64_t getMemoryWasteClients(clientNODE *head){
   uint64_t memoryWaste=0;
@@ -378,6 +391,11 @@ uint64_t getMemoryWasteClients(clientNODE *head){
   return memoryWaste;
 }
 
+/**
+ * Copies a linked list to another linked list
+ * @param **dest the destination address of the adress of its head
+ * @param **src the source address of the adress of its head
+ */
 static void copylinkedlist(clientNODE **dest,clientNODE *src){
   *dest=createLinked(src->data);
   src=src->next;
@@ -387,7 +405,13 @@ static void copylinkedlist(clientNODE **dest,clientNODE *src){
   }
 }
 
-static clientNODE* mergeHelper(clientNODE* list1,clientNODE* list2){
+/**
+ * Helps in mergin the left and right parts
+ * @param *list1 the left list
+ * @param *list2 the right list
+ * @return the merged lists
+ */
+static clientNODE *mergeHelper(clientNODE* list1,clientNODE* list2){
   clientNODE *temp=NULL;
   //base cases
   if(list1==NULL){
@@ -409,6 +433,13 @@ static clientNODE* mergeHelper(clientNODE* list1,clientNODE* list2){
   return temp;
 }
 
+/**
+ * Splits the lists
+ * @param *src the source list
+ * @param **front address of the address of the front 
+ * @param **back address of the address of the back 
+ * @return the merged lists
+ */
 static void splitMerge(clientNODE *src,clientNODE **front,clientNODE **back){
   clientNODE *l1=src->next;
   clientNODE *l2=src;
@@ -424,7 +455,11 @@ static void splitMerge(clientNODE *src,clientNODE **front,clientNODE **back){
   l2->next=NULL;
 }
 
-static void MergeSort(struct clientNODE **list){
+/**
+ * Sorts the linked list through the merge sort algorithm
+ * @param **list the address of the address of the head of the list
+ */
+static void mergeSort(clientNODE **list){
   clientNODE *head=*list;
   clientNODE *left;
   clientNODE *right;
@@ -434,11 +469,15 @@ static void MergeSort(struct clientNODE **list){
   }
   //recursive
   splitMerge(head, &left, &right);
-  MergeSort(&left);
-  MergeSort(&right);
+  mergeSort(&left);
+  mergeSort(&right);
   *list=mergeHelper(left,right);
 }
 
+/**
+ * Prints the linked list in reverse order
+ * @param *head the address of the head
+ */
 static void printReverse(clientNODE *head){
   if(head==NULL){
     return;
@@ -453,7 +492,7 @@ static void printReverse(clientNODE *head){
 void showClientsDec(void){
   clientNODE *clientTemp=NULL;
   copylinkedlist(&clientTemp,clientlist);
-  MergeSort(&clientTemp);
+  mergeSort(&clientTemp);
   printReverse(clientTemp);
   clnmem(clientTemp);
 }
@@ -486,7 +525,7 @@ CLIENT clientWithMostBooks(void){
  * @param *year the year
  * @return the number of books at the specified date
  */
-size_t getNumOfBooks(char *monthTemp,char *yearTemp){
+size_t getNumOfBooks(const char *monthTemp,const char *yearTemp){
   size_t numOfBooks=0;
   clientNODE *clientTemp=clientlist;
   while(clientTemp!=NULL){
@@ -513,7 +552,7 @@ size_t getNumOfBooks(char *monthTemp,char *yearTemp){
  * Prints the latest date, given an ISBN
  * @param ISBN the specified ISBN
  */
-void latestDateByBook(long int ISBN){
+void latestDateByBook(const long int ISBN){
   clientNODE *clientTemp=clientlist;
   char maxDate[11]="00-00-0000";
   const char defaultDate[11]="00-00-0000";
@@ -528,10 +567,10 @@ void latestDateByBook(long int ISBN){
     clientTemp=clientTemp->next;
   }
   if(strcmp(defaultDate,maxDate)==0){
-    fprintf(stderr,"ERROR: There aren't any books ordered with that ISBN!\n");
+    fprintf(stderr,"\tERROR: There aren't any books ordered with that ISBN!\n");
   }
   else{
-    printf("======= DATE: %s =======\n",maxDate);
+    printf("\t======= DATE: %s =======\n",maxDate);
   }
 }
 
@@ -539,7 +578,7 @@ void latestDateByBook(long int ISBN){
  * Prints the number of books of a given client, given the NIF
  * @param NIF the specified NIF
  */
-void numBooksByClient(uint32_t NIF){
+void numBooksByClient(const uint32_t NIF){
    clientNODE *clientTemp=clientlist;
    size_t numOfBooks=0;
    while(clientTemp!=NULL){
@@ -550,7 +589,7 @@ void numBooksByClient(uint32_t NIF){
     }
     clientTemp=clientTemp->next;
   }
-  printf("======= NUM OF BOOKS: %zu =======\n",numOfBooks);
+  printf("\t======= NUM OF BOOKS: %zu =======\n",numOfBooks);
 }
 
 /**
@@ -558,7 +597,7 @@ void numBooksByClient(uint32_t NIF){
  * @param month the specified month
  * @param year the specified year
  */
-void clientThatWastedMore(uint8_t month,uint16_t year){
+void clientThatWastedMore(const uint8_t month,const uint16_t year){
    clientNODE *clientTemp=clientlist;
    CLIENT client;
    double totalPrice=0,maxTotalPrice=-1;
@@ -579,7 +618,7 @@ void clientThatWastedMore(uint8_t month,uint16_t year){
     clientTemp=clientTemp->next;
   }
   if(fabs(maxTotalPrice-1)<0.001){
-    fprintf(stderr,"ERROR: There aren't any clients that wasted money on that date!\n");
+    fprintf(stderr,"\tERROR: There aren't any clients that wasted money on that date!\n");
   }
   else{
     printClient(client);
@@ -591,9 +630,13 @@ void clientThatWastedMore(uint8_t month,uint16_t year){
  */
 void clientsThatStartWithChar(void){
   char startingChar;
-  printf("            What's the first character?            \n");
+  printf("            What's the first character? (0 to CANCEL)            \n");
   scanf("%c",&startingChar);
   getchar();
+  if(startingChar==0){
+    fprintf(stderr,"\tACTION CANCELED: No users were shown!\n");
+    return;
+  }
   clientNODE *clientTemp=clientlist;
   bool noneFound=true;
   while(clientTemp!=NULL){
@@ -604,7 +647,7 @@ void clientsThatStartWithChar(void){
     clientTemp=clientTemp->next;
   }
   if(noneFound){
-    fprintf(stderr,"ERROR: There are no clients with the specified character as their name's starting character!\n");
+    fprintf(stderr,"\tERROR: There are no clients with the specified character as their name's starting character!\n");
   }
 }
 
@@ -624,13 +667,16 @@ int64_t ui32lsearch(size_t size,uint32_t *array,uint32_t value){
   return -1;
 }
 
+/**
+ * Holds the ISBN and the number of bought books with it
+ */
 typedef struct BEST_SOLD{
   uint32_t ISBN;
   size_t count; 
 }BEST_SOLD;
 
 /**
- * Sorts the array in ascending order (uint32_t version)
+ * Sorts the array in ascending order by ISBN
  * @param size the size of the array
  * @param *array the array to sort
  */
@@ -653,7 +699,13 @@ void bestSoldisort(size_t size,BEST_SOLD *array){
     }
   }
 }
-void showBestSoldBooks(clientNODE *clients,size_t amount){
+
+/**
+ * Shows the `amount` best sold books
+ * @param *clients the clients linked list
+ * @param amount the amound of books to show
+ */
+void showBestSoldBooks(clientNODE *clients,const size_t amount){
   size_t alreadyMaxSize=1;
   uint32_t *alreadyMax=memalloc(sizeof(uint32_t));
   uint32_t count=0,currISBN;

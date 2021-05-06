@@ -16,7 +16,7 @@ ORDER_NODE_QUEUE *orderQueue;
  * @param value the value to be the front of the queue
  * @return the address of the front
  */
-ORDER_NODE_QUEUE *createqueue(ORDER value){
+ORDER_NODE_QUEUE *createqueue(const ORDER value){
   ORDER_NODE_QUEUE *front=memalloc(sizeof(ORDER_NODE_QUEUE));
   front->data=value;
   front->previous=NULL;
@@ -28,9 +28,9 @@ ORDER_NODE_QUEUE *createqueue(ORDER value){
  * @param **front the address of the address of the front of the queue
  * @param value the new value to enqueue into the queue
  */
-void enqueue(ORDER_NODE_QUEUE **front,ORDER value){
+void enqueue(ORDER_NODE_QUEUE **front,const ORDER value){
   if(*front==NULL){
-    fprintf(stderr,"ERROR: The queue is empty, thus can't be enqueued\n");
+    fprintf(stderr,"\tERROR: The queue is empty, thus can't be enqueued\n");
     return;
   }
   ORDER_NODE_QUEUE *temp=*front;
@@ -47,7 +47,7 @@ void enqueue(ORDER_NODE_QUEUE **front,ORDER value){
  * @param *front the address of the front
  * @return true if the queue is empty and false otherwise
  */
-bool isemptyqueue(ORDER_NODE_QUEUE *front){
+bool isemptyqueue(const ORDER_NODE_QUEUE *front){
   return front==NULL;
 }
 
@@ -58,7 +58,7 @@ bool isemptyqueue(ORDER_NODE_QUEUE *front){
  */
 ORDER dequeue(ORDER_NODE_QUEUE **front){
   if(*front==NULL){
-    fprintf(stderr,"ERROR: The queue is empty, thus can't be dequeued\n");
+    fprintf(stderr,"\tERROR: The queue is empty, thus can't be dequeued\n");
     exit(EMPTY_QUEUE);
   }
   ORDER_NODE_QUEUE *temp=*front;
@@ -91,7 +91,7 @@ void freequeue(ORDER_NODE_QUEUE **front){
  */
 ORDER peekqueue(ORDER_NODE_QUEUE **front){
   if(*front==NULL){
-    fprintf(stderr,"ERROR: The queue is empty, and thus cannot be peeked!\n");
+    fprintf(stderr,"\tERROR: The queue is empty, and thus cannot be peeked!\n");
     exit(EMPTY_QUEUE);
   }
   return (*front)->data;

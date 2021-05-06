@@ -7,6 +7,7 @@
 #include<ctype.h>
 //project includes
 #include"menu.h"
+#include"librorithm.h"
 #include"fileHandling.h"
 #include"mem.h"
 #include"clientOperations.h"
@@ -15,7 +16,7 @@
 #include"order.h"
 #include"booksOperations.h"
 #include"books.h"
-//globals
+//global variables
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
 extern PNodoAB Books;
@@ -24,8 +25,23 @@ extern CIENTIFIC_QTD *cientific_qtd;
 extern int num_cientific_qtd;
 extern PUBLISH_YEAR *publish_year;
 extern int num_publish_year;
+//static function prototypes
+static void     printMainMenu           (void);
+static void     printFileMenu           (void);
+static void     printBooksMenu          (void);
+static void     printClientsMenu        (void);
+static void     standardOperations      (void);
+static void     printConsultBooksMenu   (void);
+static void     printConsultClientsMenu (void);
+static void     printOrdersMenu         (void);
+static void     printOperationsMenu     (void);
+static ssize_t  getOption               (void);
+static void     consultClient           (void);
+static uint64_t computeMemoryWaste      (void);
 
-//print the menus
+/**
+ * Prints the main menu
+ */
 static void printMainMenu(void){
   printf("========================================\n");
   printf("|     ========= MAIN MENU =========    |\n");
@@ -40,6 +56,9 @@ static void printMainMenu(void){
   printf("========================================\n");
 }
 
+/**
+ * Prints the file menu
+ */
 static void printFileMenu(void){
   printf("========================================\n");
   printf("|     ========= FILE MENU =========    |\n");
@@ -53,6 +72,26 @@ static void printFileMenu(void){
   printf("========================================\n");
 }
 
+/**
+ * Prints the books menu
+ */
+static void printBooksMenu(void){
+  printf("========================================\n");
+  printf("|    ========= BOOKS MENU =========    |\n");
+  standardOperations();
+}
+/**
+ * Prints the clients menu
+ */
+static void printClientsMenu(void){
+  printf("========================================\n");
+  printf("|   ========= CLIENTS MENU =========   |\n");
+  standardOperations();
+}
+
+/**
+ * Prints the standard operations used in both the clients and books menus
+ */
 static void standardOperations(void){
   printf("|                                      |\n");
   printf("|               1-Insert               |\n");
@@ -64,30 +103,25 @@ static void standardOperations(void){
   printf("========================================\n");  
 }
 
-static void printBooksMenu(void){
+/**
+ * Prints books' consult menu
+ */
+static void printConsultBooksMenu(void){
   printf("========================================\n");
-  printf("|    ========= BOOKS MENU =========    |\n");
-  standardOperations();
-}
-
-static void printClientsMenu(void){
-  printf("========================================\n");
-  printf("|   ========= CLIENTS MENU =========   |\n");
-  standardOperations();
-}
-
-static void printBookssubMenuConsult(void){
-  printf("========================================\n");
-  printf("|    ========= Show BOOKS =========    |\n");
-  printf("|              1-ISBN                  |\n");
-  printf("|              2-Título                |\n");
-  printf("|    3-First Author and year publish   |\n");
-  printf("|              4-Show All              |\n");
+  printf("|   ========= CONSULT BOOK =========   |\n");
+  printf("|                                      |\n");
+  printf("|              1-BY ISBN               |\n");
+  printf("|              2-BY TITLE              |\n");
+  printf("|              3-BY AUTHOR AND YEAR    |\n");
+  printf("|              4-ALL BOOKS             |\n");
   printf("|              0-Go Back               |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
 }
 
+/**
+ * Prints clients' consult menu
+ */
 static void printConsultClientsMenu(void){
   printf("========================================\n");
   printf("|   ======== CONSULT CLIENT ========   |\n");
@@ -101,6 +135,9 @@ static void printConsultClientsMenu(void){
   printf("========================================\n");  
 }
 
+/**
+ * Prints orders menu
+ */
 static void printOrdersMenu(void){
   printf("========================================\n");
   printf("|    ========= ORDER MENU =========    |\n");
@@ -112,6 +149,9 @@ static void printOrdersMenu(void){
   printf("========================================\n");  
 }
 
+/**
+ * Prints the operations menu
+ */
 static void printOperationsMenu(void){
   printf("======================================================================\n");
   printf("|                    ======== OPERATIONS ========                    |\n");
@@ -136,12 +176,16 @@ static void printOperationsMenu(void){
   printf("======================================================================\n");  
 }
 
-//read option
+/**
+ * Gets the option of the menu
+ * @return the chosen option or -1 in case of invalid option
+ */
 static ssize_t getOption(void){
+  printPrompt();
   ssize_t option;
   if(scanf("%zd",&option)==EOF){
     if(ferror(stdin)){
-      perror("ERROR: There was an error reading the option!");
+      perror("\tERROR: There was an error reading the option!");
     }
     option=-1;
   }
@@ -149,7 +193,9 @@ static ssize_t getOption(void){
   return option; 
 }
 
-//menu handling
+/**
+ * Handles the main menu
+ */
 void mainMenu(void){
   bool exit=false;
   ssize_t option;
@@ -176,12 +222,15 @@ void mainMenu(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     } 
   }
 }
 
+/**
+ * Handles file menu
+ */
 void fileMenu(void){
   bool exit=false;
   ssize_t option;
@@ -205,12 +254,15 @@ void fileMenu(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
 }
 
+/**
+ * Handles book menu
+ */
 void bookMenu(void){
   bool exit=false;
   ssize_t option;
@@ -239,12 +291,15 @@ void bookMenu(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
 }
 
+/**
+ * Handles the book consult menu
+ */
 void booksubMenuShow(void){
   bool exit=false;
   ssize_t option;
@@ -252,7 +307,7 @@ void booksubMenuShow(void){
   int yearPublish;
   char title[100], firstAuthor[100];
   while(!exit){
-    printBookssubMenuConsult();
+    printConsultBooksMenu();
     option=getOption();
     switch(option){
       case 1:
@@ -279,22 +334,86 @@ void booksubMenuShow(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
 }
 
+/**
+ * Handles the clients' menu
+ */
+void clientMenu(void){
+  bool exit=false;
+  ssize_t option;
+  clientNODE *clientToChange;
+  CLIENT client;
+  uint32_t NIF;
+  while(!exit){
+    printClientsMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        client=newClient();
+        if(client.NIF!=0){
+          if(isemptylist(clientlist)){
+            clientlist=createLinked(client);
+          }
+          else{
+            eappendlinked(clientlist,client);
+          }
+          printf("\tClient added with success!\n");
+        }
+        break;
+      case 2:
+        if(!getNIF(&NIF)){
+          fprintf(stderr,"\tACTION CANCELED: No user was removed!\n");
+          continue;
+        }
+        removeClient(&clientlist,NIF);
+        printf("\tClient removed with success!\n");
+        break;
+      case 3:
+        if(!getNIF(&NIF)){
+          fprintf(stderr,"\tACTION CANCELED: No user was changed!\n");
+          continue;
+        }
+        clientToChange=getSearchlinked(clientlist,NIF);
+        if(clientToChange==NULL){continue;}
+        changeClient(clientlist,clientToChange->data);
+        printf("\tClient changed with success!\n");
+        break;
+      case 4:
+        consultClient();
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"\tERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+/**
+ * Handles the consult clients' menu
+ */
 static void consultClient(void){
   bool exit=false;
   ssize_t option;
+  uint32_t NIF;
   char name[255],address[255];
   while(!exit){
     printConsultClientsMenu();
     option=getOption();
     switch(option){
       case 1:
-        consultClientNIF(clientlist,getNIF());
+        if(!getNIF(&NIF)){
+          fprintf(stderr,"\tACTION CANCELED: No user was consulted!\n");
+          continue;
+        }
+        consultClientNIF(clientlist,NIF);
         break;
       case 2:
         getName(name);
@@ -311,54 +430,15 @@ static void consultClient(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
 }
 
-void clientMenu(void){
-  bool exit=false;
-  ssize_t option;
-  clientNODE *clientToChange;
-  CLIENT client;
-  while(!exit){
-    printClientsMenu();
-    option=getOption();
-    switch(option){
-      case 1:
-        if(isemptylist(clientlist)){
-          clientlist=createLinked(newClient());
-        }
-        else{
-          eappendlinked(clientlist,newClient());
-        }
-        printf("\tClient added with success!\n");
-        break;
-      case 2:
-        removeClient(&clientlist,getNIF());
-        printf("\tClient removed with success!\n");
-        break;
-      case 3:
-        clientToChange=getSearchlinked(clientlist,getNIF());
-        if(clientToChange==NULL){continue;}
-        client=clientToChange->data;
-        changeClient(clientlist,client);
-        printf("\tClient changed with success!\n");
-        break;
-      case 4:
-        consultClient();
-        break;
-      case 0:
-        exit=true;
-        break;
-      default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
-        break;
-    }
-  }
-}
-
+/**
+ * Handles the order menu
+ */
 void orderMenu(void){
   bool exit=false;
   ssize_t option;
@@ -377,7 +457,7 @@ void orderMenu(void){
         break;
       case 2:
         if(isemptyqueue(orderQueue)){
-          fprintf(stderr,"ERROR: There are no orders!\n");
+          fprintf(stderr,"\tERROR: There are no orders!\n");
         }
         else{
           //remove from queue
@@ -392,18 +472,15 @@ void orderMenu(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
 }
 
-static uint64_t computeMemoryWaste(void){
-  uint64_t memoryWasteBytes=0;
-  memoryWasteBytes+=getMemoryWasteClients(clientlist);
-  return memoryWasteBytes;
-}
-
+/**
+ * Handles the operation menu
+ */
 void operationMenu(void){
   bool exit=false;
   ssize_t option;
@@ -413,6 +490,7 @@ void operationMenu(void){
   char yearTemp[255],monthTemp[255];
   uint16_t year;
   uint8_t month;
+  uint32_t NIF;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -420,13 +498,17 @@ void operationMenu(void){
       case 1:
         getYear(yearTemp,&year);
         getMonth(monthTemp,&month);
-        printf("======= %zu books were sold on %"PRIu8"/%"PRIu16" =======\n",getNumOfBooks(monthTemp,yearTemp),month,year);
+        printf("\t======= %zu books were sold on %"PRIu8"/%"PRIu16" =======\n",getNumOfBooks(monthTemp,yearTemp),month,year);
         break;
       case 2:
         latestDateByBook(1234567);
         break;
       case 3:
-        numBooksByClient(getNIF());
+        if(!getNIF(&NIF)){
+          fprintf(stderr,"\tACTION CANCELED: No books were consulted!\n");
+          continue;
+        }
+        numBooksByClient(NIF);
         break;
       case 4:
         printf("How many books? ");
@@ -468,7 +550,7 @@ void operationMenu(void){
         break;
       case 11:
         memWastedBytes=computeMemoryWaste();
-        printf("======= This program has wasted %"PRIu64" bytes (~= %.3lfkb, ~= %.3lfmb, ~= %.3lfgb) of memory =======\n",
+        printf("\t======= This program has wasted %"PRIu64" bytes (~= %.3lfkb, ~= %.3lfmb, ~= %.3lfgb) of memory =======\n",
           memWastedBytes,
           (double)memWastedBytes/1024,
           (double)memWastedBytes/1024/1024,
@@ -479,7 +561,7 @@ void operationMenu(void){
         clientsThatStartWithChar();
         break;
       case 13:
-        printf("======= %zu orders are left to fulfill =======\n",getOrdersLeftToFulfill(&orderQueue));
+        printf("\t======= %zu orders are left to fulfill =======\n",getOrdersLeftToFulfill(&orderQueue));
         break;
       case 14:
         //operation14();
@@ -491,8 +573,19 @@ void operationMenu(void){
         exit=true;
         break;
       default:
-        fprintf(stderr,"ERROR: Invalid option!\n");
+        fprintf(stderr,"\tERROR: Invalid option!\n");
         break;
     }
   }
+}
+
+/**
+ * Computes the memory waste of the program
+ * @return the memory waste of the program in bytes
+ */
+static uint64_t computeMemoryWaste(void){
+  uint64_t memoryWasteBytes=0;
+  memoryWasteBytes+=getMemoryWasteClients(clientlist);
+  //TODO: compute the rest of the memory waste
+  return memoryWasteBytes;
 }

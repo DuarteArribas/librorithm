@@ -1,6 +1,7 @@
 //global includes
 #include<stdio.h>
 #include<stdlib.h>
+//project includes
 #include"mem.h"
 
 /**
@@ -12,7 +13,7 @@
 void *memalloc(size_t size){
   void *temp=malloc(size);
   if(temp==NULL){
-    fprintf(stderr,"ERROR: Could not allocate memory! Stopping program execution.\n");
+    fprintf(stderr,"\tERROR: Could not allocate memory! Stopping program execution.\n");
     exit(MEMORY_ERROR);
   }
   return temp;
@@ -28,7 +29,7 @@ void *memalloc(size_t size){
 void *memrealloc(void *ptr,size_t newSize){
   void *temp=realloc(ptr,newSize);
   if(temp==NULL){
-    fprintf(stderr,"ERROR: Could not reallocate memory! Stopping program execution.\n");
+    fprintf(stderr,"\tERROR: Could not reallocate memory! Stopping program execution.\n");
     clnmem(ptr);
     exit(MEMORY_ERROR);
   }
@@ -36,7 +37,7 @@ void *memrealloc(void *ptr,size_t newSize){
 }
 
 /**
- * Handles realloc allocation.
+ * Handles realloc allocation and increases the memory's block size by one.
  * If the memory cannot be reallocated, it handles it properly by exiting the program.
  * @param *ptr the pointer to the previous allocated memory
  * @param *size size of the previous array to increase by 1
@@ -47,7 +48,7 @@ void *memreallocp(void *ptr,size_t *size,size_t typeSize){
   ++(*size);
   void *temp=realloc(ptr,*size*typeSize);
   if(temp==NULL){
-    fprintf(stderr,"ERROR: Could not reallocate memory! Stopping program execution.\n");
+    fprintf(stderr,"\tERROR: Could not reallocate memory! Stopping program execution.\n");
     clnmem(ptr);
     exit(MEMORY_ERROR);
   }
@@ -55,7 +56,7 @@ void *memreallocp(void *ptr,size_t *size,size_t typeSize){
 }
 
 /**
- * Handles realloc allocation.
+ * Handles realloc allocation and decreases the memory's block size by one.
  * If the memory cannot be reallocated, it handles it properly by exiting the program.
  * @param *ptr the pointer to the previous allocated memory
  * @param *size size of the previous array to decrease by 1
@@ -66,7 +67,7 @@ void *memreallocm(void *ptr,size_t *size,size_t typeSize){
   --(*size);
   void *temp=realloc(ptr,*size*typeSize);
   if(temp==NULL){
-    fprintf(stderr,"ERROR: Could not reallocate memory! Stopping program execution.\n");
+    fprintf(stderr,"\tERROR: Could not reallocate memory! Stopping program execution.\n");
     clnmem(ptr);
     exit(MEMORY_ERROR);
   }
@@ -75,7 +76,7 @@ void *memreallocm(void *ptr,size_t *size,size_t typeSize){
 
 /**
  * Frees and clears memory spaces
- * @param *ptr the pointer the allocated memory
+ * @param *ptr the pointer to the allocated memory
  */
 void clnmem(void *ptr){
   free(ptr);
