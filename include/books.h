@@ -26,7 +26,14 @@ typedef struct{
 
 LIVRO createBook(void);
 
+
 bool getISBN(long int *ISBN);
+
+bool getPublicationYear(int *PublishYear);
+
+bool getPrice(float *price);
+
+bool getStock(int *stock);
 
 void showBook(LIVRO book);
 
@@ -47,5 +54,7 @@ void bookRemovedWarning(void);
 void unregisteredBookWarning(void);
 
 void cientificAreaWarning(void);
+
+void emptybookstreeWarning(void);
 
 #endif

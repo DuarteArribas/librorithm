@@ -80,4 +80,7 @@ void setBookQuantity(PNodoAB T, long int ISBN, int qtd);
 
 float getBookPrice(PNodoAB T, long int ISBN);
 
+LIVRO getMostExpensiveBook(PNodoAB T);
+
+void getTotalStockandStockValue(PNodoAB T, int *totalStock, float *stockValue);
 #endif

@@ -242,10 +242,12 @@ static void readBooks(FILE *booksFile){
   LIVRO temp;
   while(readBook(&temp,booksFile)){
     Books=InserirABP(Books, temp);
-    if(verificarEquilibrio(Books)==0){
-      Books=CriarABPEquilibradaIB(Books);
-    }
+    
   }
+  if(verificarEquilibrio(Books)==0){
+    Books=CriarABPEquilibradaIB(Books);
+  }
+  
 }
 
 /**
