@@ -29,6 +29,8 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T);
 
 PNodoAB LibertarNodoAB(PNodoAB P);
 
+PNodoAB DestruirAB(PNodoAB T);
+
 PNodoAB RemoverNodoABP (PNodoAB T);
 
 PNodoAB RemoverABP (PNodoAB T, LIVRO X);
@@ -53,7 +55,6 @@ PNodoAB removeBook(PNodoAB T, long int ISBN);
 
 int seeMostRecentDate(PNodoAB T, char cientificArea[100]);
 
-void showRecentBooksCientificArea(PNodoAB P, int year, char cientificArea[100], int k);
 
 void verifyIfExistsCientificArea(LIVRO X);
 
@@ -68,5 +69,9 @@ void showYearWithMorePublications(void);
 PNodoAB insertBook(PNodoAB T);
 
 void showALL(PNodoAB T);
+
+void putInArray(PNodoAB T,char *cientificArea,LIVRO *list, int *control);
+
+void showMostRecentCientificArea(PNodoAB T);
 
 #endif

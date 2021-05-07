@@ -12,10 +12,12 @@
 #include"menu.h"
 #include"client.h"
 #include"order.h"
+#include"booksOperations.h"
 //global variables
 char prompt[100]="admin@";
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
+extern PNodoAB Books;
 
 int main(void){
   //setup prompt
@@ -45,6 +47,7 @@ int main(void){
 void cleanup(void){
   freelinked(clientlist);
   freequeue(&orderQueue); 
+  Books=DestruirAB(Books);
 }
 
 /**

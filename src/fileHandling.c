@@ -8,9 +8,12 @@
 #include"mem.h"
 #include"client.h"
 #include"order.h"
+#include"books.h"
+#include"booksOperations.h"
 //global variables
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
+extern PNodoAB Books;
 //static function prototypes
 static bool   canDeleteFiles (void);
 static bool   canDeleteDS    (void);
@@ -18,10 +21,13 @@ static void   writeClients   (FILE *clients);
 static void   writeClient    (const clientNODE *client,FILE *clientsFile);
 static void   writeOrders    (FILE *ordersFile);
 static void   writeOrder     (ORDER_NODE_QUEUE **ordersTemp,FILE *ordersFile);
+static void   writeBooks     (const PNodoAB Books,FILE *booksFile);
 static void   readClients    (FILE *clientsFile);
 static size_t readClient     (CLIENT *clientTemp,FILE *clientsFile);
 static void   readOrders     (FILE *ordersFile);
 static size_t readOrder      (ORDER *orderTemp,FILE *ordersFile);
+static void   readBooks      (FILE *booksFile);
+static size_t readBook       (LIVRO *X,FILE *booksFile);
 
 /**
  * Creates and overrides new files
@@ -71,6 +77,8 @@ void newDataStructures(void){
     freequeue(&orderQueue);
     clientlist=NULL;
     orderQueue=NULL;
+    Books=DestruirAB(Books);
+    Books=CriarAB();
     printf("\tProgram data structures' information removed with success!\n");
   }
   else{
@@ -151,6 +159,21 @@ static void writeOrder(ORDER_NODE_QUEUE **ordersTemp,FILE *ordersFile){
 }
 
 /**
+ * Writes the books' to a file
+ * @param Books the books in the tree
+ * @param *booksFile the books' file
+ */
+static void writeBooks(const PNodoAB T,FILE *booksFile){
+  if(T==NULL){
+    return;
+  }
+  fwrite(&(T->Elemento), sizeof(LIVRO), 1, booksFile);
+
+  writeBooks(T->Direita, booksFile);
+  writeBooks(T->Esquerda, booksFile);
+}
+
+/**
  * Reads the clients from the file
  * @param *clientsFile the clients' file
  */
@@ -212,6 +235,32 @@ static size_t readOrder(ORDER *orderTemp,FILE *ordersFile){
 }
 
 /**
+ * Reads the books from the file
+ * @param *booksFile the books' file
+ */
+static void readBooks(FILE *booksFile){
+  LIVRO temp;
+  while(readBook(&temp,booksFile)){
+    Books=InserirABP(Books, temp);
+    if(verificarEquilibrio(Books)==0){
+      Books=CriarABPEquilibradaIB(Books);
+  }
+  }
+  
+}
+
+/**
+ * Reads an books from the file
+ * @param *X the read book
+ * @param *booksFile the books' file
+ * @return the output of fread on a single book
+ */
+static size_t readBook(LIVRO *X,FILE *booksFile){
+  return fread(X,sizeof(LIVRO),1,booksFile);
+}
+
+
+/**
  * Saves the contents of the three structures of the program into their respective files
  */
 void saveFile(void){
@@ -225,6 +274,7 @@ void saveFile(void){
   }
   writeClients(clients);
   writeOrders(orders);
+  writeBooks(Books, books);
   fclose(clients);
   fclose(books);
   fclose(orders);
@@ -246,6 +296,7 @@ void openFile(void){
   }
   readClients(clients);
   readOrders(orders);
+  readBooks(books);
   fclose(clients);
   fclose(books);
   fclose(orders);

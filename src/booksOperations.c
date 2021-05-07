@@ -1,6 +1,6 @@
 //global includes
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
 //project includes
@@ -57,9 +57,9 @@ int PesquisarABP (PNodoAB T, LIVRO X){   // 0 = nao existe; 1 = existe
   if (CompareBooks(X, T->Elemento) == 0)
     return 1;
   if (CompareBooks(X, T->Elemento) == -1)   // X.NIF < (T->Elemento).NIF)
-    return PesquisarABP(T->Direita, X);
-  else
     return PesquisarABP(T->Esquerda, X);
+  else
+    return PesquisarABP(T->Direita, X);
 }
 
 void ABPEqInsercaoBinaria (PNodoAB *TE, LIVRO L[], int inicio, int fim){
@@ -109,6 +109,14 @@ PNodoAB LibertarNodoAB(PNodoAB P){
   clnmem(P);
   P = NULL;
   return P;
+}
+
+PNodoAB DestruirAB(PNodoAB T){
+	if (T == NULL) 
+		return NULL;
+	T->Esquerda = DestruirAB(T->Esquerda);
+	T->Direita = DestruirAB(T->Direita);
+	return LibertarNodoAB(T);
 }
 
 PNodoAB RemoverNodoABP (PNodoAB T){
@@ -268,9 +276,12 @@ PNodoAB removeBook(PNodoAB T, long int ISBN){
   }
   T=RemoverABP(T,X);
   bookRemovedWarning();
-  if(verificarEquilibrio(T)==0){
-    T=CriarABPEquilibradaIB(T);
+  if(T!=NULL){
+    if(verificarEquilibrio(T)==0){
+      T=CriarABPEquilibradaIB(T);
+    }
   }
+  
   return T;
 }
 
@@ -294,18 +305,6 @@ int seeMostRecentDate(PNodoAB T, char cientificArea[100]){
   return maior;
 }
 
-//K _FEITO AQUI
-void showRecentBooksCientificArea(PNodoAB P, int year, char cientificArea[100], int k){
-  if (P == NULL)
-    return;
-
-  if (k>0 && strcmp(cientificArea, P->Elemento.cientificArea) == 0 && year==(P->Elemento.yearPublish)){
-    showBook(P->Elemento);
-    k--;
-  }
-  showRecentBooksCientificArea(P->Esquerda, year, cientificArea, k);
-  showRecentBooksCientificArea(P->Direita, year, cientificArea,k);
-}
 
 void verifyIfExistsCientificArea(LIVRO X)
 {
@@ -437,4 +436,78 @@ void showALL(PNodoAB T){
   showALL(T->Esquerda);
   
   showALL(T->Direita);
+}
+/**
+ * Put in an array the books of a specific cientific area.
+ * @param T Tree that contains the book's
+ * @param cientificArea Cientific area of a book
+ * @param list array that contains the books of a specific cientific area
+ * @param contrl control variable to determine how many books have been inserted
+ */
+void putInArray(PNodoAB T,char *cientificArea,LIVRO *list,int *control){  
+  if(T==NULL){
+    return;
+  }
+
+  if(strcmp(cientificArea, T->Elemento.cientificArea)==0){
+    list[(*control)]=T->Elemento;
+    *control=*control+1;
+  }
+  putInArray(T->Esquerda, cientificArea,list, control);
+  putInArray(T->Direita, cientificArea, list, control);
+
+}
+
+/**
+ * Determine the k most recent books of a cientific area
+ * @param T tree of books
+ */
+void showMostRecentCientificArea(PNodoAB T){
+  int tamListbooks=0, k;
+  LIVRO aux;
+  LIVRO *list;
+  char cientificArea[100];
+  
+  printf("How many books?");
+  scanf("%d", &k);
+  printf("Cientific Area: ");
+  scanf("\n%[^\n]s",cientificArea);
+
+  list=memalloc(NumeroNodosAB(T)*sizeof(LIVRO));
+  putInArray(T,cientificArea,list,&tamListbooks);
+
+  if(tamListbooks==0){
+    //if the cientific area didn't have a book, a warning message appears
+    cientificAreaWarning();
+    free(list);
+    return;
+  }
+  //sorts the array in decreasing order
+  for (int i = 0; i < tamListbooks; i++) 
+  {
+    for (int j = i + 1; j < tamListbooks; j++)
+    {
+      if (list[i].yearPublish < list[j].yearPublish) 
+      {
+        aux =  list[i];
+        list[i] = list[j];
+        list[j] = aux;
+       }
+ 
+    }
+  }
+
+  if(k!=tamListbooks){
+    if(k < tamListbooks){
+      list=memrealloc(list, k*sizeof(LIVRO));
+    }else{
+      k=tamListbooks;
+    }
+  }
+
+  //Show the k recent books
+  for(int i=0;i<k;i++){
+    showBook(list[i]);
+  }
+  free(list);
 }

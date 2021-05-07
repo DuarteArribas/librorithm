@@ -44,4 +44,6 @@ void bookRemovedWarning(void);
 
 void unregisteredBookWarning(void);
 
+void cientificAreaWarning(void);
+
 #endif

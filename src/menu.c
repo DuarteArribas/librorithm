@@ -485,12 +485,13 @@ void operationMenu(void){
   bool exit=false;
   ssize_t option;
   char cientificArea[100];
-  int k;
   uint64_t memWastedBytes;
   char yearTemp[255],monthTemp[255];
   uint16_t year;
   uint8_t month;
   uint32_t NIF;
+  int k, tamListbooks=0;
+  LIVRO *listbooks;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -511,12 +512,7 @@ void operationMenu(void){
         numBooksByClient(NIF);
         break;
       case 4:
-        printf("How many books? ");
-        scanf("%d", &k);
-        printf("Cientific Area: ");
-        scanf("\n%[^\n]s",cientificArea);
-        int year2=seeMostRecentDate(Books,cientificArea);
-        showRecentBooksCientificArea(Books,year2,cientificArea,k);
+        showMostRecentCientificArea(Books);
         break;
       case 5:
         showBestSoldBooks(clientlist,3);

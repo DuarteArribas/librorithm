@@ -115,3 +115,12 @@ void unregisteredBookWarning(void){
   printf("|                                      |\n");
   printf("========================================\n"); 
 }
+
+
+void cientificAreaWarning(void){
+  printf("===============================================\n"); 
+  printf("|                                             |\n");
+  printf("| There isn't any book of that cientific area |\n");
+  printf("|                                             |\n");
+  printf("===============================================\n"); 
+}
