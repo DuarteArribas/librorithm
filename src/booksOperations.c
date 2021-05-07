@@ -100,13 +100,14 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T){
     return NULL;
   CriarSequenciaEmOrdem(T, Lista, &N);
   ABPEqInsercaoBinaria(&TE, Lista, 0, N-1);
+  clnmem(Lista);
   return TE;
 }
 
 PNodoAB LibertarNodoAB(PNodoAB P){
   P->Esquerda = NULL;
   P->Direita = NULL;
-  clnmem(P);
+  free(P);
   P = NULL;
   return P;
 }
@@ -510,4 +511,55 @@ void showMostRecentCientificArea(PNodoAB T){
     showBook(list[i]);
   }
   free(list);
+}
+
+int getBookQuantity(PNodoAB T, long int ISBN){
+  int esq=0,dir=0;
+  if(T==NULL){
+    return 0;
+  }
+  if(T->Elemento.ISBN==ISBN){
+    return T->Elemento.qtdStock;
+  }else if(CompareBooksISBN(T->Elemento,ISBN)==-1){
+    esq=getBookQuantity(T->Direita,ISBN);
+  }else{
+    dir=getBookQuantity(T->Esquerda,ISBN);
+  }
+  if(esq>0){
+    return esq;
+  }else{
+    return dir;
+  }
+}
+
+void setBookQuantity(PNodoAB T, long int ISBN, int qtd){
+  if(T==NULL){
+    return;
+  }
+  if(CompareBooksISBN(T->Elemento,ISBN)==0){
+    T->Elemento.qtdStock=T->Elemento.qtdStock-qtd;
+  }else if(CompareBooksISBN(T->Elemento,ISBN)==-1){
+    setBookQuantity(T->Direita, ISBN, qtd);
+  }else{
+    setBookQuantity(T->Esquerda, ISBN, qtd);
+  }
+}
+
+float getBookPrice(PNodoAB T, long int ISBN){
+  float esq=0, dir=0;
+  if(T==NULL){
+    return 0;
+  }
+  if(CompareBooksISBN(T->Elemento,ISBN)==0){
+    return T->Elemento.price;
+  }else if(CompareBooksISBN(T->Elemento,ISBN)==-1){
+    dir=getBookPrice(T->Direita, ISBN);
+  }else{
+    esq=getBookPrice(T->Esquerda, ISBN);
+  }
+  if(esq>0){
+    return esq;
+  }else{
+    return dir;
+  }
 }

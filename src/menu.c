@@ -161,7 +161,7 @@ static void printOperationsMenu(void){
   printf("|                             2-Latest date of the specified ISBN    |\n");
   printf("|                             3-Number of Books by client            |\n");
   printf("|                             4-Recent books of a cientific area     |\n");
-  printf("|                             5-Operation                            |\n");
+  printf("|                             5-Show Best Selling Books              |\n");
   printf("|                             6-Cientific area with more books       |\n");
   printf("|                             7-Client with most books               |\n");
   printf("|                             8-Show clients by num of purchases dec |\n");
@@ -443,18 +443,22 @@ static void consultClient(void){
 void orderMenu(void){
   bool exit=false;
   ssize_t option;
+  ORDER orderTemp;
   while(!exit){
     printOrdersMenu();
     option=getOption();
     switch(option){
       case 1:
-        if(isemptyqueue(orderQueue)){
-          orderQueue=createqueue(newOrder());
+        orderTemp=newOrder();
+        if(orderTemp.NIF!=0){
+          if(isemptyqueue(orderQueue)){
+            orderQueue=createqueue(orderTemp);
+          }
+          else{
+            enqueue(&orderQueue,orderTemp);
+          }
+          printf("\tOrder added with success!\n");
         }
-        else{
-          enqueue(&orderQueue,newOrder());
-        }
-        printf("\tOrder added with success!\n");
         break;
       case 2:
         if(isemptyqueue(orderQueue)){
@@ -485,14 +489,12 @@ void orderMenu(void){
 void operationMenu(void){
   bool exit=false;
   ssize_t option;
-  char cientificArea[100];
   uint64_t memWastedBytes;
   char yearTemp[255],monthTemp[255];
   uint16_t year;
   uint8_t month;
   uint32_t NIF;
-  int k, tamListbooks=0;
-  LIVRO *listbooks;
+  long int ISBN;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -503,7 +505,11 @@ void operationMenu(void){
         printf("\t======= %zu books were sold on %"PRIu8"/%"PRIu16" =======\n",getNumOfBooks(monthTemp,yearTemp),month,year);
         break;
       case 2:
-        latestDateByBook(1234567);
+        if(!getISBN(&ISBN)){
+          fprintf(stderr,"\tACTION CANCELED: No dates were consulted!\n");
+          continue;
+        }
+        latestDateByBook(ISBN);
         break;
       case 3:
         if(!getNIF(&NIF)){

@@ -2,6 +2,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
+#include<sys/stat.h>
 //project includes
 #include"fileHandling.h"
 #include"librorithm.h"
@@ -293,11 +294,50 @@ void openFile(void){
     perror("\tERROR: There was an error opening the file! Aborting...");
     exit(FILE_ERROR);
   }
-  readClients(clients);
-  readOrders(orders);
-  readBooks(books);
+  //check if files are empty
+  bool filesSaved[3]={false,false,false};
+  struct stat buffer;
+  fstat(fileno(clients),&buffer);
+  if(buffer.st_size==0){
+    fprintf(stderr,"\tERROR: No data has been found for clients!\n");
+  }
+  else{
+    readClients(clients);
+    filesSaved[0]=true;
+  }
+  fstat(fileno(books),&buffer);
+  if(buffer.st_size==0){
+    fprintf(stderr,"\tERROR: No data has been found for books!\n");
+  }
+  else{
+    readBooks(books);
+    filesSaved[1]=true;
+  }
+  fstat(fileno(orders),&buffer);
+  if(buffer.st_size==0){
+    fprintf(stderr,"\tERROR: No data has been found for orders!\n");
+  }
+  else{
+    readOrders(orders);
+    filesSaved[2]=true;
+  }
   fclose(clients);
   fclose(books);
   fclose(orders);
-  printf("\tInformation from the files opened successfully!\n");
+  if(filesSaved[0]||filesSaved[1]||filesSaved[2]){
+    printf("\tInformation from the {\n");
+    if(filesSaved[0]){
+      printf("\t\tclients,\n");
+    }
+    if(filesSaved[1]){
+      printf("\t\tbooks,\n");
+    }
+    if(filesSaved[2]){
+      printf("\t\torders,\n");
+    }
+    printf("\t} files opened successfully!\n");
+  }
+  else{
+    fprintf(stderr,"\tERROR: No information was opened!\n");  
+  }
 }

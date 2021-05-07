@@ -74,4 +74,10 @@ void putInArray(PNodoAB T,char *cientificArea,LIVRO *list, int *control);
 
 void showMostRecentCientificArea(PNodoAB T);
 
+int getBookQuantity(PNodoAB T, long int ISBN);
+
+void setBookQuantity(PNodoAB T, long int ISBN, int qtd);
+
+float getBookPrice(PNodoAB T, long int ISBN);
+
 #endif

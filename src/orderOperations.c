@@ -12,13 +12,15 @@
 #include"client.h"
 #include"orderOperations.h"
 #include"order.h"
+#include"booksOperations.h"
 //global variables
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
+extern PNodoAB Books;
 static const char *dateSeparator="-";
 //static function prototypes
 static void printContainerOrders(const size_t type);
-static ORDER buildOrder(const uint32_t NIF,const uint32_t ISBN,const uint16_t quantity,const double totalPrice,const char *date);
+static ORDER buildOrder(const uint32_t NIF,const long int ISBN,const uint16_t quantity,const double totalPrice,const char *date);
 static uint8_t getLastDayOfMonth(const uint8_t month,const uint16_t year);
 
 /**
@@ -27,7 +29,8 @@ static uint8_t getLastDayOfMonth(const uint8_t month,const uint16_t year);
  */
 ORDER newOrder(void){
   //hold input info
-  uint32_t ISBN,NIF;
+  long int ISBN;
+  uint32_t NIF;
   char date[11];
   uint16_t quantity;
   double totalPrice;
@@ -35,8 +38,11 @@ ORDER newOrder(void){
   printContainerOrders(1);
   //NIF input
   while(true){
-    getNIF(&NIF);
-    if(!lsearchlinked(clientlist,NIF)){
+    if(!getNIF(&NIF)){
+      fprintf(stderr,"\tACTION CANCELED: No order was added!\n");
+      return (ORDER){.NIF=0};
+    }
+    else if(!lsearchlinked(clientlist,NIF)){
       fprintf(stderr,"The NIF you entered is not on the system. Please insert a correct NIF.\n");
     }
     else{
@@ -44,18 +50,36 @@ ORDER newOrder(void){
     }
   }
   //ISBN input
-  //TODO: correct ISBN
-  ISBN=1234567;
+  while(true){
+    if(!getISBN(&ISBN)){
+      fprintf(stderr,"\tACTION CANCELED: No order was added!\n");
+      return (ORDER){.NIF=0};
+    }
+    else if(!PesquisarABP(Books,(LIVRO){.ISBN=ISBN})){
+      fprintf(stderr,"\tERROR: There are no books with the specified ISBN!\n");
+      continue; 
+    }
+    else if(getBookQuantity(Books,ISBN)<1){
+      fprintf(stderr,"\tERROR: There aren't any books with that ISBN in stock!\n");
+      continue;  
+    }
+    else{
+      break;
+    }
+  }
   //date input
   getDate(date);
   //quantity input
-  //TODO: check if correct quantity
-  quantity=getQuantity();
+  if(!getQuantity(&quantity,ISBN)){
+    fprintf(stderr,"\tACTION CANCELED: No order was added!\n");
+    return (ORDER){.NIF=0};  
+  }
   //totalPrice input
-  //TODO: update totalPrice
-  totalPrice=100.5;
+  totalPrice=quantity*(double)getBookPrice(Books,ISBN);
   //footer
   printContainerOrders(2);
+  //update book quantity
+  setBookQuantity(Books,ISBN,quantity);
   //create order and return
   return buildOrder(NIF,ISBN,quantity,totalPrice,date);
 }
@@ -83,7 +107,7 @@ static void printContainerOrders(const size_t type){
  * @param *date the order's date
  * @return the new order
  */
-static ORDER buildOrder(const uint32_t NIF,const uint32_t ISBN,const uint16_t quantity,const double totalPrice,const char *date){
+static ORDER buildOrder(const uint32_t NIF,const long int ISBN,const uint16_t quantity,const double totalPrice,const char *date){
   ORDER order={.ISBN=ISBN,.NIF=NIF,.quantity=quantity,.totalPrice=totalPrice};
   strcpy(order.date,date);
   return order; 
@@ -271,14 +295,15 @@ static uint8_t getLastDayOfMonth(const uint8_t month,const uint16_t year){
 
 /**
  * Asks the order's quantity
- * @return the quantity
+ * @param *quantity the new quantity
+ * @param ISBN the ISBN to search the quantity
+ * @return true if the quantity was asked successfully and false if it was canceled
  */
-uint16_t getQuantity(void){
+bool getQuantity(uint16_t *quantity,long int ISBN){
   char quantityTemp[5];
-  uint16_t quantity;
   while(true){
     //header
-    printf("            What's the quantity?            \n");
+    printf("            What's the quantity? (0 to CANCEL)            \n");
     printPrompt();
     //get quantity input
     if(fgets(quantityTemp,5,stdin)==NULL){
@@ -289,22 +314,28 @@ uint16_t getQuantity(void){
       continue;
     }
     else{
+      if(strlen(quantityTemp)==2&&quantityTemp[0]=='0'){
+        return false;
+      }
       //remove newline and verify input
       quantityTemp[strcspn(quantityTemp,"\n")]=0;
       for(size_t i=0;i<strlen(quantityTemp);i++){
         if(!isdigit(quantityTemp[i])){
-          fprintf(stderr,"\tERROR: The quantity must be a number!\n");
+          fprintf(stderr,"\tERROR: The quantity must be a positive number!\n");
           goto QUANTITYNUMBERLABEL;
         }
       }
-      sscanf(quantityTemp,"%"SCNu16,&quantity);
-      //check quantity according to ISBN
+      sscanf(quantityTemp,"%"SCNu16,quantity);
+      if(*quantity<1||*quantity>getBookQuantity(Books,ISBN)){
+        fprintf(stderr,"\tERROR: There aren't enough books in stock for that amount!\n");
+        continue;
+      }
       break;
       QUANTITYNUMBERLABEL:
       continue;
     }
   }
-  return quantity;
+  return true;
 }
 
 /**
@@ -329,10 +360,10 @@ bool isSameOrder(const ORDER order1,const ORDER order2){
  */
 void printOrder(const ORDER order,const size_t orderNum){
   printf("============ORDER %zu============\n",orderNum+1);
-  printf("\tISBN:%"PRIu32"\n",order.ISBN);
+  printf("\tISBN:%ld\n",order.ISBN);
   printf("\tNIF:%"PRIu32"\n",order.NIF);
   printf("\tDATE:%s\n",order.date);
   printf("\tQuantity:%"PRIu16"\n",order.quantity);
-  printf("\ttotalPrice:%lf\n",order.totalPrice);
+  printf("\tTotal Price:%.2lf\n",order.totalPrice);
   printf("===============================\n");
 }

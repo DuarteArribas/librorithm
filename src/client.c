@@ -11,9 +11,11 @@
 #include"order.h"
 #include"clientOperations.h"
 #include"client.h"
+#include"booksOperations.h"
 //global variables
 clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
+extern PNodoAB Books;
 //static function prototypes
 static void       printClientNumber (size_t *userCount);
 static void       copylinkedlist    (clientNODE **dest,clientNODE *src);
@@ -658,13 +660,13 @@ void clientsThatStartWithChar(void){
 }
 
 /**
- * Searches the array for the given value. (uint32_t version)
+ * Searches the array for the given value. (long int version)
  * @param size the size of the array
  * @param *array the array to search
  * @param value the value to search for
  * @return the first index of value in the array or -1 if it doesn't exit
  */
-int64_t ui32lsearch(size_t size,uint32_t *array,uint32_t value){
+int64_t lilsearch(size_t size,long int *array,long int value){
   for(size_t i=0;i<size;i++){
     if(array[i]==value){
       return i;
@@ -677,7 +679,7 @@ int64_t ui32lsearch(size_t size,uint32_t *array,uint32_t value){
  * Holds the ISBN and the number of bought books with it
  */
 typedef struct BEST_SOLD{
-  uint32_t ISBN;
+  long int ISBN;
   size_t count; 
 }BEST_SOLD;
 
@@ -713,8 +715,8 @@ void bestSoldisort(size_t size,BEST_SOLD *array){
  */
 void showBestSoldBooks(clientNODE *clients,const size_t amount){
   size_t alreadyMaxSize=1;
-  uint32_t *alreadyMax=memalloc(sizeof(uint32_t));
-  uint32_t count=0,currISBN;
+  long int *alreadyMax=memalloc(sizeof(long int));
+  long int count=0,currISBN;
   clientNODE *clientlistTemp=clients;
   size_t bestSoldSize=1;
   BEST_SOLD *bestSoldArray=memalloc(sizeof(BEST_SOLD));
@@ -723,11 +725,11 @@ void showBestSoldBooks(clientNODE *clients,const size_t amount){
     while(clientlistTemp!=NULL){
       for(size_t i=0;i<clientlistTemp->data.numOfOrders;i++){
         if(currISBN==0){
-          if(ui32lsearch(alreadyMaxSize,alreadyMax,clientlistTemp->data.orders[i].ISBN)==-1){
+          if(lilsearch(alreadyMaxSize,alreadyMax,clientlistTemp->data.orders[i].ISBN)==-1){
             currISBN=clientlistTemp->data.orders[i].ISBN;
             alreadyMax[alreadyMaxSize-1]=currISBN;
             alreadyMaxSize++;
-            alreadyMax=realloc(alreadyMax,alreadyMaxSize*sizeof(uint32_t));
+            alreadyMax=realloc(alreadyMax,alreadyMaxSize*sizeof(long int));
           }
         }
         if(clientlistTemp->data.orders[i].ISBN==currISBN){
@@ -752,12 +754,12 @@ void showBestSoldBooks(clientNODE *clients,const size_t amount){
   bestSoldisort(bestSoldSize,bestSoldArray);
   if(amount>bestSoldSize){
     for(size_t i=0;i<bestSoldSize;i++){
-      printf("%zu\n",bestSoldArray[i].count);
+      PesquisarABPISBN(Books,bestSoldArray[i].ISBN);
     }  
   }
   else{
     for(size_t i=0;i<amount;i++){
-      printf("%zu\n",bestSoldArray[i].count);
+      PesquisarABPISBN(Books,bestSoldArray[i].ISBN);
     }
   }
   clnmem(alreadyMax);

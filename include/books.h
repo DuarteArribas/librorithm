@@ -26,6 +26,8 @@ typedef struct{
 
 LIVRO createBook(void);
 
+bool getISBN(long int *ISBN);
+
 void showBook(LIVRO book);
 
 int CompareBooks(LIVRO X, LIVRO Y);

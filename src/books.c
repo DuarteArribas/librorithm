@@ -3,10 +3,11 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
+#include<ctype.h>
 //project includes
 #include"books.h"
+#include"librorithm.h"
 
-//Corrigir esta bugado
 LIVRO createBook(void){
     LIVRO book;
     printf("ISBN: ");
@@ -34,6 +35,50 @@ LIVRO createBook(void){
     printf("Stock Quantity: ");
     scanf("%d", &book.qtdStock);
     return book;
+}
+
+/**
+ * Ask the user's ISBN
+ * @param *ISBN the user's ISBN
+ * @return true if the NIF was asked successfully and false if it was canceled
+ */
+bool getISBN(long int *ISBN){
+  char ISBNtemp[100];
+  while(true){
+    //header
+    printf("     What's the ISBN? (0 to CANCEL)     \n");
+    printPrompt();
+    //get ISBN input
+    if(fgets(ISBNtemp,100,stdin)==NULL){
+      if(ferror(stdin)){
+        perror("\tERROR: There was an error reading the ISBN!");
+      }
+      strcpy(ISBNtemp,"");
+      continue;
+    }
+    if(strlen(ISBNtemp)==2&&ISBNtemp[0]=='0'){
+      return false;
+    }
+    //check if ISBN is a string
+    for(size_t i=0;i<strlen(ISBNtemp)-1;i++){
+      if(!isdigit(ISBNtemp[i])){
+        fprintf(stderr,"\tERROR: The ISBN must be a number!\n");
+        goto ISBNNUMBERLABEL;
+      }
+    }
+    //transform ISBN into integer
+    sscanf(ISBNtemp,"%ld",ISBN);
+    //verify input
+    if(strlen(ISBNtemp)-1!=13){
+      fprintf(stderr,"\tERROR: The ISBN must be a 13 digit number!\n");
+      ISBNNUMBERLABEL:
+      strcpy(ISBNtemp,"");
+      continue;
+    }
+    else{
+      return true;
+    }
+  }
 }
 
 void showBook(LIVRO book){

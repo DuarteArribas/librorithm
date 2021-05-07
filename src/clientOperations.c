@@ -88,7 +88,7 @@ static CLIENT buildClient(const uint32_t NIF,const char *name,const char *addres
   strcpy(client.name,name);
   strcpy(client.address,address);
   strcpy(client.phoneNumber,phoneNumber);
-  return client; 
+  return client;
 }
 
 /**
