@@ -203,13 +203,14 @@ void removeClient(clientNODE **head,const uint32_t NIF){
     return;
   }
   size_t clientIndex=0;
-  while(*head!=NULL){
-    if((*head)->data.NIF==NIF){
+  clientNODE *temp=*head;
+  while(temp!=NULL){
+    if(temp->data.NIF==NIF){
       removelinked(head,clientIndex);
       return;
     }
     ++clientIndex;
-    *head=(*head)->next;
+    temp=temp->next;
   }
 }
 

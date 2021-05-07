@@ -168,7 +168,6 @@ static void writeBooks(const PNodoAB T,FILE *booksFile){
     return;
   }
   fwrite(&(T->Elemento), sizeof(LIVRO), 1, booksFile);
-
   writeBooks(T->Direita, booksFile);
   writeBooks(T->Esquerda, booksFile);
 }
@@ -244,9 +243,8 @@ static void readBooks(FILE *booksFile){
     Books=InserirABP(Books, temp);
     if(verificarEquilibrio(Books)==0){
       Books=CriarABPEquilibradaIB(Books);
+    }
   }
-  }
-  
 }
 
 /**
@@ -264,7 +262,8 @@ static size_t readBook(LIVRO *X,FILE *booksFile){
  * Saves the contents of the three structures of the program into their respective files
  */
 void saveFile(void){
-  //will empty the files, and write the current contents of the data structures
+  //empty the existing files
+  newFile();
   FILE *clients = fopen("in/binStructures/clients.bin","wb+");
   FILE *books   = fopen("in/binStructures/books.bin","wb+");
   FILE *orders  = fopen("in/binStructures/orders.bin","wb+");
@@ -274,7 +273,7 @@ void saveFile(void){
   }
   writeClients(clients);
   writeOrders(orders);
-  writeBooks(Books, books);
+  writeBooks(Books,books);
   fclose(clients);
   fclose(books);
   fclose(orders);

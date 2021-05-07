@@ -17,13 +17,14 @@
 #include"booksOperations.h"
 #include"books.h"
 //global variables
+//data structures
 extern clientNODE *clientlist;
 extern ORDER_NODE_QUEUE *orderQueue;
 extern PNodoAB Books;
-
+//other
 extern CIENTIFIC_QTD *cientific_qtd;
-extern int num_cientific_qtd;
 extern PUBLISH_YEAR *publish_year;
+extern int num_cientific_qtd;
 extern int num_publish_year;
 //static function prototypes
 static void     printMainMenu           (void);
