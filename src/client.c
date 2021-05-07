@@ -8,14 +8,16 @@
 //project includes
 #include"mem.h"
 #include"orderOperations.h"
+#include"order.h"
 #include"clientOperations.h"
 #include"client.h"
 //global variables
 clientNODE *clientlist;
+extern ORDER_NODE_QUEUE *orderQueue;
 //static function prototypes
 static void       printClientNumber (size_t *userCount);
 static void       copylinkedlist    (clientNODE **dest,clientNODE *src);
-static clientNODE *mergeHelper      (clientNODE* list1,clientNODE* list2);
+static clientNODE *mergeHelper      (clientNODE *list1,clientNODE *list2);
 static void       splitMerge        (clientNODE *src,clientNODE **front,clientNODE **back);
 static void       mergeSort         (clientNODE **list);
 static void       printReverse      (clientNODE *head);
@@ -141,12 +143,14 @@ void changeClient(clientNODE *head,const CLIENT client){
   if(head==NULL){
     return;
   }
+  uint32_t oldNIF=client.NIF;
   uint32_t newNIF;
   char newName[255],newAddress[255],newPhoneNumber[18];
   if(!getNIF(&newNIF)||!getName(newName)||!getAddress(newAddress)||!getPhoneNumber(newPhoneNumber)){
     fprintf(stderr,"\tACTION CANCELED: No user was changed!\n");
     return;
   }
+  replaceOrdersNIF(&orderQueue,oldNIF,newNIF);
   while(head!=NULL){
     if(head->data.NIF==client.NIF){
       head->data.NIF=newNIF;
@@ -199,6 +203,7 @@ void removelinked(clientNODE **head,size_t index){
  * @param NIF the NIF of the client to remove
  */
 void removeClient(clientNODE **head,const uint32_t NIF){
+  removeOrdersWithNIF(&orderQueue,NIF);
   if(*head==NULL){
     return;
   }

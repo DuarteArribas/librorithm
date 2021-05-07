@@ -123,3 +123,61 @@ size_t getOrdersLeftToFulfill(ORDER_NODE_QUEUE **ordersQueue){
   freequeue(&queue);
   return ordersCount;
 }
+
+/**
+ * Removes the orders of the specified NIF
+ * @param **orders the orders queue
+ * @param NIF the NIF of the orders to remove
+ */
+void removeOrdersWithNIF(ORDER_NODE_QUEUE **orders,uint32_t NIF){
+  ORDER_NODE_QUEUE *queue=NULL;
+  while(*orders!=NULL){
+    if((*orders)->data.NIF!=NIF){
+      if(isemptyqueue(queue)){
+        queue=createqueue(dequeue(orders));
+        continue;
+      }
+      enqueue(&queue,dequeue(orders));
+    }
+    else{
+      dequeue(orders);
+    }
+  }
+  while(queue!=NULL){
+    if(isemptyqueue(*orders)){
+      *orders=createqueue(dequeue(&queue));
+      continue;
+    }
+    enqueue(orders,dequeue(&queue));
+  }
+  freequeue(&queue);
+}
+
+
+/**
+ * Replaces the NIF of the orders with oldNIF by newNIF
+ * @param **orders the orders queue
+ * @param oldNIF the NIF of the order
+ * @param newNIF the new NIF to replace the old NIF on the order
+ */
+void replaceOrdersNIF(ORDER_NODE_QUEUE **orders,uint32_t oldNIF,uint32_t newNIF){
+  ORDER_NODE_QUEUE *queue=NULL;
+  while(*orders!=NULL){
+    if((*orders)->data.NIF==oldNIF){
+      (*orders)->data.NIF=newNIF;
+    }
+    if(isemptyqueue(queue)){
+      queue=createqueue(dequeue(orders));
+      continue;
+    }
+    enqueue(&queue,dequeue(orders));
+  }
+  while(queue!=NULL){
+    if(isemptyqueue(*orders)){
+      *orders=createqueue(dequeue(&queue));
+      continue;
+    }
+    enqueue(orders,dequeue(&queue));
+  }
+  freequeue(&queue); 
+}
