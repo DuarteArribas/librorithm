@@ -19,37 +19,36 @@ LIVRO createBook(void){
         break;
       }
     }
-    printf("     What's the Title? (0 to CANCEL) : ");
-    scanf("\n%[^\n]s",book.title);
+    printf("     What's the Title? (0 to CANCEL) \n");
+    getString(book.title, 100);
     if(strcmp(book.title, "0")==0){
       fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
       return (LIVRO){.ISBN=-1};
     }
-    printf("     What's the Language? (0 to CANCEL) : ");
-    scanf("\n%[^\n]s",book.language);
+    printf("     What's the Language? (0 to CANCEL) \n");
+    getString(book.language, 100);
     if(strcmp(book.language, "0")==0){
       fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
       return (LIVRO){.ISBN=-1};
     }
-    printf("     What's the First Author? (0 to CANCEL) : ");
-    scanf("\n%[^\n]s",book.firstAuthor);
+    printf("     What's the First Author? (0 to CANCEL) \n");
+    getString(book.firstAuthor, 100);
     if(strcmp(book.firstAuthor, "0")==0){
       fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
       return (LIVRO){.ISBN=-1};
     }
-    printf("     What's the Second Author? (NULL if it doesn't exist) (0 to CANCEL) : ");
-    scanf("\n%[^\n]s",book.secondAuthor);
+    printf("     What's the Second Author? (NULL if it doesn't exist) (0 to CANCEL) \n");
+    getString(book.secondAuthor, 100);
     if(strcmp(book.secondAuthor, "0")==0){
       fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
       return (LIVRO){.ISBN=-1};
     }
-    printf("     What's the Editor? (0 to CANCEL) : ");
-    scanf("\n%[^\n]s",book.editor);
+    printf("     What's the Editor? (0 to CANCEL) \n");
+    getString(book.editor, 100);
     if(strcmp(book.editor, "0")==0){
       fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
       return (LIVRO){.ISBN=-1};
     }
-    getchar();
     while(true){
       if(!getPublicationYear(&book.yearPublish)){
         fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
@@ -57,6 +56,12 @@ LIVRO createBook(void){
       }else{
         break;
       }
+    }
+    printf("     What's the Cientific Area ? \n");
+    getString(book.cientificArea, 100);
+    if(strcmp(book.cientificArea, "0")==0){
+      fprintf(stderr,"\tACTION CANCELED: No BOOK was added!\n");
+      return (LIVRO){.ISBN=-1};
     }
     while(true){
       if(!getPrice(&book.price)){
@@ -78,6 +83,16 @@ LIVRO createBook(void){
     return book;
 }
 
+void getString(char *string, int tam){
+  if(fgets(string,tam,stdin)==NULL){
+      if(ferror(stdin)){
+        perror("\tERROR: There was an error reading the input!\n");
+      }
+      strcpy(string,"");
+  }else{
+    string[strcspn(string,"\n")]=0;
+  }
+}
 
 /**
  * Ask the books's ISBN
@@ -88,11 +103,11 @@ bool getISBN(long int *ISBN){
   char ISBNtemp[100];
   while(true){
     //header
-    printf("     What's the ISBN? (0 to CANCEL) : ");
+    printf("     What's the ISBN? (0 to CANCEL)\n");
     //get ISBN input
     if(fgets(ISBNtemp,100,stdin)==NULL){
       if(ferror(stdin)){
-        perror("\tERROR: There was an error reading the ISBN!");
+        perror("\tERROR: There was an error reading the ISBN!\n");
       }
       strcpy(ISBNtemp,"");
       continue;
@@ -131,11 +146,11 @@ bool getPublicationYear(int *PublishYear){
   char PublishYearTemp[100];
   while(true){
     //header
-    printf("     What's the Publication year? (0 to CANCEL) : ");
-    //get ISBN input
+    printf("     What's the Publication year? (0 to CANCEL)\n");
+    //get Publication year input
     if(fgets(PublishYearTemp,100,stdin)==NULL){
       if(ferror(stdin)){
-        perror("\tERROR: There was an error reading the Year!");
+        perror("\tERROR: There was an error reading the Year!\n");
       }
       strcpy(PublishYearTemp,"");
       continue;
@@ -143,7 +158,7 @@ bool getPublicationYear(int *PublishYear){
     if(strlen(PublishYearTemp)==2&&PublishYearTemp[0]=='0'){
       return false;
     }
-    //check if ISBN is a string
+    //check if publication year is a string
     for(size_t i=0;i<strlen(PublishYearTemp)-1;i++){
       if(!isdigit(PublishYearTemp[i])){
         fprintf(stderr,"\tERROR: The Year must be a number!\n");
@@ -174,11 +189,11 @@ bool getPrice(float *price){
   char priceTemp[100];
   while(true){
     //header
-    printf("     What's the Price? (0 to CANCEL) : ");
+    printf("     What's the Price? (0 to CANCEL)\n");
     //get Price input
     if(fgets(priceTemp,100,stdin)==NULL){
       if(ferror(stdin)){
-        perror("\tERROR: There was an error reading the Price!");
+        perror("\tERROR: There was an error reading the Price!\n");
       }
       strcpy(priceTemp,"");
       continue;
@@ -216,7 +231,7 @@ bool getStock(int *stock){
   char stockTemp[100];
   while(true){
     //header
-    printf("     What's the Stock? (0 to CANCEL) : ");
+    printf("     What's the Stock? (0 to CANCEL)\n");
     //get stock input
     if(fgets(stockTemp,100,stdin)==NULL){
       if(ferror(stdin)){

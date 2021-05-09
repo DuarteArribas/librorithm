@@ -283,7 +283,7 @@ void bookMenu(void){
       case 3:
         printf("Insert an ISBN: ");
         scanf("%ld", &ISBN);
-        Books=changeBookISBN(Books,Books, ISBN);
+        Books=changeBookISBN(Books, ISBN);
         break;
       case 4:
         booksubMenuShow();

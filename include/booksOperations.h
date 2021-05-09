@@ -49,12 +49,9 @@ void PesquisarABPAuthorYear(PNodoAB T, char firstAuthor[100], int yearPublish);
 
 void PesquisarABPEditorCientificArea(PNodoAB T, char editor[100], char cientificArea[100]);
 
-PNodoAB changeBookISBN(PNodoAB P, PNodoAB T, long int ISBN);
+PNodoAB changeBookISBN(PNodoAB P,long int ISBN);
 
 PNodoAB removeBook(PNodoAB T, long int ISBN);
-
-int seeMostRecentDate(PNodoAB T, char cientificArea[100]);
-
 
 void verifyIfExistsCientificArea(LIVRO X);
 
@@ -83,4 +80,5 @@ float getBookPrice(PNodoAB T, long int ISBN);
 LIVRO getMostExpensiveBook(PNodoAB T);
 
 void getTotalStockandStockValue(PNodoAB T, int *totalStock, float *stockValue);
+
 #endif

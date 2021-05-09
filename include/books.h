@@ -26,6 +26,7 @@ typedef struct{
 
 LIVRO createBook(void);
 
+void getString(char *string, int tam);
 
 bool getISBN(long int *ISBN);
 
