@@ -99,6 +99,7 @@ static void standardOperations(void){
   printf("|               2-Remove               |\n");
   printf("|               3-Change               |\n");
   printf("|               4-Consult              |\n");
+  printf("|               5-Restock By ISBN      |\n");
   printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
@@ -266,6 +267,7 @@ void fileMenu(void){
  */
 void bookMenu(void){
   bool exit=false;
+  int stock;
   ssize_t option;
   long int ISBN;
   while(!exit){
@@ -288,6 +290,15 @@ void bookMenu(void){
       case 4:
         booksubMenuShow();
         break;
+      case 5:
+        if(getISBN(&ISBN) && getStock(&stock)){
+          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})!=1){
+            unregisteredBookWarning();
+          }else{
+            restockBook(Books, ISBN, stock);
+          }
+        }
+      break;
       case 0:
         exit=true;
         break;

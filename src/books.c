@@ -4,6 +4,7 @@
 #include<stdbool.h>
 #include<string.h>
 #include<ctype.h>
+#include<limits.h>
 //project includes
 #include"books.h"
 #include"librorithm.h"
@@ -210,7 +211,7 @@ bool getPrice(float *price){
     }
     //transform stock into integer
     sscanf(priceTemp,"%f",price);
-     if(strlen(priceTemp)-1>=4){
+     if(*price>INT_MAX){
       fprintf(stderr,"\tERROR: The inserted price is absurd\n");
       PRICENUMBERLABEL:
       strcpy(priceTemp,"");
@@ -252,7 +253,7 @@ bool getStock(int *stock){
     }
     //transform ISBN into integer
     sscanf(stockTemp,"%d",stock);
-     if(strlen(stockTemp)-1>=8){
+     if(*stock>INT_MAX){
       fprintf(stderr,"\tERROR: The inserted stock is absurd\n");
       STOCKNUMBERLABEL:
       strcpy(stockTemp,"");

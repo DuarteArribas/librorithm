@@ -81,4 +81,6 @@ LIVRO getMostExpensiveBook(PNodoAB T);
 
 void getTotalStockandStockValue(PNodoAB T, int *totalStock, float *stockValue);
 
+void restockBook(PNodoAB T, long int ISBN, int qtd);
+
 #endif

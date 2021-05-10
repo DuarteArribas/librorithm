@@ -768,3 +768,23 @@ void getTotalStockandStockValue(PNodoAB T, int *totalStock, float *stockValue){
   getTotalStockandStockValue(T->Esquerda, totalStock, stockValue);
   getTotalStockandStockValue(T->Direita, totalStock, stockValue);
 }
+
+/**
+ * Restock the book
+ * @param T the book's tree
+ * @param ISBN the specified ISBN
+ * @param qtd the quantity to add to the stock 
+ */
+void restockBook(PNodoAB T, long int ISBN, int qtd){
+  if(T==NULL){
+    return;
+  }
+
+  if(CompareBooksISBN(T->Elemento, ISBN) == 0 ){
+    T->Elemento.qtdStock = T->Elemento.qtdStock + qtd;
+  }else if(CompareBooksISBN(T->Elemento, ISBN)==-1){
+    restockBook(T->Direita, ISBN, qtd);
+  }else{
+    restockBook(T->Direita, ISBN, qtd);
+  }
+}
