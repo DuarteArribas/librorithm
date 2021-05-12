@@ -99,6 +99,7 @@ static void standardOperations(void){
   printf("|               2-Remove               |\n");
   printf("|               3-Change               |\n");
   printf("|               4-Consult              |\n");
+  printf("|               5-Restock By ISBN      |\n");
   printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
@@ -170,7 +171,7 @@ static void printOperationsMenu(void){
   printf("|                             11-Check memory wasted                 |\n");
   printf("|                             12-Show clients starting with char     |\n");
   printf("|                             13-Number of orders left to fulfill    |\n");
-  printf("|                             14-Operation                           |\n");
+  printf("|                             14-Show most expensive Book            |\n");
   printf("|                             15-Operation                           |\n");
   printf("|                             0-Go Back                              |\n");
   printf("|                                                                    |\n");
@@ -266,6 +267,7 @@ void fileMenu(void){
  */
 void bookMenu(void){
   bool exit=false;
+  int stock;
   ssize_t option;
   long int ISBN;
   while(!exit){
@@ -283,11 +285,20 @@ void bookMenu(void){
       case 3:
         printf("Insert an ISBN: ");
         scanf("%ld", &ISBN);
-        Books=changeBookISBN(Books,Books, ISBN);
+        Books=changeBookISBN(Books, ISBN);
         break;
       case 4:
         booksubMenuShow();
         break;
+      case 5:
+        if(getISBN(&ISBN) && getStock(&stock)){
+          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})!=1){
+            unregisteredBookWarning();
+          }else{
+            restockBook(Books, ISBN, stock);
+          }
+        }
+      break;
       case 0:
         exit=true;
         break;
@@ -495,6 +506,9 @@ void operationMenu(void){
   uint8_t month;
   uint32_t NIF;
   long int ISBN;
+  int totalStock=0;
+  float stockValue=0;
+  LIVRO X;
   while(!exit){
     printOperationsMenu();
     option=getOption();
@@ -567,10 +581,16 @@ void operationMenu(void){
         printf("\t======= %zu orders are left to fulfill =======\n",getOrdersLeftToFulfill(&orderQueue));
         break;
       case 14:
-        //operation14();
+        X=getMostExpensiveBook(Books);
+        if(X.ISBN==-1){
+          emptybookstreeWarning();
+        }else{
+          showBook(X);
+        }
         break;
       case 15:
-        
+        getTotalStockandStockValue(Books,&totalStock,&stockValue);
+        printf("\t======= Total Stock: %d. Total Value of Stock %.2f € =======\n",totalStock, stockValue);
         break;
       case 0:
         exit=true;
