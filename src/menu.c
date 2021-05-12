@@ -99,7 +99,6 @@ static void standardOperations(void){
   printf("|               2-Remove               |\n");
   printf("|               3-Change               |\n");
   printf("|               4-Consult              |\n");
-  printf("|               5-Restock By ISBN      |\n");
   printf("|               0-Go Back              |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
@@ -116,6 +115,20 @@ static void printConsultBooksMenu(void){
   printf("|              2-BY TITLE              |\n");
   printf("|              3-BY AUTHOR AND YEAR    |\n");
   printf("|              4-ALL BOOKS             |\n");
+  printf("|              0-Go Back               |\n");
+  printf("|                                      |\n");
+  printf("========================================\n");  
+}
+
+/**
+ * Prints books' change menu
+ */
+static void printChangeBooksMenu(void){
+  printf("========================================\n");
+  printf("|   ========= Change BOOK =========    |\n");
+  printf("|                                      |\n");
+  printf("|              1-Change Book           |\n");
+  printf("|              2-Restock By ISBN       |\n");
   printf("|              0-Go Back               |\n");
   printf("|                                      |\n");
   printf("========================================\n");  
@@ -267,7 +280,6 @@ void fileMenu(void){
  */
 void bookMenu(void){
   bool exit=false;
-  int stock;
   ssize_t option;
   long int ISBN;
   while(!exit){
@@ -285,24 +297,11 @@ void bookMenu(void){
         Books=removeBook(Books, ISBN);
         break;
       case 3:
-        if(!getISBN(&ISBN)){
-          fprintf(stderr,"\tACTION CANCELED: No book was changed!\n");
-          continue;
-        }
-        Books=changeBookISBN(Books, ISBN);
+        bookChangeMenu();
         break;
       case 4:
         booksubMenuShow();
         break;
-      case 5:
-        if(getISBN(&ISBN) && getStock(&stock)){
-          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})!=1){
-            unregisteredBookWarning();
-          }else{
-            restockBook(Books, ISBN, stock);
-          }
-        }
-      break;
       case 0:
         exit=true;
         break;
@@ -327,24 +326,74 @@ void booksubMenuShow(void){
     option=getOption();
     switch(option){
       case 1:
-        printf("Insert an ISBN: ");
-        scanf("%ld", &ISBN);
+        if(!getISBN(&ISBN)){
+          fprintf(stderr,"\tACTION CANCELED: No ISBN read!\n");
+          continue;
+        }
         PesquisarABPISBN(Books, ISBN);
         break;
       case 2:
-        printf("Insert Title: ");
-        scanf("\n%[^\n]s",title);
+        printf("     What's the Title? (0 to CANCEL) \n");
+        getString(title, 100);
+        if(strcmp(title, "0")==0){
+          fprintf(stderr,"\tACTION CANCELED: No title read!\n");
+          break;
+        }
         PesquisarABPTitle(Books, title);
         break;
       case 3:
-        printf("First Author: ");
-        scanf("\n%[^\n]s",firstAuthor);
-        printf("Year Publish: ");
-        scanf("%d", &yearPublish);
+        printf("     What's the First Author? (0 to CANCEL) \n");
+        getString(firstAuthor, 100);
+        if(strcmp(firstAuthor, "0")==0){
+          fprintf(stderr,"\tACTION CANCELED: No first author read!\n");
+          break;
+        }
+        if(!getPublicationYear(&yearPublish)){
+          fprintf(stderr,"\tACTION CANCELED: No year read!\n");
+          continue;
+        }
         PesquisarABPAuthorYear(Books, firstAuthor,yearPublish);
         break;
       case 4:
         showALL(Books);
+        break;
+      case 0:
+        exit=true;
+        break;
+      default:
+        fprintf(stderr,"\tERROR: Invalid option!\n");
+        break;
+    }
+  }
+}
+
+/**
+ * Handles the book change menu
+ */
+void bookChangeMenu(void){
+  bool exit=false;
+  int stock;
+  ssize_t option;
+  long int ISBN;
+  while(!exit){
+    printChangeBooksMenu();
+    option=getOption();
+    switch(option){
+      case 1:
+        if(!getISBN(&ISBN)){
+          fprintf(stderr,"\tACTION CANCELED: No book was changed!\n");
+          continue;
+        }
+        Books=changeBookISBN(Books, ISBN);
+        break;
+      case 2:
+        if(getISBN(&ISBN) && getStock(&stock)){
+          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})!=1){
+            unregisteredBookWarning();
+          }else{
+            restockBook(Books, ISBN, stock);
+          }
+        }
         break;
       case 0:
         exit=true;
