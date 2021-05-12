@@ -5,6 +5,7 @@ void mainMenu        (void);
 void fileMenu        (void);
 void bookMenu        (void);
 void booksubMenuShow (void);
+void bookChangeMenu  (void);
 void clientMenu      (void);
 void orderMenu       (void);
 void operationMenu   (void);
