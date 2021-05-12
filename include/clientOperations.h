@@ -13,13 +13,15 @@ typedef struct CLIENT{
   ORDER *orders;
 }CLIENT;
 //function prototypes
-CLIENT   newClient          (void);
-bool     getNIF             (uint32_t *NIF);
-bool     getName            (char *name);
-bool     getAddress         (char *address);
-bool     getPhoneNumber     (char *phoneNumber);
-void     printClient        (const CLIENT client);
-void     printClientReverse (const CLIENT client);
-void     getDayMonthYear    (char *date,uint8_t *day,uint8_t *month,uint16_t *year);
-int8_t   compareDates       (char *date1,char *date2);
+CLIENT   newClient            (void);
+bool     getNIF               (uint32_t *NIF);
+bool     getNIFChange         (uint32_t *NIF,uint32_t oldNIF);
+bool     getName              (char *name);
+bool     getAddress           (char *address);
+bool     getPhoneNumber       (char *phoneNumber);
+bool     getPhoneNumberChange (char *phoneNumber);
+void     printClient          (const CLIENT client);
+void     printClientReverse   (const CLIENT client);
+void     getDayMonthYear      (char *date,uint8_t *day,uint8_t *month,uint16_t *year);
+int8_t   compareDates         (char *date1,char *date2);
 #endif //clientOperations_h

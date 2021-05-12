@@ -136,6 +136,59 @@ bool getNIF(uint32_t *NIF){
 }
 
 /**
+ * Ask the user's new NIF to change
+ * @param *NIF will store the new NIF or 1 to stay as is
+ * @param oldNIF the old NIF to compare
+ * @return true if the NIF was asked successfully and false if it was canceled
+ */
+bool getNIFChange(uint32_t *NIF,uint32_t oldNIF){
+  char NIFtemp[100];
+  while(true){
+    //header
+    printf("     What's the new NIF? (0 to CANCEL)     \n");
+    printPrompt();
+    //get NIF input
+    if(fgets(NIFtemp,100,stdin)==NULL){
+      if(ferror(stdin)){
+        perror("\tERROR: There was an error reading the NIF!");
+      }
+      strcpy(NIFtemp,"");
+      continue;
+    }
+    if(strlen(NIFtemp)==2&&NIFtemp[0]=='0'){
+      return false;
+    }
+    if(NIFtemp[0]=='-'&&NIFtemp[1]=='1'){
+      *NIF=1;
+      return true;
+    }
+    //check if NIF is a string
+    for(size_t i=0;i<strlen(NIFtemp)-1;i++){
+      if(!isdigit(NIFtemp[i])){
+        fprintf(stderr,"\tERROR: The NIF must be a number!\n");
+        goto NIFNUMBERLABEL;
+      }
+    }
+    //transform NIF into integer
+    sscanf(NIFtemp,"%"SCNu32,NIF);
+    //verify input
+    if(strlen(NIFtemp)-1!=9){
+      fprintf(stderr,"\tERROR: The NIF must be a 9 digit number!\n");
+      NIFNUMBERLABEL:
+      strcpy(NIFtemp,"");
+      continue;
+    }
+    else if(lsearchlinked(clientlist,*NIF)&&*NIF!=oldNIF){
+      fprintf(stderr,"\tThe NIF you entered is not unique, which might mean the user is already on the system.\n");
+      continue;
+    }
+    else{
+      return true;
+    }
+  }
+}
+
+/**
  * Asks the user's name
  * @param *name the user's name
  * @return true if the name was asked successfully and false if it was canceled
@@ -145,6 +198,7 @@ bool getName(char *name){
   while(true){
     //header
     printf("     What is the name? (0 to CANCEL)     \n");
+    printPrompt();
     //get name input
     if(fgets(nameTemp,255,stdin)==NULL){
       if(ferror(stdin)){
@@ -174,6 +228,7 @@ bool getAddress(char *address){
   char addressTemp[255];
   while(true){
     printf("     What's the address? (0 to CANCEL)     \n");
+    printPrompt();
     //get address input
     if(fgets(addressTemp,255,stdin)==NULL){
       if(ferror(stdin)){
@@ -203,6 +258,7 @@ bool getPhoneNumber(char *phoneNumber){
   char phoneTemp[100],country[100];
   while(true){
     printf("     What's the country? (0 to CANCEL)     \n");
+    printPrompt();
     //get country input to check the phone code number
     if(fgets(country,100,stdin)==NULL){
       if(ferror(stdin)){
@@ -247,6 +303,7 @@ bool getPhoneNumber(char *phoneNumber){
           strcat(phoneNumber,temp2);
           strcat(phoneNumber," ");
           printf("     What is the phone number? (0 to CANCEL)     \n");
+          printPrompt();
           //get phone number input
           if(fgets(phoneTemp,100,stdin)==NULL){
             if(ferror(stdin)){
@@ -260,6 +317,119 @@ bool getPhoneNumber(char *phoneNumber){
           else{
             if(strlen(phoneTemp)==2&&phoneTemp[0]=='0'){
               return false;
+            }
+            //check if phone number is a string
+            for(size_t i=0;i<strlen(phoneTemp)-1;i++){
+              if(!isdigit(phoneTemp[i])){
+                fprintf(stderr,"\tERROR: The Phone Number must be a number!\n");
+                strcpy(phoneTemp,"");
+                strcpy(country,"");
+                strcpy(phoneNumber,"");
+                goto PHONE_ERROR_LABEL;
+              }
+            }
+            //verify input
+            if(strlen(phoneTemp)-1!=9){
+              strcpy(phoneTemp,"");
+              strcpy(country,"");
+              strcpy(phoneNumber,"");
+              goto PHONE_ERROR_LABEL;
+            }
+            strcat(phoneNumber,phoneTemp);
+          }
+        }
+      }
+      if(!countryAvailable){
+        fprintf(stderr,"\tERROR: The country is not correct!\n");
+        PHONE_ERROR_LABEL:
+        strcpy(phoneTemp,"");
+        strcpy(country,"");
+        strcpy(phoneNumber,"");
+        continue;
+      }
+      return true;
+    }
+  }
+}
+
+/**
+ * Asks the user's new phone number to change
+ * @param *phoneNumber will store the new phone number or 1 to stay as is
+ * @return true if the phone number was asked successfully and false if it was canceled
+ */
+bool getPhoneNumberChange(char *phoneNumber){
+  char phoneTemp[100],country[100];
+  while(true){
+    printf("     What's the country? (0 to CANCEL)     \n");
+    printPrompt();
+    //get country input to check the phone code number
+    if(fgets(country,100,stdin)==NULL){
+      if(ferror(stdin)){
+        perror("\tERROR: There was an error reading the country!");
+      }
+      strcpy(phoneTemp,"");
+      strcpy(country,"");
+      strcpy(phoneNumber,"");
+      continue;
+    }
+    else{
+      if(strlen(country)==2&&country[0]=='0'){
+        return false;
+      }
+      if(country[0]=='-'&&country[1]=='1'){
+        phoneNumber[0]='-';
+        phoneNumber[1]='1';
+        return true;
+      }
+      //format country string
+      country[strcspn(country,"\n")]=0;
+      for(size_t i=0;i<strlen(country)-1;i++){
+        country[i]=tolower(country[i]);
+      }
+      //check countries
+      FILE *fileCountry=fopen("in/countries","r");
+      if(fileCountry==NULL){
+        perror("\tERROR: There was an error checking the countries!");
+        strcpy(phoneTemp,"");
+        strcpy(country,"");
+        strcpy(phoneNumber,"");
+        continue;
+      }
+      char temp[100],temp2[100];
+      bool countryAvailable=false;
+      //read countries and check if the specified country is a valid country
+      while(fscanf(fileCountry,"%s %s",temp,temp2)==2){
+        //format read country string
+        for(size_t i=0;i<strlen(temp);i++){
+          temp[i]=tolower(temp[i]);
+        }
+        //if the country exists, ask the phone number
+        if(strcmp(country,temp)==0){
+          countryAvailable=true;
+          //add the country's phone code number to the phone number
+          strcpy(phoneNumber,plus);
+          strcat(phoneNumber,temp2);
+          strcat(phoneNumber," ");
+          printf("     What is the phone number? (0 to CANCEL)     \n");
+          printPrompt();
+          //get phone number input
+          if(fgets(phoneTemp,100,stdin)==NULL){
+            if(ferror(stdin)){
+              perror("\tERROR: There was an error reading the phone number!");
+            }
+            strcpy(phoneTemp,"");
+            strcpy(country,"");
+            strcpy(phoneNumber,"");
+            goto PHONE_ERROR_LABEL;
+          }
+          else{
+            if(strlen(phoneTemp)==2&&phoneTemp[0]=='0'){
+              return false;
+            }
+            if(phoneTemp[0]=='-'&&phoneTemp[1]=='1'){
+              phoneNumber[0]='-';
+              phoneNumber[1]='1';
+              return true;
             }
             //check if phone number is a string
             for(size_t i=0;i<strlen(phoneTemp)-1;i++){

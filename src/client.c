@@ -148,17 +148,29 @@ void changeClient(clientNODE *head,const CLIENT client){
   uint32_t oldNIF=client.NIF;
   uint32_t newNIF;
   char newName[255],newAddress[255],newPhoneNumber[18];
-  if(!getNIF(&newNIF)||!getName(newName)||!getAddress(newAddress)||!getPhoneNumber(newPhoneNumber)){
+  printf("=========================================\n");
+  printf("     ========= CHANGE CLIENT =========    \n");
+  printf("            (-1 to keep as is)    \n");
+  if(!getNIFChange(&newNIF,client.NIF)||!getName(newName)||!getAddress(newAddress)||!getPhoneNumberChange(newPhoneNumber)){
     fprintf(stderr,"\tACTION CANCELED: No user was changed!\n");
     return;
   }
   replaceOrdersNIF(&orderQueue,oldNIF,newNIF);
   while(head!=NULL){
     if(head->data.NIF==client.NIF){
-      head->data.NIF=newNIF;
-      strcpy(head->data.name,newName);
-      strcpy(head->data.address,newAddress);
-      strcpy(head->data.phoneNumber,newPhoneNumber);
+      if(newNIF!=1){
+        head->data.NIF=newNIF;
+      }
+      if(!(newName[0]=='-'&&newName[1]=='1')){
+        strcpy(head->data.name,newName);
+      }
+      if(!(newAddress[0]=='-'&&newAddress[1]=='1')){
+        strcpy(head->data.address,newAddress);
+      }
+      if(!(newPhoneNumber[0]=='-'&&newPhoneNumber[1]=='1')){
+        printf("aa\n");
+        strcpy(head->data.phoneNumber,newPhoneNumber);
+      }
       //return so that it's more efficient (doesn't have to keep searching for another NIF, as it's unique)
       return;
     }
