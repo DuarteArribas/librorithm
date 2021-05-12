@@ -245,7 +245,6 @@ static void readBooks(FILE *booksFile){
     if(verificarEquilibrio(Books)==0){
       Books=CriarABPEquilibradaIB(Books);
     }
-    Books=DestruirAB(Books);
   }
 }
 
@@ -312,7 +311,7 @@ void openFile(void){
   }
   else{
     readBooks(books);
-    Books=DestruirAB(Books);
+    //Books=DestruirAB(Books);
     filesSaved[1]=true;
   }
   fstat(fileno(orders),&buffer);

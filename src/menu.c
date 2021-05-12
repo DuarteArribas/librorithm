@@ -278,13 +278,17 @@ void bookMenu(void){
         Books=insertBook(Books);
         break;
       case 2:
-        printf("Insert an ISBN: ");
-        scanf("%ld", &ISBN);
+        if(!getISBN(&ISBN)){
+          fprintf(stderr,"\tACTION CANCELED: No book was changed!\n");
+          continue;
+        }
         Books=removeBook(Books, ISBN);
         break;
       case 3:
-        printf("Insert an ISBN: ");
-        scanf("%ld", &ISBN);
+        if(!getISBN(&ISBN)){
+          fprintf(stderr,"\tACTION CANCELED: No book was changed!\n");
+          continue;
+        }
         Books=changeBookISBN(Books, ISBN);
         break;
       case 4:
