@@ -8,9 +8,6 @@
 //project includes
 #include"books.h"
 #include"librorithm.h"
-#include"booksOperations.h"
-
-extern PNodoAB Books;
 
 LIVRO createBook(void){
     LIVRO book;

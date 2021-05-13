@@ -138,12 +138,13 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T){
   Num = NumeroNodosAB(T);
   if (T == NULL)
     return NULL;
-  Lista = (LIVRO *)malloc(Num * sizeof(LIVRO));
+  Lista =malloc(Num * sizeof(LIVRO));
   if (Lista == NULL)
     return NULL;
   CriarSequenciaEmOrdem(T, Lista, &N);
   ABPEqInsercaoBinaria(&TE, Lista, 0, N-1);
   clnmem(Lista);
+  T=DestruirAB(T);
   return TE;
 }
 
@@ -613,9 +614,9 @@ void showMostRecentCientificArea(PNodoAB T){
   LIVRO *list;
   char cientificArea[100];
   
-  printf("How many books? ");
+  printf("     How many books ? \n");
   scanf("%d", &k);
-  printf("Cientific Area: ");
+  printf("     What's the Cientific Area ? \n");
   scanf("\n%[^\n]s",cientificArea);
 
   list=memalloc(NumeroNodosAB(T)*sizeof(LIVRO));
