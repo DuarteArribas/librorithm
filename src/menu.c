@@ -444,7 +444,10 @@ void clientMenu(void){
           continue;
         }
         clientToChange=getSearchlinked(clientlist,NIF);
-        if(clientToChange==NULL){continue;}
+        if(clientToChange==NULL){
+          fprintf(stderr,"\tERROR: The specified user's NIF is not on the system!\n");
+          continue;
+        }
         changeClient(clientlist,clientToChange->data);
         printf("\tClient changed with success!\n");
         break;
