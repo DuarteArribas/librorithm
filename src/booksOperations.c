@@ -420,7 +420,7 @@ void verifyIfExistsCientificArea(LIVRO X)
   {
     if(strcmp(X.cientificArea, cientific_qtd[i].cientificArea)==0)
     {
-      cientific_qtd[i].qtd++;
+      cientific_qtd[i].qtd=cientific_qtd[i].qtd+X.qtdStock;
       exists=true;
       break;
     }
@@ -430,7 +430,7 @@ void verifyIfExistsCientificArea(LIVRO X)
     num_cientific_qtd++;
     cientific_qtd=memrealloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
     strcpy(cientific_qtd[num_cientific_qtd-1].cientificArea, X.cientificArea);
-    cientific_qtd[num_cientific_qtd-1].qtd=1;
+    cientific_qtd[num_cientific_qtd-1].qtd=X.qtdStock;
   }
 }
 

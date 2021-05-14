@@ -179,7 +179,7 @@ static void printOperationsMenu(void){
   printf("|                             6-Cientific area with more books            |\n");
   printf("|                             7-Client with most books                    |\n");
   printf("|                             8-Show clients by num of purchases dec      |\n");
-  printf("|                             9-Year with more books                      |\n");
+  printf("|                             9-Year with more publications               |\n");
   printf("|                             10-Client that wasted more                  |\n");
   printf("|                             11-Check memory wasted                      |\n");
   printf("|                             12-Show clients starting with char          |\n");
