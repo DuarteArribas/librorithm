@@ -19,4 +19,5 @@ ORDER            peekqueue              (ORDER_NODE_QUEUE **front);
 size_t           getOrdersLeftToFulfill (ORDER_NODE_QUEUE **ordersQueue);
 void             removeOrdersWithNIF    (ORDER_NODE_QUEUE **orders,uint32_t NIF);
 void             replaceOrdersNIF       (ORDER_NODE_QUEUE **orders,uint32_t oldNIF,uint32_t newNIF);
+uint64_t         getMemoryWasteOrders   (ORDER_NODE_QUEUE **orders);
 #endif //order_h

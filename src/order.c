@@ -181,3 +181,30 @@ void replaceOrdersNIF(ORDER_NODE_QUEUE **orders,uint32_t oldNIF,uint32_t newNIF)
   }
   freequeue(&queue); 
 }
+
+/**
+ * Computes the memory waste from the orders' queue
+ * @param **orders the orders queue
+ * @return the memory wasted by the orders in bytes
+ */
+uint64_t getMemoryWasteOrders(ORDER_NODE_QUEUE **orders){
+  ORDER_NODE_QUEUE *queue=NULL;
+  uint64_t memoryWaste=0;
+  while(*orders!=NULL){
+    memoryWaste+=(11)-(strlen((*orders)->data.date));
+    if(isemptyqueue(queue)){
+      queue=createqueue(dequeue(orders));
+      continue;
+    }
+    enqueue(&queue,dequeue(orders));
+  }
+  while(queue!=NULL){
+    if(isemptyqueue(*orders)){
+      *orders=createqueue(dequeue(&queue));
+      continue;
+    }
+    enqueue(orders,dequeue(&queue));
+  }
+  freequeue(&queue); 
+  return memoryWaste;
+}

@@ -670,6 +670,6 @@ static uint64_t computeMemoryWaste(void){
   uint64_t memoryWasteBytes=0;
   memoryWasteBytes+=getMemoryWasteClients(clientlist);
   memoryWasteBytes+=getMemoryWasteBooks(Books);
-  //TODO: compute the rest of the memory waste
+  memoryWasteBytes+=getMemoryWasteOrders(&orderQueue);
   return memoryWasteBytes;
 }
