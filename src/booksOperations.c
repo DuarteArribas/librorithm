@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
+#include<inttypes.h>
 //project includes
 #include"booksOperations.h"
 #include"books.h"
@@ -788,4 +789,21 @@ void restockBook(PNodoAB T, long int ISBN, int qtd){
   }else{
     restockBook(T->Direita, ISBN, qtd);
   }
+}
+
+/**
+ * Get the memory wasted by the book's
+ * @param T the book's tree
+ * @return the memory wasted
+ */
+uint64_t getMemoryWasteBooks(PNodoAB T){
+  uint64_t waste=0;
+  if(T==NULL){
+    return 0;
+  }
+  
+  waste=(100-strlen(T->Elemento.title)) + (50-strlen(T->Elemento.language))+(100-strlen(T->Elemento.firstAuthor))+(100-strlen(T->Elemento.secondAuthor))+(100-strlen(T->Elemento.editor))+(100-strlen(T->Elemento.cientificArea));
+  
+
+  return waste + getMemoryWasteBooks(T->Esquerda) + getMemoryWasteBooks(T->Direita);
 }
