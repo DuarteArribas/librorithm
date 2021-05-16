@@ -168,7 +168,6 @@ void changeClient(clientNODE *head,const CLIENT client){
         strcpy(head->data.address,newAddress);
       }
       if(!(newPhoneNumber[0]=='-'&&newPhoneNumber[1]=='1')){
-        printf("aa\n");
         strcpy(head->data.phoneNumber,newPhoneNumber);
       }
       //return so that it's more efficient (doesn't have to keep searching for another NIF, as it's unique)
@@ -216,21 +215,22 @@ void removelinked(clientNODE **head,size_t index){
  * @param **head the address of the address of the head
  * @param NIF the NIF of the client to remove
  */
-void removeClient(clientNODE **head,const uint32_t NIF){
+bool removeClient(clientNODE **head,const uint32_t NIF){
   removeOrdersWithNIF(&orderQueue,NIF);
   if(*head==NULL){
-    return;
+    return false;
   }
   size_t clientIndex=0;
   clientNODE *temp=*head;
   while(temp!=NULL){
     if(temp->data.NIF==NIF){
       removelinked(head,clientIndex);
-      return;
+      return true;
     }
     ++clientIndex;
     temp=temp->next;
   }
+  return false;
 }
 
 /**

@@ -435,8 +435,12 @@ void clientMenu(void){
           fprintf(stderr,"\tACTION CANCELED: No user was removed!\n");
           continue;
         }
-        removeClient(&clientlist,NIF);
-        printf("\tClient removed with success!\n");
+        if(removeClient(&clientlist,NIF)){
+          printf("\tClient removed with success!\n");
+        }
+        else{
+          fprintf(stderr,"\tNo client with the specified NIF is on the system!\n");
+        }
         break;
       case 3:
         if(!getNIF(&NIF)){

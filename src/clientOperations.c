@@ -426,11 +426,6 @@ bool getPhoneNumberChange(char *phoneNumber){
             if(strlen(phoneTemp)==2&&phoneTemp[0]=='0'){
               return false;
             }
-            if(phoneTemp[0]=='-'&&phoneTemp[1]=='1'){
-              phoneNumber[0]='-';
-              phoneNumber[1]='1';
-              return true;
-            }
             //check if phone number is a string
             for(size_t i=0;i<strlen(phoneTemp)-1;i++){
               if(!isdigit(phoneTemp[i])){

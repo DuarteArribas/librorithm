@@ -21,7 +21,7 @@ clientNODE *getSearchlinkedByOrder  (clientNODE *head,const ORDER value,size_t *
 void       changeClient             (clientNODE *head,const CLIENT client);
 void       sremovelinked            (clientNODE **head);
 void       removelinked             (clientNODE **head,size_t index);
-void       removeClient             (clientNODE **head,const uint32_t NIF);
+bool       removeClient             (clientNODE **head,const uint32_t NIF);
 void       consultClientNIF         (clientNODE *head,const uint32_t NIF);
 void       consultClientName        (clientNODE *head,const char *name);
 void       consultClientAddress     (clientNODE *head,const char *address);

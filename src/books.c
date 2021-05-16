@@ -87,6 +87,7 @@ LIVRO createBook(void){
 }
 
 void getString(char *string, int tam){
+  printPrompt();
   if(fgets(string,tam,stdin)==NULL){
       if(ferror(stdin)){
         perror("\tERROR: There was an error reading the input!\n");
@@ -107,6 +108,7 @@ bool getISBN(long int *ISBN){
   while(true){
     //header
     printf("     What's the ISBN? (0 to CANCEL)\n");
+    printPrompt();
     //get ISBN input
     if(fgets(ISBNtemp,100,stdin)==NULL){
       if(ferror(stdin)){
@@ -150,6 +152,7 @@ bool getPublicationYear(int *PublishYear){
   while(true){
     //header
     printf("     What's the Publication year? (0 to CANCEL)\n");
+    printPrompt();
     //get Publication year input
     if(fgets(PublishYearTemp,100,stdin)==NULL){
       if(ferror(stdin)){
@@ -193,6 +196,7 @@ bool getPrice(float *price){
   while(true){
     //header
     printf("     What's the Price? (0 to CANCEL)\n");
+    printPrompt();
     //get Price input
     if(fgets(priceTemp,100,stdin)==NULL){
       if(ferror(stdin)){
@@ -235,6 +239,7 @@ bool getStock(int *stock){
   while(true){
     //header
     printf("     What's the Stock? (0 to CANCEL)\n");
+    printPrompt();
     //get stock input
     if(fgets(stockTemp,100,stdin)==NULL){
       if(ferror(stdin)){
