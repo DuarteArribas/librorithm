@@ -311,7 +311,6 @@ void openFile(void){
   }
   else{
     readBooks(books);
-    //Books=DestruirAB(Books);
     filesSaved[1]=true;
   }
   fstat(fileno(orders),&buffer);

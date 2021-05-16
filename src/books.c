@@ -8,9 +8,6 @@
 //project includes
 #include"books.h"
 #include"librorithm.h"
-#include"booksOperations.h"
-
-extern PNodoAB Books;
 
 LIVRO createBook(void){
     LIVRO book;
@@ -210,7 +207,7 @@ bool getPrice(float *price){
     }
     //check if Price is a string
     for(size_t i=0;i<strlen(priceTemp)-1;i++){
-      if(!isdigit(priceTemp[i])){
+      if(!isdigit(priceTemp[i]) && priceTemp[i]!='.'){
         fprintf(stderr,"\tERROR: The Price must be a number!\n");
         goto PRICENUMBERLABEL;
       }

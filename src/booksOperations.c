@@ -3,6 +3,7 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #include<string.h>
+#include<inttypes.h>
 //project includes
 #include"booksOperations.h"
 #include"books.h"
@@ -138,12 +139,13 @@ PNodoAB CriarABPEquilibradaIB (PNodoAB T){
   Num = NumeroNodosAB(T);
   if (T == NULL)
     return NULL;
-  Lista = (LIVRO *)malloc(Num * sizeof(LIVRO));
+  Lista =malloc(Num * sizeof(LIVRO));
   if (Lista == NULL)
     return NULL;
   CriarSequenciaEmOrdem(T, Lista, &N);
   ABPEqInsercaoBinaria(&TE, Lista, 0, N-1);
   clnmem(Lista);
+  T=DestruirAB(T);
   return TE;
 }
 
@@ -419,7 +421,7 @@ void verifyIfExistsCientificArea(LIVRO X)
   {
     if(strcmp(X.cientificArea, cientific_qtd[i].cientificArea)==0)
     {
-      cientific_qtd[i].qtd++;
+      cientific_qtd[i].qtd=cientific_qtd[i].qtd+X.qtdStock;
       exists=true;
       break;
     }
@@ -429,7 +431,7 @@ void verifyIfExistsCientificArea(LIVRO X)
     num_cientific_qtd++;
     cientific_qtd=memrealloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
     strcpy(cientific_qtd[num_cientific_qtd-1].cientificArea, X.cientificArea);
-    cientific_qtd[num_cientific_qtd-1].qtd=1;
+    cientific_qtd[num_cientific_qtd-1].qtd=X.qtdStock;
   }
 }
 
@@ -613,9 +615,9 @@ void showMostRecentCientificArea(PNodoAB T){
   LIVRO *list;
   char cientificArea[100];
   
-  printf("How many books? ");
+  printf("     How many books ? \n");
   scanf("%d", &k);
-  printf("Cientific Area: ");
+  printf("     What's the Cientific Area ? \n");
   scanf("\n%[^\n]s",cientificArea);
 
   list=memalloc(NumeroNodosAB(T)*sizeof(LIVRO));
@@ -787,4 +789,21 @@ void restockBook(PNodoAB T, long int ISBN, int qtd){
   }else{
     restockBook(T->Direita, ISBN, qtd);
   }
+}
+
+/**
+ * Get the memory wasted by the book's
+ * @param T the book's tree
+ * @return the memory wasted
+ */
+uint64_t getMemoryWasteBooks(PNodoAB T){
+  uint64_t waste=0;
+  if(T==NULL){
+    return 0;
+  }
+  
+  waste=(100-strlen(T->Elemento.title)) + (50-strlen(T->Elemento.language))+(100-strlen(T->Elemento.firstAuthor))+(100-strlen(T->Elemento.secondAuthor))+(100-strlen(T->Elemento.editor))+(100-strlen(T->Elemento.cientificArea));
+  
+
+  return waste + getMemoryWasteBooks(T->Esquerda) + getMemoryWasteBooks(T->Direita);
 }
