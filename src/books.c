@@ -9,6 +9,10 @@
 #include"books.h"
 #include"librorithm.h"
 
+/**
+ * Creates a new book
+ * @return the created book
+ */
 LIVRO createBook(void){
     LIVRO book;
     while(true){
@@ -83,6 +87,11 @@ LIVRO createBook(void){
     return book;
 }
 
+/**
+ * Gets a string
+ * @param *string the got string
+ * @param tam the string size
+ */
 void getString(char *string, int tam){
   printPrompt();
   if(fgets(string,tam,stdin)==NULL){
@@ -269,7 +278,10 @@ bool getStock(int *stock){
   }
 }
 
-
+/**
+ * Shows the specified book
+ * @param book the book to be shown
+ */
 void showBook(LIVRO book){
   printf("================ Book ==================\n");
   printf("                                        \n");
@@ -287,6 +299,12 @@ void showBook(LIVRO book){
   printf("========================================\n");
 }
 
+/**
+ * Compares two books by the ISBN
+ * @param X the first book to compare
+ * @param Y the second book to compare
+ * @return 1 if X>Y, 0 if X=Y, -1 if x<Y
+ */
 int  CompareBooks (LIVRO X, LIVRO Y){  
   if (X.ISBN > Y.ISBN)
     return 1;
@@ -295,9 +313,12 @@ int  CompareBooks (LIVRO X, LIVRO Y){
   return 0;
 }
 
-/*
-* Devolve 0 caso sejam iguais
-*/
+/**
+ * Compares the book with the given ISBN
+ * @param X the given book
+ * @param ISBN the given ISBN
+ * @return 1 if X>ISBN, 0 if X=ISBN, -1 if x<ISBN
+ */
 int  CompareBooksISBN (LIVRO X, long int ISBN){  
   if (X.ISBN > ISBN)
     return 1;
@@ -306,12 +327,25 @@ int  CompareBooksISBN (LIVRO X, long int ISBN){
   return 0;
 }
 
-int  CompareBooksTitle (LIVRO X, char * title){  
+/**
+ * Compares the book with the given title (checks if it is a substring)
+ * @param X the given book
+ * @param *title the given title
+ * @return 1 if X==title, 0 if otherwise
+ */
+int  CompareBooksTitle (LIVRO X, char *title){  
   if (strstr(X.title, title)==NULL)
     return 1;
   return 0;
 }
 
+/**
+ * Compares the book with the given first author and year
+ * @param X the given book
+ * @param firstAuthor[100] the given first author
+ * @param yearPublish the year published
+ * @return 0 if X==firstAuthor and yearPublish, and 0 if otherwise
+ */
 int  CompareBooksFirstAuthorYear (LIVRO X, char firstAuthor[100], int yearPublish){  
   if (strcmp(X.firstAuthor, firstAuthor)==0 && X.yearPublish==yearPublish){
     return 0;
@@ -319,6 +353,13 @@ int  CompareBooksFirstAuthorYear (LIVRO X, char firstAuthor[100], int yearPublis
   return 1;
 }
 
+/**
+ * Compares the book with the given cientific area and editor
+ * @param X the given book
+ * @param editor[100] the editor
+ * @param cientificArea[100] the cientific area
+ * @return 0 if X==editor and cientificArea, and 0 if otherwise
+ */
 int CompareBooksEditorCientificArea(LIVRO X,char editor[100], char cientificArea[100]){
   if(strcmp(X.editor,editor)==0 && strcmp(X.cientificArea,cientificArea)==0){
     return 0;
@@ -326,6 +367,9 @@ int CompareBooksEditorCientificArea(LIVRO X,char editor[100], char cientificArea
   return 1;
 }
 
+/**
+ * Shows the bookAlreadyExists warning
+ */
 void bookAlreadyExistsWarning(void){
   printf("========================================\n"); 
   printf("|                                      |\n");
@@ -334,6 +378,9 @@ void bookAlreadyExistsWarning(void){
   printf("========================================\n"); 
 }
 
+/**
+ * Shows the bookRemoved warning
+ */
 void bookRemovedWarning(void){
   printf("========================================\n"); 
   printf("|                                      |\n");
@@ -342,6 +389,10 @@ void bookRemovedWarning(void){
   printf("========================================\n"); 
 }
 
+
+/**
+ * Shows the unregistered book warning
+ */
 void unregisteredBookWarning(void){
   printf("========================================\n"); 
   printf("|                                      |\n");
@@ -350,7 +401,9 @@ void unregisteredBookWarning(void){
   printf("========================================\n"); 
 }
 
-
+/**
+ * Shows the cientificArea warning warning
+ */
 void cientificAreaWarning(void){
   printf("===============================================\n"); 
   printf("|                                             |\n");
@@ -359,6 +412,9 @@ void cientificAreaWarning(void){
   printf("===============================================\n"); 
 }
 
+/**
+ * Shows the emptyBooksTree warning warning
+ */
 void emptybookstreeWarning(void){
   printf("===============================================\n"); 
   printf("|                                             |\n");

@@ -168,27 +168,27 @@ static void printOrdersMenu(void){
  * Prints the operations menu
  */
 static void printOperationsMenu(void){
-  printf("===========================================================================\n");
-  printf("|                    ======== OPERATIONS ========                         |\n");
-  printf("|                                                                         |\n");
-  printf("|                             1-Num of Books sold at date                 |\n");
-  printf("|                             2-Latest date of the specified ISBN         |\n");
-  printf("|                             3-Number of Books by client                 |\n");
-  printf("|                             4-Recent books of a cientific area          |\n");
-  printf("|                             5-Show Best Selling Books                   |\n");
-  printf("|                             6-Cientific area with more books            |\n");
-  printf("|                             7-Client with most books                    |\n");
-  printf("|                             8-Show clients by num of purchases dec      |\n");
-  printf("|                             9-Year with more publications               |\n");
-  printf("|                             10-Client that wasted more                  |\n");
-  printf("|                             11-Check memory wasted                      |\n");
-  printf("|                             12-Show clients starting with char          |\n");
-  printf("|                             13-Number of orders left to fulfill         |\n");
-  printf("|                             14-Show most expensive Book                 |\n");
-  printf("|                             15-Number of books in stock and total value |\n");
-  printf("|                             0-Go Back                                   |\n");
-  printf("|                                                                         |\n");
-  printf("===========================================================================\n");  
+  printf("================================================================================\n");
+  printf("|            ===================== OPERATIONS =====================            |\n");
+  printf("|                                                                              |\n");
+  printf("|                                  1-Sold Books at date                        |\n");
+  printf("|                                  2-Latest date of ISBN                       |\n");
+  printf("|                                  3-Number of Books of client                 |\n");
+  printf("|                                  4-Recent books of cientific area            |\n");
+  printf("|                                  5-Show Best Selling Books                   |\n");
+  printf("|                                  6-Cientific area with more books            |\n");
+  printf("|                                  7-Client with most books                    |\n");
+  printf("|                                  8-Clients by num of purchases dec           |\n");
+  printf("|                                  9-Year with more publications               |\n");
+  printf("|                                  10-Client that wasted more                  |\n");
+  printf("|                                  11-Check memory wasted                      |\n");
+  printf("|                                  12-Clients starting with char               |\n");
+  printf("|                                  13-Num of orders left to fulfill            |\n");
+  printf("|                                  14-Most expensive Book                      |\n");
+  printf("|                                  15-Num of books and total value             |\n");
+  printf("|                                  0-Go Back                                   |\n");
+  printf("|                                                                              |\n");
+  printf("================================================================================\n");  
 }
 
 /**

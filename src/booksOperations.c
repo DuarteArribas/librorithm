@@ -8,7 +8,7 @@
 #include"booksOperations.h"
 #include"books.h"
 #include"mem.h"
-
+//global variables
 PNodoAB Books;
 CIENTIFIC_QTD *cientific_qtd=NULL;
 PUBLISH_YEAR *publish_year=NULL;
@@ -482,7 +482,6 @@ void cientificAreaAndYearWithMoreBooks(PNodoAB T, int option){
     default:
       printf("ERROR!\n");
   }
-  
 
   cientificAreaAndYearWithMoreBooks(T->Esquerda, option);
   cientificAreaAndYearWithMoreBooks(T->Direita, option);
@@ -526,8 +525,6 @@ void showYearWithMorePublications(void){
   printf("   Year with more publications: %d       \n", year);
   printf("                                         \n");
   printf("=========================================\n");
-
-  
 }
 
 /**
@@ -602,7 +599,6 @@ void putInArray(PNodoAB T,char *cientificArea,LIVRO *list,int *control){
   }
   putInArray(T->Esquerda, cientificArea,list, control);
   putInArray(T->Direita, cientificArea, list, control);
-
 }
 
 /**
@@ -640,10 +636,8 @@ void showMostRecentCientificArea(PNodoAB T){
         list[i] = list[j];
         list[j] = aux;
        }
- 
     }
   }
-
   if(k!=tamListbooks){
     if(k < tamListbooks){
       list=memrealloc(list, k*sizeof(LIVRO));
@@ -801,9 +795,6 @@ uint64_t getMemoryWasteBooks(PNodoAB T){
   if(T==NULL){
     return 0;
   }
-  
   waste=(100-strlen(T->Elemento.title)) + (50-strlen(T->Elemento.language))+(100-strlen(T->Elemento.firstAuthor))+(100-strlen(T->Elemento.secondAuthor))+(100-strlen(T->Elemento.editor))+(100-strlen(T->Elemento.cientificArea));
-  
-
   return waste + getMemoryWasteBooks(T->Esquerda) + getMemoryWasteBooks(T->Direita);
 }

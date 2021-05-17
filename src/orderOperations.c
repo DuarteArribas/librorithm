@@ -169,6 +169,11 @@ void getDate(char *date){
   strcat(date,yearTemp);
 }
 
+/**
+ * Gets the year
+ * @param *yearTemp the year asked as a string
+ * @param *year the year asked
+ */
 void getYear(char *yearTemp,uint16_t *year){
   time_t currTime = time(NULL);
   struct tm tm = *localtime(&currTime);
@@ -205,6 +210,11 @@ void getYear(char *yearTemp,uint16_t *year){
   }
 }
 
+/**
+ * Gets the month
+ * @param *monthTemp the month asked as a string
+ * @param *month the month asked
+ */
 void getMonth(char *monthTemp,uint8_t *month){
   while(true){
     //header
@@ -239,6 +249,12 @@ void getMonth(char *monthTemp,uint8_t *month){
   }
 }
 
+/**
+ * Gets the day
+ * @param *dayTemp the day asked as a string
+ * @param *day the day asked
+ * @param MAX_DAY the maximum day for the specified month
+ */
 void getDay(char *dayTemp,uint8_t *day,const uint8_t MAX_DAY){
   while(true){
     //header
