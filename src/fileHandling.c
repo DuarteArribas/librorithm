@@ -61,8 +61,8 @@ void newFile(void){
  */
 static bool canDeleteFiles(void){
   char answer;
-  printf("\t\tAre you sure you want to delete the information on the files? (y/n)\n");
-  printf("\t(this action is non reverteable)\n");
+  printf("\tAre you sure you want to delete the information on the files? (y/n)\n");
+  printf("\t\t(this action is non reverteable)\n");
   printPrompt();
   scanf("%c",&answer);
   getchar();
@@ -93,8 +93,8 @@ void newDataStructures(void){
  */
 static bool canDeleteDS(void){
   char answer;
-  printf("\t\tAre you sure you want to delete the information on the data structures? (y/n)\n");
-  printf("\t(this action is non reverteable)\n");
+  printf("\tAre you sure you want to delete the information on the data structures? (y/n)\n");
+  printf("\t\t(this action is non reverteable)\n");
   printPrompt();
   scanf("%c",&answer);
   getchar();

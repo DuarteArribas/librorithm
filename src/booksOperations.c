@@ -5,6 +5,7 @@
 #include<string.h>
 #include<inttypes.h>
 //project includes
+#include"librorithm.h"
 #include"booksOperations.h"
 #include"books.h"
 #include"mem.h"
@@ -612,8 +613,10 @@ void showMostRecentCientificArea(PNodoAB T){
   char cientificArea[100];
   
   printf("     How many books ? \n");
+  printPrompt();
   scanf("%d", &k);
   printf("     What's the Cientific Area ? \n");
+  printPrompt();
   scanf("\n%[^\n]s",cientificArea);
 
   list=memalloc(NumeroNodosAB(T)*sizeof(LIVRO));

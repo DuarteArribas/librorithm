@@ -417,6 +417,9 @@ uint64_t getMemoryWasteClients(clientNODE *head){
  * @param **src the source address of the adress of its head
  */
 static void copylinkedlist(clientNODE **dest,clientNODE *src){
+  if(src==NULL){
+    *dest=NULL;
+  }
   *dest=createLinked(src->data);
   src=src->next;
   while(src!=NULL){
@@ -514,7 +517,7 @@ void showClientsDec(void){
   copylinkedlist(&clientTemp,clientlist);
   mergeSort(&clientTemp);
   printReverse(clientTemp);
-  clnmem(clientTemp);
+  freelinked(clientTemp);
 }
 
 /**
