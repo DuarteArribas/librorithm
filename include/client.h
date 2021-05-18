@@ -13,6 +13,7 @@ typedef struct clientNODE{
 //function prototypes
 clientNODE *createLinked            (const CLIENT value);
 void       freelinked               (clientNODE *head);
+void       freelinked2              (clientNODE *head);
 bool       isemptylist              (const clientNODE *head);
 size_t     linkedlength             (clientNODE *head);
 bool       lsearchlinked            (clientNODE *head,const uint32_t value);

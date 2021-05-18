@@ -51,6 +51,19 @@ void freelinked(clientNODE *head){
 }
 
 /**
+ * Cleans the whole client's linked list, without clearing the client's orders, freeing the memory
+ * @param *head the address of the head
+ */
+void freelinked2(clientNODE *head){
+  clientNODE *temp=head;
+  while(head!=NULL){
+    temp=head->next;
+    clnmem(head);
+    head=temp;
+  }
+}
+
+/**
  * Checks if the list is empty
  * @param *head the address of the head
  * @return true if the list is empty and false otherwise
@@ -517,7 +530,7 @@ void showClientsDec(void){
   copylinkedlist(&clientTemp,clientlist);
   mergeSort(&clientTemp);
   printReverse(clientTemp);
-  freelinked(clientTemp);
+  freelinked2(clientTemp);
 }
 
 /**
@@ -626,24 +639,28 @@ void clientThatWastedMore(const uint8_t month,const uint16_t year){
    double totalPrice=0,maxTotalPrice=-1;
    uint8_t currMonth,currDay;
    uint16_t currYear;
+   bool entered=false;
    while(clientTemp!=NULL){
+    entered=false;
     for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
       getDayMonthYear(clientTemp->data.orders[i].date,&currDay,&currMonth,&currYear);
       if(currMonth==month&&currYear==year){
+        entered=true;
         totalPrice+=clientTemp->data.orders[i].totalPrice;
       }
     }
-    if(totalPrice>maxTotalPrice){
+    if(totalPrice>maxTotalPrice&&entered){
       maxTotalPrice=totalPrice;
       client=clientTemp->data;
     }
     totalPrice=0;
     clientTemp=clientTemp->next;
   }
-  if(fabs(maxTotalPrice-1)<0.001){
+  if((int)(fabs(maxTotalPrice)-1)==0){
     fprintf(stderr,"\tERROR: There aren't any clients that wasted money on that date!\n");
   }
   else{
+    printf("%lf\n",maxTotalPrice);
     printClient(client);
   }
 }
