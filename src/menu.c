@@ -599,8 +599,8 @@ void operationMenu(void){
         showBestSoldBooks(clientlist,3);
         break;
       case 6:
-        num_cientific_qtd=1;
-        cientific_qtd=memalloc(num_cientific_qtd * sizeof(CIENTIFIC_QTD));
+        num_cientific_qtd=0;
+        cientific_qtd=malloc(1 * sizeof(CIENTIFIC_QTD));
         cientificAreaAndYearWithMoreBooks(Books,1);
         showCientificAreaWithMoreBooks();
         free(cientific_qtd);
@@ -613,8 +613,8 @@ void operationMenu(void){
         showClientsDec();
         break;
       case 9:
-        num_publish_year=1;
-        publish_year=memalloc(num_publish_year * sizeof(PUBLISH_YEAR));
+        num_publish_year=0;
+        publish_year=malloc(1 * sizeof(PUBLISH_YEAR));
         cientificAreaAndYearWithMoreBooks(Books, 2);
         showYearWithMorePublications();
         free(publish_year);

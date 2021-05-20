@@ -11,7 +11,7 @@
 #include"mem.h"
 //global variables
 PNodoAB Books;
-CIENTIFIC_QTD *cientific_qtd=NULL;
+CIENTIFIC_QTD *cientific_qtd;
 PUBLISH_YEAR *publish_year=NULL;
 int num_cientific_qtd;
 int num_publish_year;
@@ -417,20 +417,20 @@ PNodoAB removeBook(PNodoAB T, long int ISBN){
  */
 void verifyIfExistsCientificArea(LIVRO X)
 {
-  bool exists=false;
+  int exists=0;
   for(int i=0;i<num_cientific_qtd;i++)
   {
     if(strcmp(X.cientificArea, cientific_qtd[i].cientificArea)==0)
     {
       cientific_qtd[i].qtd=cientific_qtd[i].qtd+X.qtdStock;
-      exists=true;
-      break;
+      exists=1;
+      
     }
   }
-  if(!exists)
+  if(exists==0)
   {
-    num_cientific_qtd++;
-    cientific_qtd=memrealloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
+    num_cientific_qtd=num_cientific_qtd+1;
+    cientific_qtd=realloc(cientific_qtd, num_cientific_qtd*sizeof(CIENTIFIC_QTD));
     strcpy(cientific_qtd[num_cientific_qtd-1].cientificArea, X.cientificArea);
     cientific_qtd[num_cientific_qtd-1].qtd=X.qtdStock;
   }
