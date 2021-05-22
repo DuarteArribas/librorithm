@@ -1,0 +1,100 @@
+\hypertarget{mem_8c}{}\doxysection{src/mem.c File Reference}
+\label{mem_8c}\index{src/mem.c@{src/mem.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+Include dependency graph for mem.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{mem_8c_a4e63c5ee02d1e6500fe2f3f619d7301c}{memalloc}} (size\+\_\+t size)
+\item 
+void $\ast$ \mbox{\hyperlink{mem_8c_a6218e1692b9d37cb1a665eab7b22c485}{memrealloc}} (void $\ast$ptr, size\+\_\+t new\+Size)
+\item 
+void $\ast$ \mbox{\hyperlink{mem_8c_a7f8040352bf60f9b9a989f61f6324db0}{memreallocp}} (void $\ast$ptr, size\+\_\+t $\ast$size, size\+\_\+t type\+Size)
+\item 
+void $\ast$ \mbox{\hyperlink{mem_8c_ae4a7a567445f753fa3ec301ed2f3044a}{memreallocm}} (void $\ast$ptr, size\+\_\+t $\ast$size, size\+\_\+t type\+Size)
+\item 
+void \mbox{\hyperlink{mem_8c_a58fbba12dde2b6c2b365061e7f7d6503}{clnmem}} (void $\ast$ptr)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{mem_8c_a58fbba12dde2b6c2b365061e7f7d6503}\label{mem_8c_a58fbba12dde2b6c2b365061e7f7d6503}} 
+\index{mem.c@{mem.c}!clnmem@{clnmem}}
+\index{clnmem@{clnmem}!mem.c@{mem.c}}
+\doxysubsubsection{\texorpdfstring{clnmem()}{clnmem()}}
+{\footnotesize\ttfamily void clnmem (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr }\end{DoxyParamCaption})}
+
+Frees and clears memory spaces 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$ptr} & the pointer to the allocated memory \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{mem_8c_a4e63c5ee02d1e6500fe2f3f619d7301c}\label{mem_8c_a4e63c5ee02d1e6500fe2f3f619d7301c}} 
+\index{mem.c@{mem.c}!memalloc@{memalloc}}
+\index{memalloc@{memalloc}!mem.c@{mem.c}}
+\doxysubsubsection{\texorpdfstring{memalloc()}{memalloc()}}
+{\footnotesize\ttfamily void$\ast$ memalloc (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+Handles malloc allocation. If the memory cannot be allocated, it handles it properly by exiting the program. 
+\begin{DoxyParams}{Parameters}
+{\em size} & the initial size of the array (should account for different size objects) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the new allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mem_8c_a6218e1692b9d37cb1a665eab7b22c485}\label{mem_8c_a6218e1692b9d37cb1a665eab7b22c485}} 
+\index{mem.c@{mem.c}!memrealloc@{memrealloc}}
+\index{memrealloc@{memrealloc}!mem.c@{mem.c}}
+\doxysubsubsection{\texorpdfstring{memrealloc()}{memrealloc()}}
+{\footnotesize\ttfamily void$\ast$ memrealloc (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t}]{new\+Size }\end{DoxyParamCaption})}
+
+Handles realloc allocation. If the memory cannot be reallocated, it handles it properly by exiting the program. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$ptr} & the pointer to the previous allocated memory \\
+\hline
+{\em new\+Size} & the new size of the array (should account for different size objects) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the new allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mem_8c_ae4a7a567445f753fa3ec301ed2f3044a}\label{mem_8c_ae4a7a567445f753fa3ec301ed2f3044a}} 
+\index{mem.c@{mem.c}!memreallocm@{memreallocm}}
+\index{memreallocm@{memreallocm}!mem.c@{mem.c}}
+\doxysubsubsection{\texorpdfstring{memreallocm()}{memreallocm()}}
+{\footnotesize\ttfamily void$\ast$ memreallocm (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t $\ast$}]{size,  }\item[{size\+\_\+t}]{type\+Size }\end{DoxyParamCaption})}
+
+Handles realloc allocation and decreases the memory\textquotesingle{}s block size by one. If the memory cannot be reallocated, it handles it properly by exiting the program. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$ptr} & the pointer to the previous allocated memory \\
+\hline
+{\em $\ast$size} & size of the previous array to decrease by 1 \\
+\hline
+{\em type\+Size} & the size of the type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the new allocated memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{mem_8c_a7f8040352bf60f9b9a989f61f6324db0}\label{mem_8c_a7f8040352bf60f9b9a989f61f6324db0}} 
+\index{mem.c@{mem.c}!memreallocp@{memreallocp}}
+\index{memreallocp@{memreallocp}!mem.c@{mem.c}}
+\doxysubsubsection{\texorpdfstring{memreallocp()}{memreallocp()}}
+{\footnotesize\ttfamily void$\ast$ memreallocp (\begin{DoxyParamCaption}\item[{void $\ast$}]{ptr,  }\item[{size\+\_\+t $\ast$}]{size,  }\item[{size\+\_\+t}]{type\+Size }\end{DoxyParamCaption})}
+
+Handles realloc allocation and increases the memory\textquotesingle{}s block size by one. If the memory cannot be reallocated, it handles it properly by exiting the program. 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$ptr} & the pointer to the previous allocated memory \\
+\hline
+{\em $\ast$size} & size of the previous array to increase by 1 \\
+\hline
+{\em type\+Size} & the size of the type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the pointer to the new allocated memory 
+\end{DoxyReturn}

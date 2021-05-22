@@ -1,0 +1,152 @@
+\hypertarget{menu_8c}{}\doxysection{src/menu.c File Reference}
+\label{menu_8c}\index{src/menu.c@{src/menu.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}file\+Handling.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books.\+h\char`\"{}}\newline
+Include dependency graph for menu.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{menu_8c_a29c2128f12316ca1ce77fd1d686f6ec7}{main\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_aa17f003521983f4629c9b6f3118848c7}{file\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_af3451c2ec4d0b4dd3415987ff8751a8d}{book\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_ad47c1d3a71b259a91a50f802a2562e22}{booksub\+Menu\+Show}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_a8cd28a19a2480adf77cb7291f7a4d25a}{book\+Change\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_a09bd9d727dd8bcffa73d369ff139937b}{client\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_af4e80933be70eb356396e10d1a6791e3}{order\+Menu}} (void)
+\item 
+void \mbox{\hyperlink{menu_8c_aadb092d2b2a18c5bc7ac0ca37cd497c8}{operation\+Menu}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{menu_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{menu_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{menu_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\item 
+C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD $\ast$ \mbox{\hyperlink{menu_8c_a2d76d3320774d91c1014dcf6c04e8e3e}{cientific\+\_\+qtd}}
+\item 
+P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR $\ast$ \mbox{\hyperlink{menu_8c_a251a19153cd871866afa2d0378005133}{publish\+\_\+year}}
+\item 
+int \mbox{\hyperlink{menu_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}{num\+\_\+cientific\+\_\+qtd}}
+\item 
+int \mbox{\hyperlink{menu_8c_a403b730769758428ae61a52225ce9b78}{num\+\_\+publish\+\_\+year}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{menu_8c_a8cd28a19a2480adf77cb7291f7a4d25a}\label{menu_8c_a8cd28a19a2480adf77cb7291f7a4d25a}} 
+\index{menu.c@{menu.c}!bookChangeMenu@{bookChangeMenu}}
+\index{bookChangeMenu@{bookChangeMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{bookChangeMenu()}{bookChangeMenu()}}
+{\footnotesize\ttfamily void book\+Change\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the book change menu \mbox{\Hypertarget{menu_8c_af3451c2ec4d0b4dd3415987ff8751a8d}\label{menu_8c_af3451c2ec4d0b4dd3415987ff8751a8d}} 
+\index{menu.c@{menu.c}!bookMenu@{bookMenu}}
+\index{bookMenu@{bookMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{bookMenu()}{bookMenu()}}
+{\footnotesize\ttfamily void book\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles book menu \mbox{\Hypertarget{menu_8c_ad47c1d3a71b259a91a50f802a2562e22}\label{menu_8c_ad47c1d3a71b259a91a50f802a2562e22}} 
+\index{menu.c@{menu.c}!booksubMenuShow@{booksubMenuShow}}
+\index{booksubMenuShow@{booksubMenuShow}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{booksubMenuShow()}{booksubMenuShow()}}
+{\footnotesize\ttfamily void booksub\+Menu\+Show (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the book consult menu \mbox{\Hypertarget{menu_8c_a09bd9d727dd8bcffa73d369ff139937b}\label{menu_8c_a09bd9d727dd8bcffa73d369ff139937b}} 
+\index{menu.c@{menu.c}!clientMenu@{clientMenu}}
+\index{clientMenu@{clientMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{clientMenu()}{clientMenu()}}
+{\footnotesize\ttfamily void client\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the clients\textquotesingle{} menu \mbox{\Hypertarget{menu_8c_aa17f003521983f4629c9b6f3118848c7}\label{menu_8c_aa17f003521983f4629c9b6f3118848c7}} 
+\index{menu.c@{menu.c}!fileMenu@{fileMenu}}
+\index{fileMenu@{fileMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{fileMenu()}{fileMenu()}}
+{\footnotesize\ttfamily void file\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles file menu \mbox{\Hypertarget{menu_8c_a29c2128f12316ca1ce77fd1d686f6ec7}\label{menu_8c_a29c2128f12316ca1ce77fd1d686f6ec7}} 
+\index{menu.c@{menu.c}!mainMenu@{mainMenu}}
+\index{mainMenu@{mainMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{mainMenu()}{mainMenu()}}
+{\footnotesize\ttfamily void main\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the main menu \mbox{\Hypertarget{menu_8c_aadb092d2b2a18c5bc7ac0ca37cd497c8}\label{menu_8c_aadb092d2b2a18c5bc7ac0ca37cd497c8}} 
+\index{menu.c@{menu.c}!operationMenu@{operationMenu}}
+\index{operationMenu@{operationMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{operationMenu()}{operationMenu()}}
+{\footnotesize\ttfamily void operation\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the operation menu \mbox{\Hypertarget{menu_8c_af4e80933be70eb356396e10d1a6791e3}\label{menu_8c_af4e80933be70eb356396e10d1a6791e3}} 
+\index{menu.c@{menu.c}!orderMenu@{orderMenu}}
+\index{orderMenu@{orderMenu}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{orderMenu()}{orderMenu()}}
+{\footnotesize\ttfamily void order\+Menu (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Handles the order menu 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{menu_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{menu_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{menu.c@{menu.c}!Books@{Books}}
+\index{Books@{Books}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{menu_8c_a2d76d3320774d91c1014dcf6c04e8e3e}\label{menu_8c_a2d76d3320774d91c1014dcf6c04e8e3e}} 
+\index{menu.c@{menu.c}!cientific\_qtd@{cientific\_qtd}}
+\index{cientific\_qtd@{cientific\_qtd}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{cientific\_qtd}{cientific\_qtd}}
+{\footnotesize\ttfamily C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD$\ast$ cientific\+\_\+qtd}
+
+\mbox{\Hypertarget{menu_8c_a86272725e5b2c36822c3a4b13795da37}\label{menu_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{menu.c@{menu.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+
+\mbox{\Hypertarget{menu_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}\label{menu_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}} 
+\index{menu.c@{menu.c}!num\_cientific\_qtd@{num\_cientific\_qtd}}
+\index{num\_cientific\_qtd@{num\_cientific\_qtd}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{num\_cientific\_qtd}{num\_cientific\_qtd}}
+{\footnotesize\ttfamily int num\+\_\+cientific\+\_\+qtd}
+
+\mbox{\Hypertarget{menu_8c_a403b730769758428ae61a52225ce9b78}\label{menu_8c_a403b730769758428ae61a52225ce9b78}} 
+\index{menu.c@{menu.c}!num\_publish\_year@{num\_publish\_year}}
+\index{num\_publish\_year@{num\_publish\_year}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{num\_publish\_year}{num\_publish\_year}}
+{\footnotesize\ttfamily int num\+\_\+publish\+\_\+year}
+
+\mbox{\Hypertarget{menu_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{menu_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{menu.c@{menu.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+
+\mbox{\Hypertarget{menu_8c_a251a19153cd871866afa2d0378005133}\label{menu_8c_a251a19153cd871866afa2d0378005133}} 
+\index{menu.c@{menu.c}!publish\_year@{publish\_year}}
+\index{publish\_year@{publish\_year}!menu.c@{menu.c}}
+\doxysubsubsection{\texorpdfstring{publish\_year}{publish\_year}}
+{\footnotesize\ttfamily P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR$\ast$ publish\+\_\+year}
+

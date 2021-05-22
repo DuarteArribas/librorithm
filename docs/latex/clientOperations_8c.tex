@@ -1,0 +1,206 @@
+\hypertarget{clientOperations_8c}{}\doxysection{src/client\+Operations.c File Reference}
+\label{clientOperations_8c}\index{src/clientOperations.c@{src/clientOperations.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+Include dependency graph for client\+Operations.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+C\+L\+I\+E\+NT \mbox{\hyperlink{clientOperations_8c_a26d53ad33d07b374c1c9dfa347877232}{new\+Client}} (void)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_acd61511ee20a92b9f5f8ff84a2c4c1f5}{get\+N\+IF}} (uint32\+\_\+t $\ast$N\+IF)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_a5c8caeb0c3b7c79c3fa85905d5d2acea}{get\+N\+I\+F\+Change}} (uint32\+\_\+t $\ast$N\+IF, uint32\+\_\+t old\+N\+IF)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_a8d52503c0afd9018d83cbc6e0ad3b0cc}{get\+Name}} (char $\ast$name)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_a314a91ad96df74209fdd32f362fc1361}{get\+Address}} (char $\ast$address)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_a28d3ed79b167c2eb84e87e7af9be3d8b}{get\+Phone\+Number}} (char $\ast$phone\+Number)
+\item 
+bool \mbox{\hyperlink{clientOperations_8c_aa018da5692d22d6250d29f10e5b374dd}{get\+Phone\+Number\+Change}} (char $\ast$phone\+Number)
+\item 
+void \mbox{\hyperlink{clientOperations_8c_a7d9108ea90ef9a25b093118add2a0929}{print\+Client}} (const C\+L\+I\+E\+NT client)
+\item 
+void \mbox{\hyperlink{clientOperations_8c_a6264b868e049194fc9aa0d45e96f6e4e}{print\+Client\+Reverse}} (const C\+L\+I\+E\+NT client)
+\item 
+void \mbox{\hyperlink{clientOperations_8c_adce07a75ce67a87e80a43aedf6bf5a31}{get\+Day\+Month\+Year}} (char $\ast$date, uint8\+\_\+t $\ast$day, uint8\+\_\+t $\ast$month, uint16\+\_\+t $\ast$year)
+\item 
+int8\+\_\+t \mbox{\hyperlink{clientOperations_8c_a6eb082099ec5cf5adbeb604f8b536b73}{compare\+Dates}} (char $\ast$date1, char $\ast$date2)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{clientOperations_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{clientOperations_8c_a6eb082099ec5cf5adbeb604f8b536b73}\label{clientOperations_8c_a6eb082099ec5cf5adbeb604f8b536b73}} 
+\index{clientOperations.c@{clientOperations.c}!compareDates@{compareDates}}
+\index{compareDates@{compareDates}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{compareDates()}{compareDates()}}
+{\footnotesize\ttfamily int8\+\_\+t compare\+Dates (\begin{DoxyParamCaption}\item[{char $\ast$}]{date1,  }\item[{char $\ast$}]{date2 }\end{DoxyParamCaption})}
+
+Compares date1 with date2 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$date1} & the first date \\
+\hline
+{\em $\ast$date2} & the second date \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if date1$>$date2, -\/1 if date1$<$date2, 0 if date1==date2 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_a314a91ad96df74209fdd32f362fc1361}\label{clientOperations_8c_a314a91ad96df74209fdd32f362fc1361}} 
+\index{clientOperations.c@{clientOperations.c}!getAddress@{getAddress}}
+\index{getAddress@{getAddress}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getAddress()}{getAddress()}}
+{\footnotesize\ttfamily bool get\+Address (\begin{DoxyParamCaption}\item[{char $\ast$}]{address }\end{DoxyParamCaption})}
+
+Asks the user\textquotesingle{}s address 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$address} & the user\textquotesingle{}s address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the address number was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_adce07a75ce67a87e80a43aedf6bf5a31}\label{clientOperations_8c_adce07a75ce67a87e80a43aedf6bf5a31}} 
+\index{clientOperations.c@{clientOperations.c}!getDayMonthYear@{getDayMonthYear}}
+\index{getDayMonthYear@{getDayMonthYear}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getDayMonthYear()}{getDayMonthYear()}}
+{\footnotesize\ttfamily void get\+Day\+Month\+Year (\begin{DoxyParamCaption}\item[{char $\ast$}]{date,  }\item[{uint8\+\_\+t $\ast$}]{day,  }\item[{uint8\+\_\+t $\ast$}]{month,  }\item[{uint16\+\_\+t $\ast$}]{year }\end{DoxyParamCaption})}
+
+Gets the day, month, and year from the given date string 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$date} & the given date \\
+\hline
+{\em $\ast$day} & the new day \\
+\hline
+{\em $\ast$month} & the new month \\
+\hline
+{\em $\ast$year} & the new year \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{clientOperations_8c_a8d52503c0afd9018d83cbc6e0ad3b0cc}\label{clientOperations_8c_a8d52503c0afd9018d83cbc6e0ad3b0cc}} 
+\index{clientOperations.c@{clientOperations.c}!getName@{getName}}
+\index{getName@{getName}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily bool get\+Name (\begin{DoxyParamCaption}\item[{char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Asks the user\textquotesingle{}s name 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$name} & the user\textquotesingle{}s name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the name was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_acd61511ee20a92b9f5f8ff84a2c4c1f5}\label{clientOperations_8c_acd61511ee20a92b9f5f8ff84a2c4c1f5}} 
+\index{clientOperations.c@{clientOperations.c}!getNIF@{getNIF}}
+\index{getNIF@{getNIF}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getNIF()}{getNIF()}}
+{\footnotesize\ttfamily bool get\+N\+IF (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{N\+IF }\end{DoxyParamCaption})}
+
+Ask the user\textquotesingle{}s N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$\+N\+IF} & the user\textquotesingle{}s N\+IF \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the N\+IF was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_a5c8caeb0c3b7c79c3fa85905d5d2acea}\label{clientOperations_8c_a5c8caeb0c3b7c79c3fa85905d5d2acea}} 
+\index{clientOperations.c@{clientOperations.c}!getNIFChange@{getNIFChange}}
+\index{getNIFChange@{getNIFChange}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getNIFChange()}{getNIFChange()}}
+{\footnotesize\ttfamily bool get\+N\+I\+F\+Change (\begin{DoxyParamCaption}\item[{uint32\+\_\+t $\ast$}]{N\+IF,  }\item[{uint32\+\_\+t}]{old\+N\+IF }\end{DoxyParamCaption})}
+
+Ask the user\textquotesingle{}s new N\+IF to change 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$\+N\+IF} & will store the new N\+IF or 1 to stay as is \\
+\hline
+{\em old\+N\+IF} & the old N\+IF to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the N\+IF was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_a28d3ed79b167c2eb84e87e7af9be3d8b}\label{clientOperations_8c_a28d3ed79b167c2eb84e87e7af9be3d8b}} 
+\index{clientOperations.c@{clientOperations.c}!getPhoneNumber@{getPhoneNumber}}
+\index{getPhoneNumber@{getPhoneNumber}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getPhoneNumber()}{getPhoneNumber()}}
+{\footnotesize\ttfamily bool get\+Phone\+Number (\begin{DoxyParamCaption}\item[{char $\ast$}]{phone\+Number }\end{DoxyParamCaption})}
+
+Asks the user\textquotesingle{}s phone number 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$phone\+Number} & the user\textquotesingle{}s phone number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the phone number was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_aa018da5692d22d6250d29f10e5b374dd}\label{clientOperations_8c_aa018da5692d22d6250d29f10e5b374dd}} 
+\index{clientOperations.c@{clientOperations.c}!getPhoneNumberChange@{getPhoneNumberChange}}
+\index{getPhoneNumberChange@{getPhoneNumberChange}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{getPhoneNumberChange()}{getPhoneNumberChange()}}
+{\footnotesize\ttfamily bool get\+Phone\+Number\+Change (\begin{DoxyParamCaption}\item[{char $\ast$}]{phone\+Number }\end{DoxyParamCaption})}
+
+Asks the user\textquotesingle{}s new phone number to change 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$phone\+Number} & will store the new phone number or 1 to stay as is \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the phone number was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_a26d53ad33d07b374c1c9dfa347877232}\label{clientOperations_8c_a26d53ad33d07b374c1c9dfa347877232}} 
+\index{clientOperations.c@{clientOperations.c}!newClient@{newClient}}
+\index{newClient@{newClient}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{newClient()}{newClient()}}
+{\footnotesize\ttfamily C\+L\+I\+E\+NT new\+Client (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Creates a new client \begin{DoxyReturn}{Returns}
+the new client 
+\end{DoxyReturn}
+\mbox{\Hypertarget{clientOperations_8c_a7d9108ea90ef9a25b093118add2a0929}\label{clientOperations_8c_a7d9108ea90ef9a25b093118add2a0929}} 
+\index{clientOperations.c@{clientOperations.c}!printClient@{printClient}}
+\index{printClient@{printClient}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{printClient()}{printClient()}}
+{\footnotesize\ttfamily void print\+Client (\begin{DoxyParamCaption}\item[{const C\+L\+I\+E\+NT}]{client }\end{DoxyParamCaption})}
+
+Prints a client\textquotesingle{}s information 
+\begin{DoxyParams}{Parameters}
+{\em client} & the client to print \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{clientOperations_8c_a6264b868e049194fc9aa0d45e96f6e4e}\label{clientOperations_8c_a6264b868e049194fc9aa0d45e96f6e4e}} 
+\index{clientOperations.c@{clientOperations.c}!printClientReverse@{printClientReverse}}
+\index{printClientReverse@{printClientReverse}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{printClientReverse()}{printClientReverse()}}
+{\footnotesize\ttfamily void print\+Client\+Reverse (\begin{DoxyParamCaption}\item[{const C\+L\+I\+E\+NT}]{client }\end{DoxyParamCaption})}
+
+Prints a client\textquotesingle{}s information for purchases 
+\begin{DoxyParams}{Parameters}
+{\em client} & the client to print \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{clientOperations_8c_a86272725e5b2c36822c3a4b13795da37}\label{clientOperations_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{clientOperations.c@{clientOperations.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!clientOperations.c@{clientOperations.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+

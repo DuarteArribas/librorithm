@@ -1,0 +1,496 @@
+\hypertarget{client_8c}{}\doxysection{src/client.c File Reference}
+\label{client_8c}\index{src/client.c@{src/client.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+Include dependency graph for client.\+c\+:
+% FIG 0
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}} \mbox{\hyperlink{client_8c_a85e88e76172a0fa7991d994e0d5eeae5}{B\+E\+S\+T\+\_\+\+S\+O\+LD}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{client_8c_ad23c5073c0b1ba11a5355685e5d90b22}{create\+Linked}} (const C\+L\+I\+E\+NT value)
+\item 
+void \mbox{\hyperlink{client_8c_abe2f811ebf917265f4085576454023de}{freelinked}} (client\+N\+O\+DE $\ast$head)
+\item 
+void \mbox{\hyperlink{client_8c_a147627f06b8fefd072808b99090983b9}{freelinked2}} (client\+N\+O\+DE $\ast$head)
+\item 
+bool \mbox{\hyperlink{client_8c_ae212a45414ade4507149d88b3b72b666}{isemptylist}} (const client\+N\+O\+DE $\ast$head)
+\item 
+size\+\_\+t \mbox{\hyperlink{client_8c_ac0536380cf59e8491739203dcf18f2b1}{linkedlength}} (client\+N\+O\+DE $\ast$head)
+\item 
+bool \mbox{\hyperlink{client_8c_ae681c3f71a85585b6d624c62c033b322}{lsearchlinked}} (client\+N\+O\+DE $\ast$head, const uint32\+\_\+t value)
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{client_8c_af3c55b374b29eddbd0be86f7a489f007}{get\+Searchlinked}} (client\+N\+O\+DE $\ast$head, const uint32\+\_\+t value)
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{client_8c_a4c30920fdfb152bd19b1f54265fdff4f}{get\+Searchlinked\+By\+Order}} (client\+N\+O\+DE $\ast$head, const O\+R\+D\+ER value, size\+\_\+t $\ast$pos)
+\item 
+void \mbox{\hyperlink{client_8c_a04fd0a9c6107536b924fdba9a13a1b5e}{change\+Client}} (client\+N\+O\+DE $\ast$head, const C\+L\+I\+E\+NT client)
+\item 
+void \mbox{\hyperlink{client_8c_a25d7c5a512c840eeadc97edad50ce2f2}{sremovelinked}} (client\+N\+O\+DE $\ast$$\ast$head)
+\item 
+void \mbox{\hyperlink{client_8c_a993859353abb9a19aafc073ddbb521c1}{removelinked}} (client\+N\+O\+DE $\ast$$\ast$head, size\+\_\+t index)
+\item 
+bool \mbox{\hyperlink{client_8c_aecf9be1157a55e8e7cb31b04edea9262}{remove\+Client}} (client\+N\+O\+DE $\ast$$\ast$head, const uint32\+\_\+t N\+IF)
+\item 
+void \mbox{\hyperlink{client_8c_a63ad6500fc2fc4e23b2d8d39330bc865}{consult\+Client\+N\+IF}} (client\+N\+O\+DE $\ast$head, const uint32\+\_\+t N\+IF)
+\item 
+void \mbox{\hyperlink{client_8c_a1b192d2c50dfe507b91860d7f19d6590}{consult\+Client\+Name}} (client\+N\+O\+DE $\ast$head, const char $\ast$name)
+\item 
+void \mbox{\hyperlink{client_8c_aba2596296be4e52c9922f16987b87b5c}{consult\+Client\+Address}} (client\+N\+O\+DE $\ast$head, const char $\ast$address)
+\item 
+void \mbox{\hyperlink{client_8c_a8043372539775c1e6552cfaba81de89f}{consult\+All}} (client\+N\+O\+DE $\ast$head)
+\item 
+void \mbox{\hyperlink{client_8c_a5b1f999ab0bc6659f1872964bd3ee5ee}{sappendlinked}} (client\+N\+O\+DE $\ast$$\ast$head, const C\+L\+I\+E\+NT value)
+\item 
+void \mbox{\hyperlink{client_8c_aa2027662ae22987983d01101d5f64a0e}{eappendlinked}} (client\+N\+O\+DE $\ast$head, const C\+L\+I\+E\+NT value)
+\item 
+uint64\+\_\+t \mbox{\hyperlink{client_8c_a77bf5caf1eaad8f2a118caed3a4d7750}{get\+Memory\+Waste\+Clients}} (client\+N\+O\+DE $\ast$head)
+\item 
+void \mbox{\hyperlink{client_8c_a7987c0bba8ead2db7161cbd517c21435}{show\+Clients\+Dec}} (void)
+\item 
+C\+L\+I\+E\+NT \mbox{\hyperlink{client_8c_aeaea0c43dd3efa821a125c70d7cae41d}{client\+With\+Most\+Books}} (void)
+\item 
+size\+\_\+t \mbox{\hyperlink{client_8c_a7cae4a0a10b69b8e7278b14d94c9509d}{get\+Num\+Of\+Books}} (const char $\ast$month\+Temp, const char $\ast$year\+Temp)
+\item 
+void \mbox{\hyperlink{client_8c_adc7d978fd9a182d944f18791e3c94b6c}{latest\+Date\+By\+Book}} (const long int I\+S\+BN)
+\item 
+void \mbox{\hyperlink{client_8c_a7e96be7ee6304aca916b21d22687c1a7}{num\+Books\+By\+Client}} (const uint32\+\_\+t N\+IF)
+\item 
+void \mbox{\hyperlink{client_8c_a106c0c7d2d4622d2bebd61af16f495fc}{client\+That\+Wasted\+More}} (const uint8\+\_\+t month, const uint16\+\_\+t year)
+\item 
+void \mbox{\hyperlink{client_8c_a9746b12f60f9e05f7e38d217d6429879}{clients\+That\+Start\+With\+Char}} (void)
+\item 
+int64\+\_\+t \mbox{\hyperlink{client_8c_a1b18eae517ba8c2ab691f911c94794d3}{lilsearch}} (size\+\_\+t size, long int $\ast$array, long int value)
+\item 
+void \mbox{\hyperlink{client_8c_ab3fb392502e70f3b63aed86bc2ea2265}{best\+Soldisort}} (size\+\_\+t size, \mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}} $\ast$array)
+\item 
+void \mbox{\hyperlink{client_8c_a122d975b4d45f27f75a4804a170e7429}{show\+Best\+Sold\+Books}} (client\+N\+O\+DE $\ast$clients, const size\+\_\+t amount)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{client_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{client_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{client_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Typedef Documentation}
+\mbox{\Hypertarget{client_8c_a85e88e76172a0fa7991d994e0d5eeae5}\label{client_8c_a85e88e76172a0fa7991d994e0d5eeae5}} 
+\index{client.c@{client.c}!BEST\_SOLD@{BEST\_SOLD}}
+\index{BEST\_SOLD@{BEST\_SOLD}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{BEST\_SOLD}{BEST\_SOLD}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}} \mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}}}
+
+Holds the I\+S\+BN and the number of bought books with it 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{client_8c_ab3fb392502e70f3b63aed86bc2ea2265}\label{client_8c_ab3fb392502e70f3b63aed86bc2ea2265}} 
+\index{client.c@{client.c}!bestSoldisort@{bestSoldisort}}
+\index{bestSoldisort@{bestSoldisort}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{bestSoldisort()}{bestSoldisort()}}
+{\footnotesize\ttfamily void best\+Soldisort (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{\mbox{\hyperlink{structBEST__SOLD}{B\+E\+S\+T\+\_\+\+S\+O\+LD}} $\ast$}]{array }\end{DoxyParamCaption})}
+
+Sorts the array in ascending order by I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em size} & the size of the array \\
+\hline
+{\em $\ast$array} & the array to sort \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a04fd0a9c6107536b924fdba9a13a1b5e}\label{client_8c_a04fd0a9c6107536b924fdba9a13a1b5e}} 
+\index{client.c@{client.c}!changeClient@{changeClient}}
+\index{changeClient@{changeClient}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{changeClient()}{changeClient()}}
+{\footnotesize\ttfamily void change\+Client (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const C\+L\+I\+E\+NT}]{client }\end{DoxyParamCaption})}
+
+Changes the specified client\textquotesingle{}s properties for the new ones in the clients\textquotesingle{} linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em client} & the client to change \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a9746b12f60f9e05f7e38d217d6429879}\label{client_8c_a9746b12f60f9e05f7e38d217d6429879}} 
+\index{client.c@{client.c}!clientsThatStartWithChar@{clientsThatStartWithChar}}
+\index{clientsThatStartWithChar@{clientsThatStartWithChar}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{clientsThatStartWithChar()}{clientsThatStartWithChar()}}
+{\footnotesize\ttfamily void clients\+That\+Start\+With\+Char (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Prints every character that starts with the specified character \mbox{\Hypertarget{client_8c_a106c0c7d2d4622d2bebd61af16f495fc}\label{client_8c_a106c0c7d2d4622d2bebd61af16f495fc}} 
+\index{client.c@{client.c}!clientThatWastedMore@{clientThatWastedMore}}
+\index{clientThatWastedMore@{clientThatWastedMore}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{clientThatWastedMore()}{clientThatWastedMore()}}
+{\footnotesize\ttfamily void client\+That\+Wasted\+More (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t}]{month,  }\item[{const uint16\+\_\+t}]{year }\end{DoxyParamCaption})}
+
+Prints the client that wasted more money in the specified date 
+\begin{DoxyParams}{Parameters}
+{\em month} & the specified month \\
+\hline
+{\em year} & the specified year \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_aeaea0c43dd3efa821a125c70d7cae41d}\label{client_8c_aeaea0c43dd3efa821a125c70d7cae41d}} 
+\index{client.c@{client.c}!clientWithMostBooks@{clientWithMostBooks}}
+\index{clientWithMostBooks@{clientWithMostBooks}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{clientWithMostBooks()}{clientWithMostBooks()}}
+{\footnotesize\ttfamily C\+L\+I\+E\+NT client\+With\+Most\+Books (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Gets the client with most books \begin{DoxyReturn}{Returns}
+the client with most books 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_a8043372539775c1e6552cfaba81de89f}\label{client_8c_a8043372539775c1e6552cfaba81de89f}} 
+\index{client.c@{client.c}!consultAll@{consultAll}}
+\index{consultAll@{consultAll}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{consultAll()}{consultAll()}}
+{\footnotesize\ttfamily void consult\+All (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Consults every client 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_aba2596296be4e52c9922f16987b87b5c}\label{client_8c_aba2596296be4e52c9922f16987b87b5c}} 
+\index{client.c@{client.c}!consultClientAddress@{consultClientAddress}}
+\index{consultClientAddress@{consultClientAddress}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{consultClientAddress()}{consultClientAddress()}}
+{\footnotesize\ttfamily void consult\+Client\+Address (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const char $\ast$}]{address }\end{DoxyParamCaption})}
+
+Consults the client with the specified address 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em $\ast$address} & the address of the client to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a1b192d2c50dfe507b91860d7f19d6590}\label{client_8c_a1b192d2c50dfe507b91860d7f19d6590}} 
+\index{client.c@{client.c}!consultClientName@{consultClientName}}
+\index{consultClientName@{consultClientName}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{consultClientName()}{consultClientName()}}
+{\footnotesize\ttfamily void consult\+Client\+Name (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const char $\ast$}]{name }\end{DoxyParamCaption})}
+
+Consults the client with the specified name 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em $\ast$name} & the name of the client to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a63ad6500fc2fc4e23b2d8d39330bc865}\label{client_8c_a63ad6500fc2fc4e23b2d8d39330bc865}} 
+\index{client.c@{client.c}!consultClientNIF@{consultClientNIF}}
+\index{consultClientNIF@{consultClientNIF}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{consultClientNIF()}{consultClientNIF()}}
+{\footnotesize\ttfamily void consult\+Client\+N\+IF (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const uint32\+\_\+t}]{N\+IF }\end{DoxyParamCaption})}
+
+Consults the client with the specified N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em N\+IF} & the N\+IF of the client to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_ad23c5073c0b1ba11a5355685e5d90b22}\label{client_8c_ad23c5073c0b1ba11a5355685e5d90b22}} 
+\index{client.c@{client.c}!createLinked@{createLinked}}
+\index{createLinked@{createLinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{createLinked()}{createLinked()}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ create\+Linked (\begin{DoxyParamCaption}\item[{const C\+L\+I\+E\+NT}]{value }\end{DoxyParamCaption})}
+
+Creates a client linked list with the specified element 
+\begin{DoxyParams}{Parameters}
+{\em value} & the value to add to the head of the list \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the address of the head 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_aa2027662ae22987983d01101d5f64a0e}\label{client_8c_aa2027662ae22987983d01101d5f64a0e}} 
+\index{client.c@{client.c}!eappendlinked@{eappendlinked}}
+\index{eappendlinked@{eappendlinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{eappendlinked()}{eappendlinked()}}
+{\footnotesize\ttfamily void eappendlinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const C\+L\+I\+E\+NT}]{value }\end{DoxyParamCaption})}
+
+Append element at the end of the client\textquotesingle{}s linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em value} & the value to append \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_abe2f811ebf917265f4085576454023de}\label{client_8c_abe2f811ebf917265f4085576454023de}} 
+\index{client.c@{client.c}!freelinked@{freelinked}}
+\index{freelinked@{freelinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{freelinked()}{freelinked()}}
+{\footnotesize\ttfamily void freelinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Cleans the whole client\textquotesingle{}s linked list, freeing the memory 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a147627f06b8fefd072808b99090983b9}\label{client_8c_a147627f06b8fefd072808b99090983b9}} 
+\index{client.c@{client.c}!freelinked2@{freelinked2}}
+\index{freelinked2@{freelinked2}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{freelinked2()}{freelinked2()}}
+{\footnotesize\ttfamily void freelinked2 (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Cleans the whole client\textquotesingle{}s linked list, without clearing the client\textquotesingle{}s orders, freeing the memory 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a77bf5caf1eaad8f2a118caed3a4d7750}\label{client_8c_a77bf5caf1eaad8f2a118caed3a4d7750}} 
+\index{client.c@{client.c}!getMemoryWasteClients@{getMemoryWasteClients}}
+\index{getMemoryWasteClients@{getMemoryWasteClients}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{getMemoryWasteClients()}{getMemoryWasteClients()}}
+{\footnotesize\ttfamily uint64\+\_\+t get\+Memory\+Waste\+Clients (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Computes the memory waste from the clients\textquotesingle{} list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the memory wasted by the clients in bytes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_a7cae4a0a10b69b8e7278b14d94c9509d}\label{client_8c_a7cae4a0a10b69b8e7278b14d94c9509d}} 
+\index{client.c@{client.c}!getNumOfBooks@{getNumOfBooks}}
+\index{getNumOfBooks@{getNumOfBooks}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{getNumOfBooks()}{getNumOfBooks()}}
+{\footnotesize\ttfamily size\+\_\+t get\+Num\+Of\+Books (\begin{DoxyParamCaption}\item[{const char $\ast$}]{month\+Temp,  }\item[{const char $\ast$}]{year\+Temp }\end{DoxyParamCaption})}
+
+Gets the number of books at the specified date month/year 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$month\+Temp} & the month \\
+\hline
+{\em $\ast$year} & the year \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of books at the specified date 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_af3c55b374b29eddbd0be86f7a489f007}\label{client_8c_af3c55b374b29eddbd0be86f7a489f007}} 
+\index{client.c@{client.c}!getSearchlinked@{getSearchlinked}}
+\index{getSearchlinked@{getSearchlinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{getSearchlinked()}{getSearchlinked()}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ get\+Searchlinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const uint32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+Searches for the specified N\+IF in the clients\textquotesingle{} linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em value} & the value to search for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the client with the specified N\+IF or N\+U\+LL if there isn\textquotesingle{}t a client with that N\+IF 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_a4c30920fdfb152bd19b1f54265fdff4f}\label{client_8c_a4c30920fdfb152bd19b1f54265fdff4f}} 
+\index{client.c@{client.c}!getSearchlinkedByOrder@{getSearchlinkedByOrder}}
+\index{getSearchlinkedByOrder@{getSearchlinkedByOrder}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{getSearchlinkedByOrder()}{getSearchlinkedByOrder()}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ get\+Searchlinked\+By\+Order (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const O\+R\+D\+ER}]{value,  }\item[{size\+\_\+t $\ast$}]{pos }\end{DoxyParamCaption})}
+
+Searches for the specified O\+R\+D\+ER in the clients\textquotesingle{} linked list\textquotesingle{}s orders\textquotesingle{} array 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em value} & the value to search for \\
+\hline
+{\em $\ast$pos} & the index of that O\+R\+D\+ER in the client\textquotesingle{}s orders\textquotesingle{} array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the client with the specified O\+R\+D\+ER or N\+U\+LL if there isn\textquotesingle{}t a client with that O\+R\+D\+ER 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_ae212a45414ade4507149d88b3b72b666}\label{client_8c_ae212a45414ade4507149d88b3b72b666}} 
+\index{client.c@{client.c}!isemptylist@{isemptylist}}
+\index{isemptylist@{isemptylist}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{isemptylist()}{isemptylist()}}
+{\footnotesize\ttfamily bool isemptylist (\begin{DoxyParamCaption}\item[{const client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Checks if the list is empty 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the list is empty and false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_adc7d978fd9a182d944f18791e3c94b6c}\label{client_8c_adc7d978fd9a182d944f18791e3c94b6c}} 
+\index{client.c@{client.c}!latestDateByBook@{latestDateByBook}}
+\index{latestDateByBook@{latestDateByBook}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{latestDateByBook()}{latestDateByBook()}}
+{\footnotesize\ttfamily void latest\+Date\+By\+Book (\begin{DoxyParamCaption}\item[{const long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Prints the latest date, given an I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em I\+S\+BN} & the specified I\+S\+BN \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a1b18eae517ba8c2ab691f911c94794d3}\label{client_8c_a1b18eae517ba8c2ab691f911c94794d3}} 
+\index{client.c@{client.c}!lilsearch@{lilsearch}}
+\index{lilsearch@{lilsearch}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{lilsearch()}{lilsearch()}}
+{\footnotesize\ttfamily int64\+\_\+t lilsearch (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size,  }\item[{long int $\ast$}]{array,  }\item[{long int}]{value }\end{DoxyParamCaption})}
+
+Searches the array for the given value. (long int version) 
+\begin{DoxyParams}{Parameters}
+{\em size} & the size of the array \\
+\hline
+{\em $\ast$array} & the array to search \\
+\hline
+{\em value} & the value to search for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the first index of value in the array or -\/1 if it doesn\textquotesingle{}t exit 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_ac0536380cf59e8491739203dcf18f2b1}\label{client_8c_ac0536380cf59e8491739203dcf18f2b1}} 
+\index{client.c@{client.c}!linkedlength@{linkedlength}}
+\index{linkedlength@{linkedlength}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{linkedlength()}{linkedlength()}}
+{\footnotesize\ttfamily size\+\_\+t linkedlength (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head }\end{DoxyParamCaption})}
+
+Gets the length of the client\textquotesingle{}s linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_ae681c3f71a85585b6d624c62c033b322}\label{client_8c_ae681c3f71a85585b6d624c62c033b322}} 
+\index{client.c@{client.c}!lsearchlinked@{lsearchlinked}}
+\index{lsearchlinked@{lsearchlinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{lsearchlinked()}{lsearchlinked()}}
+{\footnotesize\ttfamily bool lsearchlinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{head,  }\item[{const uint32\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+Searches for the specified N\+IF in the clients\textquotesingle{} linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$head} & the address of the head \\
+\hline
+{\em value} & the N\+IF to search for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the N\+IF is in the list or false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{client_8c_a7e96be7ee6304aca916b21d22687c1a7}\label{client_8c_a7e96be7ee6304aca916b21d22687c1a7}} 
+\index{client.c@{client.c}!numBooksByClient@{numBooksByClient}}
+\index{numBooksByClient@{numBooksByClient}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{numBooksByClient()}{numBooksByClient()}}
+{\footnotesize\ttfamily void num\+Books\+By\+Client (\begin{DoxyParamCaption}\item[{const uint32\+\_\+t}]{N\+IF }\end{DoxyParamCaption})}
+
+Prints the number of books of a given client, given the N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em N\+IF} & the specified N\+IF \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_aecf9be1157a55e8e7cb31b04edea9262}\label{client_8c_aecf9be1157a55e8e7cb31b04edea9262}} 
+\index{client.c@{client.c}!removeClient@{removeClient}}
+\index{removeClient@{removeClient}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{removeClient()}{removeClient()}}
+{\footnotesize\ttfamily bool remove\+Client (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$$\ast$}]{head,  }\item[{const uint32\+\_\+t}]{N\+IF }\end{DoxyParamCaption})}
+
+Removes the client with the specified N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$head} & the address of the address of the head \\
+\hline
+{\em N\+IF} & the N\+IF of the client to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a993859353abb9a19aafc073ddbb521c1}\label{client_8c_a993859353abb9a19aafc073ddbb521c1}} 
+\index{client.c@{client.c}!removelinked@{removelinked}}
+\index{removelinked@{removelinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{removelinked()}{removelinked()}}
+{\footnotesize\ttfamily void removelinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$$\ast$}]{head,  }\item[{size\+\_\+t}]{index }\end{DoxyParamCaption})}
+
+Remove the element at the specified index 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$head} & the address of the address of the head \\
+\hline
+{\em index} & of the node to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a5b1f999ab0bc6659f1872964bd3ee5ee}\label{client_8c_a5b1f999ab0bc6659f1872964bd3ee5ee}} 
+\index{client.c@{client.c}!sappendlinked@{sappendlinked}}
+\index{sappendlinked@{sappendlinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{sappendlinked()}{sappendlinked()}}
+{\footnotesize\ttfamily void sappendlinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$$\ast$}]{head,  }\item[{const C\+L\+I\+E\+NT}]{value }\end{DoxyParamCaption})}
+
+Append element at the start of the client\textquotesingle{}s linked list 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$head} & the address of the address of the head \\
+\hline
+{\em value} & the value to append \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a122d975b4d45f27f75a4804a170e7429}\label{client_8c_a122d975b4d45f27f75a4804a170e7429}} 
+\index{client.c@{client.c}!showBestSoldBooks@{showBestSoldBooks}}
+\index{showBestSoldBooks@{showBestSoldBooks}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{showBestSoldBooks()}{showBestSoldBooks()}}
+{\footnotesize\ttfamily void show\+Best\+Sold\+Books (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$}]{clients,  }\item[{const size\+\_\+t}]{amount }\end{DoxyParamCaption})}
+
+Shows the {\ttfamily amount} best sold books 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$clients} & the clients linked list \\
+\hline
+{\em amount} & the amound of books to show \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{client_8c_a7987c0bba8ead2db7161cbd517c21435}\label{client_8c_a7987c0bba8ead2db7161cbd517c21435}} 
+\index{client.c@{client.c}!showClientsDec@{showClientsDec}}
+\index{showClientsDec@{showClientsDec}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{showClientsDec()}{showClientsDec()}}
+{\footnotesize\ttfamily void show\+Clients\+Dec (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the clients in reverse order of number of purchases \mbox{\Hypertarget{client_8c_a25d7c5a512c840eeadc97edad50ce2f2}\label{client_8c_a25d7c5a512c840eeadc97edad50ce2f2}} 
+\index{client.c@{client.c}!sremovelinked@{sremovelinked}}
+\index{sremovelinked@{sremovelinked}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{sremovelinked()}{sremovelinked()}}
+{\footnotesize\ttfamily void sremovelinked (\begin{DoxyParamCaption}\item[{client\+N\+O\+DE $\ast$$\ast$}]{head }\end{DoxyParamCaption})}
+
+Remove the client at the start position 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$head} & the address of the address of the head \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{client_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{client_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{client.c@{client.c}!Books@{Books}}
+\index{Books@{Books}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{client_8c_a86272725e5b2c36822c3a4b13795da37}\label{client_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{client.c@{client.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+
+\mbox{\Hypertarget{client_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{client_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{client.c@{client.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!client.c@{client.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+

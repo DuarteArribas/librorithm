@@ -1,0 +1,38 @@
+\hypertarget{handlers_8c}{}\doxysection{src/handlers.c File Reference}
+\label{handlers_8c}\index{src/handlers.c@{src/handlers.c}}
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}handlers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+Include dependency graph for handlers.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{handlers_8c_ad6732408eedd7b51d8bb2f861ca639be}{print\+Exit\+Message}} (void)
+\item 
+void \mbox{\hyperlink{handlers_8c_ac31bcf09f9aa60fbd089c40b10791923}{handle\+Signals}} (const int signo)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{handlers_8c_ac31bcf09f9aa60fbd089c40b10791923}\label{handlers_8c_ac31bcf09f9aa60fbd089c40b10791923}} 
+\index{handlers.c@{handlers.c}!handleSignals@{handleSignals}}
+\index{handleSignals@{handleSignals}!handlers.c@{handlers.c}}
+\doxysubsubsection{\texorpdfstring{handleSignals()}{handleSignals()}}
+{\footnotesize\ttfamily void handle\+Signals (\begin{DoxyParamCaption}\item[{const int}]{signo }\end{DoxyParamCaption})}
+
+Signal handler 
+\begin{DoxyParams}{Parameters}
+{\em signo} & the signal to handle \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{handlers_8c_ad6732408eedd7b51d8bb2f861ca639be}\label{handlers_8c_ad6732408eedd7b51d8bb2f861ca639be}} 
+\index{handlers.c@{handlers.c}!printExitMessage@{printExitMessage}}
+\index{printExitMessage@{printExitMessage}!handlers.c@{handlers.c}}
+\doxysubsubsection{\texorpdfstring{printExitMessage()}{printExitMessage()}}
+{\footnotesize\ttfamily void print\+Exit\+Message (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Prints an exit message upon exiting the program 

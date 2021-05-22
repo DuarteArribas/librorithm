@@ -1,0 +1,188 @@
+\hypertarget{orderOperations_8c}{}\doxysection{src/order\+Operations.c File Reference}
+\label{orderOperations_8c}\index{src/orderOperations.c@{src/orderOperations.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+Include dependency graph for order\+Operations.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+O\+R\+D\+ER \mbox{\hyperlink{orderOperations_8c_a644e813ce4e75e502659dee436e24205}{new\+Order}} (void)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_a4564e80af5238385076a6887672457f4}{update\+Client\+Orders}} (uint32\+\_\+t N\+IF, O\+R\+D\+ER order)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_a564a1f0c6b79cf17064916b296e10964}{get\+Date}} (char $\ast$date)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_a225c003d2a531e06ba8946b343741ec4}{get\+Year}} (char $\ast$year\+Temp, uint16\+\_\+t $\ast$year)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_af8cd24adb419e2759670b38658563c00}{get\+Month}} (char $\ast$month\+Temp, uint8\+\_\+t $\ast$month)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_a02f3a5d3e5fced1632c9d9398ae0e4d9}{get\+Day}} (char $\ast$day\+Temp, uint8\+\_\+t $\ast$day, const uint8\+\_\+t M\+A\+X\+\_\+\+D\+AY)
+\item 
+bool \mbox{\hyperlink{orderOperations_8c_aa6fc191ad4af8aa2c75473775d979ef1}{get\+Quantity}} (uint16\+\_\+t $\ast$quantity, long int I\+S\+BN)
+\item 
+bool \mbox{\hyperlink{orderOperations_8c_a3e84888e767915f4befcd06b30f9b0bb}{is\+Same\+Order}} (const O\+R\+D\+ER order1, const O\+R\+D\+ER order2)
+\item 
+void \mbox{\hyperlink{orderOperations_8c_a737420be0fb93d461cf9a8e92bedbf55}{print\+Order}} (const O\+R\+D\+ER order, const size\+\_\+t order\+Num)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{orderOperations_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{orderOperations_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{orderOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{orderOperations_8c_a564a1f0c6b79cf17064916b296e10964}\label{orderOperations_8c_a564a1f0c6b79cf17064916b296e10964}} 
+\index{orderOperations.c@{orderOperations.c}!getDate@{getDate}}
+\index{getDate@{getDate}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{getDate()}{getDate()}}
+{\footnotesize\ttfamily void get\+Date (\begin{DoxyParamCaption}\item[{char $\ast$}]{date }\end{DoxyParamCaption})}
+
+Asks the order\textquotesingle{}s date \begin{DoxyReturn}{Returns}
+the date 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orderOperations_8c_a02f3a5d3e5fced1632c9d9398ae0e4d9}\label{orderOperations_8c_a02f3a5d3e5fced1632c9d9398ae0e4d9}} 
+\index{orderOperations.c@{orderOperations.c}!getDay@{getDay}}
+\index{getDay@{getDay}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{getDay()}{getDay()}}
+{\footnotesize\ttfamily void get\+Day (\begin{DoxyParamCaption}\item[{char $\ast$}]{day\+Temp,  }\item[{uint8\+\_\+t $\ast$}]{day,  }\item[{const uint8\+\_\+t}]{M\+A\+X\+\_\+\+D\+AY }\end{DoxyParamCaption})}
+
+Gets the day 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$day\+Temp} & the day asked as a string \\
+\hline
+{\em $\ast$day} & the day asked \\
+\hline
+{\em M\+A\+X\+\_\+\+D\+AY} & the maximum day for the specified month \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orderOperations_8c_af8cd24adb419e2759670b38658563c00}\label{orderOperations_8c_af8cd24adb419e2759670b38658563c00}} 
+\index{orderOperations.c@{orderOperations.c}!getMonth@{getMonth}}
+\index{getMonth@{getMonth}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{getMonth()}{getMonth()}}
+{\footnotesize\ttfamily void get\+Month (\begin{DoxyParamCaption}\item[{char $\ast$}]{month\+Temp,  }\item[{uint8\+\_\+t $\ast$}]{month }\end{DoxyParamCaption})}
+
+Gets the month 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$month\+Temp} & the month asked as a string \\
+\hline
+{\em $\ast$month} & the month asked \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orderOperations_8c_aa6fc191ad4af8aa2c75473775d979ef1}\label{orderOperations_8c_aa6fc191ad4af8aa2c75473775d979ef1}} 
+\index{orderOperations.c@{orderOperations.c}!getQuantity@{getQuantity}}
+\index{getQuantity@{getQuantity}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{getQuantity()}{getQuantity()}}
+{\footnotesize\ttfamily bool get\+Quantity (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{quantity,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Asks the order\textquotesingle{}s quantity 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$quantity} & the new quantity \\
+\hline
+{\em I\+S\+BN} & the I\+S\+BN to search the quantity \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the quantity was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orderOperations_8c_a225c003d2a531e06ba8946b343741ec4}\label{orderOperations_8c_a225c003d2a531e06ba8946b343741ec4}} 
+\index{orderOperations.c@{orderOperations.c}!getYear@{getYear}}
+\index{getYear@{getYear}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{getYear()}{getYear()}}
+{\footnotesize\ttfamily void get\+Year (\begin{DoxyParamCaption}\item[{char $\ast$}]{year\+Temp,  }\item[{uint16\+\_\+t $\ast$}]{year }\end{DoxyParamCaption})}
+
+Gets the year 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$year\+Temp} & the year asked as a string \\
+\hline
+{\em $\ast$year} & the year asked \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orderOperations_8c_a3e84888e767915f4befcd06b30f9b0bb}\label{orderOperations_8c_a3e84888e767915f4befcd06b30f9b0bb}} 
+\index{orderOperations.c@{orderOperations.c}!isSameOrder@{isSameOrder}}
+\index{isSameOrder@{isSameOrder}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{isSameOrder()}{isSameOrder()}}
+{\footnotesize\ttfamily bool is\+Same\+Order (\begin{DoxyParamCaption}\item[{const O\+R\+D\+ER}]{order1,  }\item[{const O\+R\+D\+ER}]{order2 }\end{DoxyParamCaption})}
+
+Checks if both orders are equal 
+\begin{DoxyParams}{Parameters}
+{\em order1} & used to compare with order2 \\
+\hline
+{\em order2} & used to compare with order1 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if they\textquotesingle{}re equal or false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orderOperations_8c_a644e813ce4e75e502659dee436e24205}\label{orderOperations_8c_a644e813ce4e75e502659dee436e24205}} 
+\index{orderOperations.c@{orderOperations.c}!newOrder@{newOrder}}
+\index{newOrder@{newOrder}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{newOrder()}{newOrder()}}
+{\footnotesize\ttfamily O\+R\+D\+ER new\+Order (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Creates a new order \begin{DoxyReturn}{Returns}
+the new order 
+\end{DoxyReturn}
+\mbox{\Hypertarget{orderOperations_8c_a737420be0fb93d461cf9a8e92bedbf55}\label{orderOperations_8c_a737420be0fb93d461cf9a8e92bedbf55}} 
+\index{orderOperations.c@{orderOperations.c}!printOrder@{printOrder}}
+\index{printOrder@{printOrder}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{printOrder()}{printOrder()}}
+{\footnotesize\ttfamily void print\+Order (\begin{DoxyParamCaption}\item[{const O\+R\+D\+ER}]{order,  }\item[{const size\+\_\+t}]{order\+Num }\end{DoxyParamCaption})}
+
+Prints an order 
+\begin{DoxyParams}{Parameters}
+{\em order} & the order to print \\
+\hline
+{\em order\+Num} & the index of the order in the client\textquotesingle{}s list \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{orderOperations_8c_a4564e80af5238385076a6887672457f4}\label{orderOperations_8c_a4564e80af5238385076a6887672457f4}} 
+\index{orderOperations.c@{orderOperations.c}!updateClientOrders@{updateClientOrders}}
+\index{updateClientOrders@{updateClientOrders}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{updateClientOrders()}{updateClientOrders()}}
+{\footnotesize\ttfamily void update\+Client\+Orders (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{N\+IF,  }\item[{O\+R\+D\+ER}]{order }\end{DoxyParamCaption})}
+
+Updates the clients\textquotesingle{} orders 
+\begin{DoxyParams}{Parameters}
+{\em N\+IF} & the N\+IF of the client to be updated \\
+\hline
+{\em order} & the O\+R\+D\+ER array to be updated \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{orderOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{orderOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{orderOperations.c@{orderOperations.c}!Books@{Books}}
+\index{Books@{Books}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{orderOperations_8c_a86272725e5b2c36822c3a4b13795da37}\label{orderOperations_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{orderOperations.c@{orderOperations.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+
+\mbox{\Hypertarget{orderOperations_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{orderOperations_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{orderOperations.c@{orderOperations.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!orderOperations.c@{orderOperations.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+

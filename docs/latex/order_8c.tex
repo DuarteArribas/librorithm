@@ -1,0 +1,188 @@
+\hypertarget{order_8c}{}\doxysection{src/order.c File Reference}
+\label{order_8c}\index{src/order.c@{src/order.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+Include dependency graph for order.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{order_8c_abe1bcacd864363717460188c755c55c2}{createqueue}} (const O\+R\+D\+ER value)
+\item 
+void \mbox{\hyperlink{order_8c_a81aaec0bdb69c572431d554a40aef27c}{enqueue}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$front, const O\+R\+D\+ER value)
+\item 
+bool \mbox{\hyperlink{order_8c_a23858bc96d1703d0382b0336325bf1ea}{isemptyqueue}} (const O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$front)
+\item 
+O\+R\+D\+ER \mbox{\hyperlink{order_8c_ae47f9af6e408bacf8e4b243422aa7b86}{dequeue}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$front)
+\item 
+void \mbox{\hyperlink{order_8c_a3b44db238d2673aa5203d165e4daf801}{freequeue}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$front)
+\item 
+O\+R\+D\+ER \mbox{\hyperlink{order_8c_ac8aea9d8220ad7a661e7fe601227970f}{peekqueue}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$front)
+\item 
+size\+\_\+t \mbox{\hyperlink{order_8c_a6c94c4e7fd508053abfefae14588513f}{get\+Orders\+Left\+To\+Fulfill}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$orders\+Queue)
+\item 
+void \mbox{\hyperlink{order_8c_aa950236c72ce6821fd11631054c8de64}{remove\+Orders\+With\+N\+IF}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$orders, uint32\+\_\+t N\+IF)
+\item 
+void \mbox{\hyperlink{order_8c_a673304319261a8bd3c2ff93caa61bd0e}{replace\+Orders\+N\+IF}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$orders, uint32\+\_\+t old\+N\+IF, uint32\+\_\+t new\+N\+IF)
+\item 
+uint64\+\_\+t \mbox{\hyperlink{order_8c_abcc14adb4ceea04e3fa242d5d88a5e8c}{get\+Memory\+Waste\+Orders}} (O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$orders)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{order_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{order_8c_abe1bcacd864363717460188c755c55c2}\label{order_8c_abe1bcacd864363717460188c755c55c2}} 
+\index{order.c@{order.c}!createqueue@{createqueue}}
+\index{createqueue@{createqueue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{createqueue()}{createqueue()}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ createqueue (\begin{DoxyParamCaption}\item[{const O\+R\+D\+ER}]{value }\end{DoxyParamCaption})}
+
+Creates an order queue with the specified order 
+\begin{DoxyParams}{Parameters}
+{\em value} & the value to be the front of the queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the address of the front 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_ae47f9af6e408bacf8e4b243422aa7b86}\label{order_8c_ae47f9af6e408bacf8e4b243422aa7b86}} 
+\index{order.c@{order.c}!dequeue@{dequeue}}
+\index{dequeue@{dequeue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{dequeue()}{dequeue()}}
+{\footnotesize\ttfamily O\+R\+D\+ER dequeue (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{front }\end{DoxyParamCaption})}
+
+Dequeues the front element from the orders\textquotesingle{} queue 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$front} & the address of the address of the front \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the dequeued element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_a81aaec0bdb69c572431d554a40aef27c}\label{order_8c_a81aaec0bdb69c572431d554a40aef27c}} 
+\index{order.c@{order.c}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{enqueue()}{enqueue()}}
+{\footnotesize\ttfamily void enqueue (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{front,  }\item[{const O\+R\+D\+ER}]{value }\end{DoxyParamCaption})}
+
+Enqueues the specfied element to the back of the orders\textquotesingle{} queue 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$front} & the address of the address of the front of the queue \\
+\hline
+{\em value} & the new value to enqueue into the queue \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{order_8c_a3b44db238d2673aa5203d165e4daf801}\label{order_8c_a3b44db238d2673aa5203d165e4daf801}} 
+\index{order.c@{order.c}!freequeue@{freequeue}}
+\index{freequeue@{freequeue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{freequeue()}{freequeue()}}
+{\footnotesize\ttfamily void freequeue (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{front }\end{DoxyParamCaption})}
+
+Dequeues and frees the whole orders\textquotesingle{} queue 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$front} & the address of the address of the front \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{order_8c_abcc14adb4ceea04e3fa242d5d88a5e8c}\label{order_8c_abcc14adb4ceea04e3fa242d5d88a5e8c}} 
+\index{order.c@{order.c}!getMemoryWasteOrders@{getMemoryWasteOrders}}
+\index{getMemoryWasteOrders@{getMemoryWasteOrders}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{getMemoryWasteOrders()}{getMemoryWasteOrders()}}
+{\footnotesize\ttfamily uint64\+\_\+t get\+Memory\+Waste\+Orders (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{orders }\end{DoxyParamCaption})}
+
+Computes the memory waste from the orders\textquotesingle{} queue 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$orders} & the orders queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the memory wasted by the orders in bytes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_a6c94c4e7fd508053abfefae14588513f}\label{order_8c_a6c94c4e7fd508053abfefae14588513f}} 
+\index{order.c@{order.c}!getOrdersLeftToFulfill@{getOrdersLeftToFulfill}}
+\index{getOrdersLeftToFulfill@{getOrdersLeftToFulfill}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{getOrdersLeftToFulfill()}{getOrdersLeftToFulfill()}}
+{\footnotesize\ttfamily size\+\_\+t get\+Orders\+Left\+To\+Fulfill (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{orders\+Queue }\end{DoxyParamCaption})}
+
+Gets the number of orders left to fulfill 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$orders\+Queue} & the orders queue \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of orders left to fulfill 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_a23858bc96d1703d0382b0336325bf1ea}\label{order_8c_a23858bc96d1703d0382b0336325bf1ea}} 
+\index{order.c@{order.c}!isemptyqueue@{isemptyqueue}}
+\index{isemptyqueue@{isemptyqueue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{isemptyqueue()}{isemptyqueue()}}
+{\footnotesize\ttfamily bool isemptyqueue (\begin{DoxyParamCaption}\item[{const O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$}]{front }\end{DoxyParamCaption})}
+
+Checks if the queue is empty 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$front} & the address of the front \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the queue is empty and false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_ac8aea9d8220ad7a661e7fe601227970f}\label{order_8c_ac8aea9d8220ad7a661e7fe601227970f}} 
+\index{order.c@{order.c}!peekqueue@{peekqueue}}
+\index{peekqueue@{peekqueue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{peekqueue()}{peekqueue()}}
+{\footnotesize\ttfamily O\+R\+D\+ER peekqueue (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{front }\end{DoxyParamCaption})}
+
+Gets the front element of the orders\textquotesingle{} queue 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$front} & the address of the address of the front \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the front element 
+\end{DoxyReturn}
+\mbox{\Hypertarget{order_8c_aa950236c72ce6821fd11631054c8de64}\label{order_8c_aa950236c72ce6821fd11631054c8de64}} 
+\index{order.c@{order.c}!removeOrdersWithNIF@{removeOrdersWithNIF}}
+\index{removeOrdersWithNIF@{removeOrdersWithNIF}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{removeOrdersWithNIF()}{removeOrdersWithNIF()}}
+{\footnotesize\ttfamily void remove\+Orders\+With\+N\+IF (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{orders,  }\item[{uint32\+\_\+t}]{N\+IF }\end{DoxyParamCaption})}
+
+Removes the orders of the specified N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$orders} & the orders queue \\
+\hline
+{\em N\+IF} & the N\+IF of the orders to remove \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{order_8c_a673304319261a8bd3c2ff93caa61bd0e}\label{order_8c_a673304319261a8bd3c2ff93caa61bd0e}} 
+\index{order.c@{order.c}!replaceOrdersNIF@{replaceOrdersNIF}}
+\index{replaceOrdersNIF@{replaceOrdersNIF}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{replaceOrdersNIF()}{replaceOrdersNIF()}}
+{\footnotesize\ttfamily void replace\+Orders\+N\+IF (\begin{DoxyParamCaption}\item[{O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$$\ast$}]{orders,  }\item[{uint32\+\_\+t}]{old\+N\+IF,  }\item[{uint32\+\_\+t}]{new\+N\+IF }\end{DoxyParamCaption})}
+
+Replaces the N\+IF of the orders with old\+N\+IF by new\+N\+IF 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$$\ast$orders} & the orders queue \\
+\hline
+{\em old\+N\+IF} & the N\+IF of the order \\
+\hline
+{\em new\+N\+IF} & the new N\+IF to replace the old N\+IF on the order \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{order_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{order_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{order.c@{order.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!order.c@{order.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+

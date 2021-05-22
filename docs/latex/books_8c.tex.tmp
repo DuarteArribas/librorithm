@@ -1,0 +1,256 @@
+\hypertarget{books_8c}{}\doxysection{src/books.c File Reference}
+\label{books_8c}\index{src/books.c@{src/books.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$ctype.\+h$>$}\newline
+{\ttfamily \#include $<$limits.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}books.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+Include dependency graph for books.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+L\+I\+V\+RO \mbox{\hyperlink{books_8c_a5ed7e959e987b3ad9be9032c712ab8dc}{create\+Book}} (void)
+\item 
+void \mbox{\hyperlink{books_8c_a49a336b2c6a500d1bd690ae3e77c7e2a}{get\+String}} (char $\ast$string, int tam)
+\item 
+bool \mbox{\hyperlink{books_8c_ac5267472aecc18697412f020bea155a9}{get\+I\+S\+BN}} (long int $\ast$I\+S\+BN)
+\item 
+bool \mbox{\hyperlink{books_8c_ab57bf35813d614834126daa3480e1ae0}{get\+Publication\+Year}} (int $\ast$Publish\+Year)
+\item 
+bool \mbox{\hyperlink{books_8c_ac7999241ddbcab1ce472c19e34004603}{get\+Price}} (float $\ast$price)
+\item 
+bool \mbox{\hyperlink{books_8c_ae943da7796037fa6eebd347564e0a614}{get\+Stock}} (int $\ast$stock)
+\item 
+void \mbox{\hyperlink{books_8c_a70e4a5dab855d5d8345f9c92e0782199}{show\+Book}} (L\+I\+V\+RO book)
+\item 
+int \mbox{\hyperlink{books_8c_a8129dabbf8c5ca034ae5e138fdbff341}{Compare\+Books}} (L\+I\+V\+RO X, L\+I\+V\+RO Y)
+\item 
+int \mbox{\hyperlink{books_8c_a1f64d4002ac41055987b67554f483972}{Compare\+Books\+I\+S\+BN}} (L\+I\+V\+RO X, long int I\+S\+BN)
+\item 
+int \mbox{\hyperlink{books_8c_a4bb8929eb5a8b577d2b00a59e67c393c}{Compare\+Books\+Title}} (L\+I\+V\+RO X, char $\ast$title)
+\item 
+int \mbox{\hyperlink{books_8c_a15ea5fd637c2804a4b0b07bed3016c08}{Compare\+Books\+First\+Author\+Year}} (L\+I\+V\+RO X, char first\+Author\mbox{[}100\mbox{]}, int year\+Publish)
+\item 
+int \mbox{\hyperlink{books_8c_a03b42a46238446f1dcc25771c906ce60}{Compare\+Books\+Editor\+Cientific\+Area}} (L\+I\+V\+RO X, char editor\mbox{[}100\mbox{]}, char cientific\+Area\mbox{[}100\mbox{]})
+\item 
+void \mbox{\hyperlink{books_8c_a9ae48f24900804723a7b8416a5b3c9e4}{book\+Already\+Exists\+Warning}} (void)
+\item 
+void \mbox{\hyperlink{books_8c_a46a6ece2df9c3fd494bd98167d76a85e}{book\+Removed\+Warning}} (void)
+\item 
+void \mbox{\hyperlink{books_8c_af64f549eb1a6646fe811839f9a4b4a24}{unregistered\+Book\+Warning}} (void)
+\item 
+void \mbox{\hyperlink{books_8c_a159b26032363d71aa5d804523229f949}{cientific\+Area\+Warning}} (void)
+\item 
+void \mbox{\hyperlink{books_8c_a8e1a4e960a0a47c09ad68b99cf492d46}{emptybookstree\+Warning}} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{books_8c_a9ae48f24900804723a7b8416a5b3c9e4}\label{books_8c_a9ae48f24900804723a7b8416a5b3c9e4}} 
+\index{books.c@{books.c}!bookAlreadyExistsWarning@{bookAlreadyExistsWarning}}
+\index{bookAlreadyExistsWarning@{bookAlreadyExistsWarning}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{bookAlreadyExistsWarning()}{bookAlreadyExistsWarning()}}
+{\footnotesize\ttfamily void book\+Already\+Exists\+Warning (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the book\+Already\+Exists warning \mbox{\Hypertarget{books_8c_a46a6ece2df9c3fd494bd98167d76a85e}\label{books_8c_a46a6ece2df9c3fd494bd98167d76a85e}} 
+\index{books.c@{books.c}!bookRemovedWarning@{bookRemovedWarning}}
+\index{bookRemovedWarning@{bookRemovedWarning}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{bookRemovedWarning()}{bookRemovedWarning()}}
+{\footnotesize\ttfamily void book\+Removed\+Warning (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the book\+Removed warning \mbox{\Hypertarget{books_8c_a159b26032363d71aa5d804523229f949}\label{books_8c_a159b26032363d71aa5d804523229f949}} 
+\index{books.c@{books.c}!cientificAreaWarning@{cientificAreaWarning}}
+\index{cientificAreaWarning@{cientificAreaWarning}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{cientificAreaWarning()}{cientificAreaWarning()}}
+{\footnotesize\ttfamily void cientific\+Area\+Warning (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the cientific\+Area warning warning \mbox{\Hypertarget{books_8c_a8129dabbf8c5ca034ae5e138fdbff341}\label{books_8c_a8129dabbf8c5ca034ae5e138fdbff341}} 
+\index{books.c@{books.c}!CompareBooks@{CompareBooks}}
+\index{CompareBooks@{CompareBooks}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{CompareBooks()}{CompareBooks()}}
+{\footnotesize\ttfamily int Compare\+Books (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X,  }\item[{L\+I\+V\+RO}]{Y }\end{DoxyParamCaption})}
+
+Compares two books by the I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em X} & the first book to compare \\
+\hline
+{\em Y} & the second book to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if X$>$Y, 0 if X=Y, -\/1 if x$<$Y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a03b42a46238446f1dcc25771c906ce60}\label{books_8c_a03b42a46238446f1dcc25771c906ce60}} 
+\index{books.c@{books.c}!CompareBooksEditorCientificArea@{CompareBooksEditorCientificArea}}
+\index{CompareBooksEditorCientificArea@{CompareBooksEditorCientificArea}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{CompareBooksEditorCientificArea()}{CompareBooksEditorCientificArea()}}
+{\footnotesize\ttfamily int Compare\+Books\+Editor\+Cientific\+Area (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X,  }\item[{char}]{editor\mbox{[}100\mbox{]},  }\item[{char}]{cientific\+Area\mbox{[}100\mbox{]} }\end{DoxyParamCaption})}
+
+Compares the book with the given cientific area and editor 
+\begin{DoxyParams}{Parameters}
+{\em X} & the given book \\
+\hline
+{\em editor\mbox{[}100\mbox{]}} & the editor \\
+\hline
+{\em cientific\+Area\mbox{[}100\mbox{]}} & the cientific area \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if X==editor and cientific\+Area, and 0 if otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a15ea5fd637c2804a4b0b07bed3016c08}\label{books_8c_a15ea5fd637c2804a4b0b07bed3016c08}} 
+\index{books.c@{books.c}!CompareBooksFirstAuthorYear@{CompareBooksFirstAuthorYear}}
+\index{CompareBooksFirstAuthorYear@{CompareBooksFirstAuthorYear}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{CompareBooksFirstAuthorYear()}{CompareBooksFirstAuthorYear()}}
+{\footnotesize\ttfamily int Compare\+Books\+First\+Author\+Year (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X,  }\item[{char}]{first\+Author\mbox{[}100\mbox{]},  }\item[{int}]{year\+Publish }\end{DoxyParamCaption})}
+
+Compares the book with the given first author and year 
+\begin{DoxyParams}{Parameters}
+{\em X} & the given book \\
+\hline
+{\em first\+Author\mbox{[}100\mbox{]}} & the given first author \\
+\hline
+{\em year\+Publish} & the year published \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if X==first\+Author and year\+Publish, and 0 if otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a1f64d4002ac41055987b67554f483972}\label{books_8c_a1f64d4002ac41055987b67554f483972}} 
+\index{books.c@{books.c}!CompareBooksISBN@{CompareBooksISBN}}
+\index{CompareBooksISBN@{CompareBooksISBN}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{CompareBooksISBN()}{CompareBooksISBN()}}
+{\footnotesize\ttfamily int Compare\+Books\+I\+S\+BN (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Compares the book with the given I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em X} & the given book \\
+\hline
+{\em I\+S\+BN} & the given I\+S\+BN \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if X$>$I\+S\+BN, 0 if X=I\+S\+BN, -\/1 if x$<$I\+S\+BN 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a4bb8929eb5a8b577d2b00a59e67c393c}\label{books_8c_a4bb8929eb5a8b577d2b00a59e67c393c}} 
+\index{books.c@{books.c}!CompareBooksTitle@{CompareBooksTitle}}
+\index{CompareBooksTitle@{CompareBooksTitle}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{CompareBooksTitle()}{CompareBooksTitle()}}
+{\footnotesize\ttfamily int Compare\+Books\+Title (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X,  }\item[{char $\ast$}]{title }\end{DoxyParamCaption})}
+
+Compares the book with the given title (checks if it is a substring) 
+\begin{DoxyParams}{Parameters}
+{\em X} & the given book \\
+\hline
+{\em $\ast$title} & the given title \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if X==title, 0 if otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a5ed7e959e987b3ad9be9032c712ab8dc}\label{books_8c_a5ed7e959e987b3ad9be9032c712ab8dc}} 
+\index{books.c@{books.c}!createBook@{createBook}}
+\index{createBook@{createBook}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{createBook()}{createBook()}}
+{\footnotesize\ttfamily L\+I\+V\+RO create\+Book (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Creates a new book \begin{DoxyReturn}{Returns}
+the created book 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a8e1a4e960a0a47c09ad68b99cf492d46}\label{books_8c_a8e1a4e960a0a47c09ad68b99cf492d46}} 
+\index{books.c@{books.c}!emptybookstreeWarning@{emptybookstreeWarning}}
+\index{emptybookstreeWarning@{emptybookstreeWarning}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{emptybookstreeWarning()}{emptybookstreeWarning()}}
+{\footnotesize\ttfamily void emptybookstree\+Warning (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the empty\+Books\+Tree warning warning \mbox{\Hypertarget{books_8c_ac5267472aecc18697412f020bea155a9}\label{books_8c_ac5267472aecc18697412f020bea155a9}} 
+\index{books.c@{books.c}!getISBN@{getISBN}}
+\index{getISBN@{getISBN}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{getISBN()}{getISBN()}}
+{\footnotesize\ttfamily bool get\+I\+S\+BN (\begin{DoxyParamCaption}\item[{long int $\ast$}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Ask the books\textquotesingle{}s I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$\+I\+S\+BN} & the user\textquotesingle{}s I\+S\+BN \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the I\+S\+BN was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_ac7999241ddbcab1ce472c19e34004603}\label{books_8c_ac7999241ddbcab1ce472c19e34004603}} 
+\index{books.c@{books.c}!getPrice@{getPrice}}
+\index{getPrice@{getPrice}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{getPrice()}{getPrice()}}
+{\footnotesize\ttfamily bool get\+Price (\begin{DoxyParamCaption}\item[{float $\ast$}]{price }\end{DoxyParamCaption})}
+
+Ask the books\textquotesingle{}s Price 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$price} & the books\textquotesingle{}s price \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the price was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_ab57bf35813d614834126daa3480e1ae0}\label{books_8c_ab57bf35813d614834126daa3480e1ae0}} 
+\index{books.c@{books.c}!getPublicationYear@{getPublicationYear}}
+\index{getPublicationYear@{getPublicationYear}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{getPublicationYear()}{getPublicationYear()}}
+{\footnotesize\ttfamily bool get\+Publication\+Year (\begin{DoxyParamCaption}\item[{int $\ast$}]{Publish\+Year }\end{DoxyParamCaption})}
+
+Ask the books\textquotesingle{}s publication year 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$\+Publish\+Year} & the books\textquotesingle{}s publication year \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the year was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_ae943da7796037fa6eebd347564e0a614}\label{books_8c_ae943da7796037fa6eebd347564e0a614}} 
+\index{books.c@{books.c}!getStock@{getStock}}
+\index{getStock@{getStock}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{getStock()}{getStock()}}
+{\footnotesize\ttfamily bool get\+Stock (\begin{DoxyParamCaption}\item[{int $\ast$}]{stock }\end{DoxyParamCaption})}
+
+Ask the books\textquotesingle{}s Stock quantity 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$price} & the books\textquotesingle{}s stock \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the stock was asked successfully and false if it was canceled 
+\end{DoxyReturn}
+\mbox{\Hypertarget{books_8c_a49a336b2c6a500d1bd690ae3e77c7e2a}\label{books_8c_a49a336b2c6a500d1bd690ae3e77c7e2a}} 
+\index{books.c@{books.c}!getString@{getString}}
+\index{getString@{getString}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{getString()}{getString()}}
+{\footnotesize\ttfamily void get\+String (\begin{DoxyParamCaption}\item[{char $\ast$}]{string,  }\item[{int}]{tam }\end{DoxyParamCaption})}
+
+Gets a string 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$string} & the got string \\
+\hline
+{\em tam} & the string size \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{books_8c_a70e4a5dab855d5d8345f9c92e0782199}\label{books_8c_a70e4a5dab855d5d8345f9c92e0782199}} 
+\index{books.c@{books.c}!showBook@{showBook}}
+\index{showBook@{showBook}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{showBook()}{showBook()}}
+{\footnotesize\ttfamily void show\+Book (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{book }\end{DoxyParamCaption})}
+
+Shows the specified book 
+\begin{DoxyParams}{Parameters}
+{\em book} & the book to be shown \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{books_8c_af64f549eb1a6646fe811839f9a4b4a24}\label{books_8c_af64f549eb1a6646fe811839f9a4b4a24}} 
+\index{books.c@{books.c}!unregisteredBookWarning@{unregisteredBookWarning}}
+\index{unregisteredBookWarning@{unregisteredBookWarning}!books.c@{books.c}}
+\doxysubsubsection{\texorpdfstring{unregisteredBookWarning()}{unregisteredBookWarning()}}
+{\footnotesize\ttfamily void unregistered\+Book\+Warning (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Shows the unregistered book warning 

@@ -1,0 +1,649 @@
+\hypertarget{booksOperations_8c}{}\doxysection{src/books\+Operations.c File Reference}
+\label{booksOperations_8c}\index{src/booksOperations.c@{src/booksOperations.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+Include dependency graph for books\+Operations.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a71556f0ac5be73ad2e6f0773bb32c3a6}{Criar\+AB}} (void)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_aa370f1ab33f75371a3986d71ff680d83}{Criar\+Nodo\+AB}} (L\+I\+V\+RO X)
+\item 
+int \mbox{\hyperlink{booksOperations_8c_a10655d5c1b3074856e282a5551ecbce8}{Numero\+Nodos\+AB}} (P\+Nodo\+AB T)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_af411164d676c21aa70bd3e249675927f}{Inserir\+A\+BP}} (P\+Nodo\+AB T, L\+I\+V\+RO X)
+\item 
+int \mbox{\hyperlink{booksOperations_8c_ab5bc9ebbce107310de424de10cc3611e}{Pesquisar\+A\+BP}} (P\+Nodo\+AB T, L\+I\+V\+RO X)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a6b007809e5fc20cfd9e7a4b010a11541}{A\+B\+P\+Eq\+Insercao\+Binaria}} (P\+Nodo\+AB $\ast$TE, L\+I\+V\+RO L\mbox{[}$\,$\mbox{]}, int inicio, int fim)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_aeec50b5c34343dc80929c4d6372e001e}{Criar\+Sequencia\+Em\+Ordem}} (P\+Nodo\+AB T, L\+I\+V\+RO L\mbox{[}$\,$\mbox{]}, int $\ast$N)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_aa858e48f14de1234e0f63137a9e688cb}{Criar\+A\+B\+P\+Equilibrada\+IB}} (P\+Nodo\+AB T)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a11037be0f423bbfc50b3db3a25278236}{Libertar\+Nodo\+AB}} (P\+Nodo\+AB T)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a00e3a1ede8164d8eb06968be1f7609f2}{Destruir\+AB}} (P\+Nodo\+AB T)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_af4e72984a6069b1bcbf8bed8d75bb4c1}{Substituir\+Nodo\+Direita}} (P\+Nodo\+AB T, L\+I\+V\+RO $\ast$X)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a3483a4e70c760dca3b167637810256d3}{Remover\+Nodo\+A\+BP}} (P\+Nodo\+AB T)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a29edc64c459807cebb805b0d48631a59}{Remover\+A\+BP}} (P\+Nodo\+AB T, L\+I\+V\+RO X)
+\item 
+int \mbox{\hyperlink{booksOperations_8c_a77086331e77e3e3cf0110ccd3e84ee03}{Altura\+AB}} (P\+Nodo\+AB T)
+\item 
+int \mbox{\hyperlink{booksOperations_8c_ad0bd466acc9a3e2f567b740e8cee1d37}{verificar\+Equilibrio}} (P\+Nodo\+AB T)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a962c667b57607dd0c6193b1232b4a666}{Pesquisar\+A\+B\+P\+I\+S\+BN}} (P\+Nodo\+AB T, long int I\+S\+BN)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_acf7b3d1c45fe810d2bca5c38bc6adf63}{Pesquisar\+A\+B\+P\+Title}} (P\+Nodo\+AB T, char title\mbox{[}100\mbox{]})
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a61b2bb1e4265be5dc72a61b74f8eba0a}{Pesquisar\+A\+B\+P\+Author\+Year}} (P\+Nodo\+AB T, char first\+Author\mbox{[}100\mbox{]}, int year\+Publish)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a672acc0e225807d7dbe51a4b5e3d2268}{Pesquisar\+A\+B\+P\+Editor\+Cientific\+Area}} (P\+Nodo\+AB T, char editor\mbox{[}100\mbox{]}, char cientific\+Area\mbox{[}100\mbox{]})
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a3991b280bea8585d5f798c3cfd7dfd81}{change\+Book\+I\+S\+BN}} (P\+Nodo\+AB P, long int I\+S\+BN)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a2298d99ae2a3780c77fb28c904471de6}{remove\+Book}} (P\+Nodo\+AB T, long int I\+S\+BN)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a0df818b65d9d1ee70c9765b46229526b}{verify\+If\+Exists\+Cientific\+Area}} (L\+I\+V\+RO X)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a0183b7625be80f87876f92489e3cc323}{verify\+If\+Exists\+Year}} (L\+I\+V\+RO X)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a4d8cc8a505fdc8ae3c974f4151c84db7}{cientific\+Area\+And\+Year\+With\+More\+Books}} (P\+Nodo\+AB T, int option)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a6778aeb2035da9f4b8749acb4f431524}{show\+Cientific\+Area\+With\+More\+Books}} (void)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a3dcc54f76560e58768164fb0e0a185b6}{show\+Year\+With\+More\+Publications}} (void)
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a732addd1f10bee129a2d7261f66dc617}{insert\+Book}} (P\+Nodo\+AB T)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a04f03e9c10e7fadb62591d62347aab61}{show\+A\+LL}} (P\+Nodo\+AB T)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a670db70dd399cf09008acc534b8104aa}{put\+In\+Array}} (P\+Nodo\+AB T, char $\ast$cientific\+Area, L\+I\+V\+RO $\ast$list, int $\ast$control)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a8c2aeee4753a4fa31ab60ae8573da035}{show\+Most\+Recent\+Cientific\+Area}} (P\+Nodo\+AB T)
+\item 
+int \mbox{\hyperlink{booksOperations_8c_aadbb549be5daeadffb35700c39c302be}{get\+Book\+Quantity}} (P\+Nodo\+AB T, long int I\+S\+BN)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a83c6fb11bb3e227cce3dc0e6fc92ee31}{set\+Book\+Quantity}} (P\+Nodo\+AB T, long int I\+S\+BN, int qtd)
+\item 
+float \mbox{\hyperlink{booksOperations_8c_a78cbdc9d61c1967d9a37de08a27b7be5}{get\+Book\+Price}} (P\+Nodo\+AB T, long int I\+S\+BN)
+\item 
+L\+I\+V\+RO \mbox{\hyperlink{booksOperations_8c_af0006802c3b9101f04c82f26e099dfb2}{get\+Most\+Expensive\+Book}} (P\+Nodo\+AB T)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a9bbdd6832649a2807d07315d56a721b7}{get\+Total\+Stockand\+Stock\+Value}} (P\+Nodo\+AB T, int $\ast$total\+Stock, float $\ast$stock\+Value)
+\item 
+void \mbox{\hyperlink{booksOperations_8c_a78eb5a824627a8b0acb6e1eabbab644c}{restock\+Book}} (P\+Nodo\+AB T, long int I\+S\+BN, int qtd)
+\item 
+uint64\+\_\+t \mbox{\hyperlink{booksOperations_8c_aaf648f564f3e9d09a325301c527ef9b0}{get\+Memory\+Waste\+Books}} (P\+Nodo\+AB T)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{booksOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\item 
+C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD $\ast$ \mbox{\hyperlink{booksOperations_8c_a2d76d3320774d91c1014dcf6c04e8e3e}{cientific\+\_\+qtd}}
+\item 
+P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR $\ast$ \mbox{\hyperlink{booksOperations_8c_a251a19153cd871866afa2d0378005133}{publish\+\_\+year}} =N\+U\+LL
+\item 
+int \mbox{\hyperlink{booksOperations_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}{num\+\_\+cientific\+\_\+qtd}}
+\item 
+int \mbox{\hyperlink{booksOperations_8c_a403b730769758428ae61a52225ce9b78}{num\+\_\+publish\+\_\+year}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{booksOperations_8c_a6b007809e5fc20cfd9e7a4b010a11541}\label{booksOperations_8c_a6b007809e5fc20cfd9e7a4b010a11541}} 
+\index{booksOperations.c@{booksOperations.c}!ABPEqInsercaoBinaria@{ABPEqInsercaoBinaria}}
+\index{ABPEqInsercaoBinaria@{ABPEqInsercaoBinaria}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{ABPEqInsercaoBinaria()}{ABPEqInsercaoBinaria()}}
+{\footnotesize\ttfamily void A\+B\+P\+Eq\+Insercao\+Binaria (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB $\ast$}]{TE,  }\item[{L\+I\+V\+RO}]{L\mbox{[}$\,$\mbox{]},  }\item[{int}]{inicio,  }\item[{int}]{fim }\end{DoxyParamCaption})}
+
+Function to balance a tree from a list 
+\begin{DoxyParams}{Parameters}
+{\em TE} & the tree \\
+\hline
+{\em L} & list of books \\
+\hline
+{\em inicio} & index of the top of the list \\
+\hline
+{\em fim} & end of list index \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a77086331e77e3e3cf0110ccd3e84ee03}\label{booksOperations_8c_a77086331e77e3e3cf0110ccd3e84ee03}} 
+\index{booksOperations.c@{booksOperations.c}!AlturaAB@{AlturaAB}}
+\index{AlturaAB@{AlturaAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{AlturaAB()}{AlturaAB()}}
+{\footnotesize\ttfamily int Altura\+AB (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Determines the height of the tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the height of the tree 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a3991b280bea8585d5f798c3cfd7dfd81}\label{booksOperations_8c_a3991b280bea8585d5f798c3cfd7dfd81}} 
+\index{booksOperations.c@{booksOperations.c}!changeBookISBN@{changeBookISBN}}
+\index{changeBookISBN@{changeBookISBN}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{changeBookISBN()}{changeBookISBN()}}
+{\footnotesize\ttfamily P\+Nodo\+AB change\+Book\+I\+S\+BN (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{P,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Change a book with a specified I\+S\+BN. When the book is found the user can change all book informations 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book tree used to scroll throught the tree \\
+\hline
+{\em I\+S\+BN} & the specified I\+S\+BN \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the tree updated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a4d8cc8a505fdc8ae3c974f4151c84db7}\label{booksOperations_8c_a4d8cc8a505fdc8ae3c974f4151c84db7}} 
+\index{booksOperations.c@{booksOperations.c}!cientificAreaAndYearWithMoreBooks@{cientificAreaAndYearWithMoreBooks}}
+\index{cientificAreaAndYearWithMoreBooks@{cientificAreaAndYearWithMoreBooks}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{cientificAreaAndYearWithMoreBooks()}{cientificAreaAndYearWithMoreBooks()}}
+{\footnotesize\ttfamily void cientific\+Area\+And\+Year\+With\+More\+Books (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{int}]{option }\end{DoxyParamCaption})}
+
+if the option is one we verify if a cientific area already exists in the struct C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD. if the option is two we verify if a year already exists in the struct P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em option} & indicates which function we have to do \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a71556f0ac5be73ad2e6f0773bb32c3a6}\label{booksOperations_8c_a71556f0ac5be73ad2e6f0773bb32c3a6}} 
+\index{booksOperations.c@{booksOperations.c}!CriarAB@{CriarAB}}
+\index{CriarAB@{CriarAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{CriarAB()}{CriarAB()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Criar\+AB (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+create the binary tree \begin{DoxyReturn}{Returns}
+the tree root 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_aa858e48f14de1234e0f63137a9e688cb}\label{booksOperations_8c_aa858e48f14de1234e0f63137a9e688cb}} 
+\index{booksOperations.c@{booksOperations.c}!CriarABPEquilibradaIB@{CriarABPEquilibradaIB}}
+\index{CriarABPEquilibradaIB@{CriarABPEquilibradaIB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{CriarABPEquilibradaIB()}{CriarABPEquilibradaIB()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Criar\+A\+B\+P\+Equilibrada\+IB (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Create a balanced search tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & the tree of books \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the binary tree balanced 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_aa370f1ab33f75371a3986d71ff680d83}\label{booksOperations_8c_aa370f1ab33f75371a3986d71ff680d83}} 
+\index{booksOperations.c@{booksOperations.c}!CriarNodoAB@{CriarNodoAB}}
+\index{CriarNodoAB@{CriarNodoAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{CriarNodoAB()}{CriarNodoAB()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Criar\+Nodo\+AB (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Creates a node with a book 
+\begin{DoxyParams}{Parameters}
+{\em X} & book \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+node of that book 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_aeec50b5c34343dc80929c4d6372e001e}\label{booksOperations_8c_aeec50b5c34343dc80929c4d6372e001e}} 
+\index{booksOperations.c@{booksOperations.c}!CriarSequenciaEmOrdem@{CriarSequenciaEmOrdem}}
+\index{CriarSequenciaEmOrdem@{CriarSequenciaEmOrdem}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{CriarSequenciaEmOrdem()}{CriarSequenciaEmOrdem()}}
+{\footnotesize\ttfamily void Criar\+Sequencia\+Em\+Ordem (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{L\+I\+V\+RO}]{L\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{N }\end{DoxyParamCaption})}
+
+Function to create the sequence of elements of a tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & tree of books \\
+\hline
+{\em L} & array of type books \\
+\hline
+{\em N} & number of elements \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a00e3a1ede8164d8eb06968be1f7609f2}\label{booksOperations_8c_a00e3a1ede8164d8eb06968be1f7609f2}} 
+\index{booksOperations.c@{booksOperations.c}!DestruirAB@{DestruirAB}}
+\index{DestruirAB@{DestruirAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{DestruirAB()}{DestruirAB()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Destruir\+AB (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Destroys a tree from memory 
+\begin{DoxyParams}{Parameters}
+{\em T} & tree of books \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the tree destroyed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a78cbdc9d61c1967d9a37de08a27b7be5}\label{booksOperations_8c_a78cbdc9d61c1967d9a37de08a27b7be5}} 
+\index{booksOperations.c@{booksOperations.c}!getBookPrice@{getBookPrice}}
+\index{getBookPrice@{getBookPrice}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{getBookPrice()}{getBookPrice()}}
+{\footnotesize\ttfamily float get\+Book\+Price (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+get the book price 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em I\+S\+BN} & the identifier of the book \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the price 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_aadbb549be5daeadffb35700c39c302be}\label{booksOperations_8c_aadbb549be5daeadffb35700c39c302be}} 
+\index{booksOperations.c@{booksOperations.c}!getBookQuantity@{getBookQuantity}}
+\index{getBookQuantity@{getBookQuantity}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{getBookQuantity()}{getBookQuantity()}}
+{\footnotesize\ttfamily int get\+Book\+Quantity (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+get the quantity of a book 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em I\+S\+BN} & the identifier of the book \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the book quantity 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_aaf648f564f3e9d09a325301c527ef9b0}\label{booksOperations_8c_aaf648f564f3e9d09a325301c527ef9b0}} 
+\index{booksOperations.c@{booksOperations.c}!getMemoryWasteBooks@{getMemoryWasteBooks}}
+\index{getMemoryWasteBooks@{getMemoryWasteBooks}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{getMemoryWasteBooks()}{getMemoryWasteBooks()}}
+{\footnotesize\ttfamily uint64\+\_\+t get\+Memory\+Waste\+Books (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Get the memory wasted by the book\textquotesingle{}s 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the memory wasted 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_af0006802c3b9101f04c82f26e099dfb2}\label{booksOperations_8c_af0006802c3b9101f04c82f26e099dfb2}} 
+\index{booksOperations.c@{booksOperations.c}!getMostExpensiveBook@{getMostExpensiveBook}}
+\index{getMostExpensiveBook@{getMostExpensiveBook}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{getMostExpensiveBook()}{getMostExpensiveBook()}}
+{\footnotesize\ttfamily L\+I\+V\+RO get\+Most\+Expensive\+Book (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+get the most expensive book 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the book 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a9bbdd6832649a2807d07315d56a721b7}\label{booksOperations_8c_a9bbdd6832649a2807d07315d56a721b7}} 
+\index{booksOperations.c@{booksOperations.c}!getTotalStockandStockValue@{getTotalStockandStockValue}}
+\index{getTotalStockandStockValue@{getTotalStockandStockValue}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{getTotalStockandStockValue()}{getTotalStockandStockValue()}}
+{\footnotesize\ttfamily void get\+Total\+Stockand\+Stock\+Value (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{int $\ast$}]{total\+Stock,  }\item[{float $\ast$}]{stock\+Value }\end{DoxyParamCaption})}
+
+get the total stock and the stock value at the moment 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em total\+Stock} & pointer to the total stock \\
+\hline
+{\em stock\+Value} & pointer to the value of the stock \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_af411164d676c21aa70bd3e249675927f}\label{booksOperations_8c_af411164d676c21aa70bd3e249675927f}} 
+\index{booksOperations.c@{booksOperations.c}!InserirABP@{InserirABP}}
+\index{InserirABP@{InserirABP}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{InserirABP()}{InserirABP()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Inserir\+A\+BP (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Insert a book in a binary tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & binary tree with the books \\
+\hline
+{\em X} & the book to be inserted \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the tree with a new book 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a732addd1f10bee129a2d7261f66dc617}\label{booksOperations_8c_a732addd1f10bee129a2d7261f66dc617}} 
+\index{booksOperations.c@{booksOperations.c}!insertBook@{insertBook}}
+\index{insertBook@{insertBook}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{insertBook()}{insertBook()}}
+{\footnotesize\ttfamily P\+Nodo\+AB insert\+Book (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Insert a bookto the book´s tree. After put in the tree check if the tree is balanced 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the book\textquotesingle{}s tree updated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a11037be0f423bbfc50b3db3a25278236}\label{booksOperations_8c_a11037be0f423bbfc50b3db3a25278236}} 
+\index{booksOperations.c@{booksOperations.c}!LibertarNodoAB@{LibertarNodoAB}}
+\index{LibertarNodoAB@{LibertarNodoAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{LibertarNodoAB()}{LibertarNodoAB()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Libertar\+Nodo\+AB (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Free a node from memory 
+\begin{DoxyParams}{Parameters}
+{\em T} & tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the node free from memory 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a10655d5c1b3074856e282a5551ecbce8}\label{booksOperations_8c_a10655d5c1b3074856e282a5551ecbce8}} 
+\index{booksOperations.c@{booksOperations.c}!NumeroNodosAB@{NumeroNodosAB}}
+\index{NumeroNodosAB@{NumeroNodosAB}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{NumeroNodosAB()}{NumeroNodosAB()}}
+{\footnotesize\ttfamily int Numero\+Nodos\+AB (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Count the nodes of a binary tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & the binary tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the number of nodes 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_ab5bc9ebbce107310de424de10cc3611e}\label{booksOperations_8c_ab5bc9ebbce107310de424de10cc3611e}} 
+\index{booksOperations.c@{booksOperations.c}!PesquisarABP@{PesquisarABP}}
+\index{PesquisarABP@{PesquisarABP}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{PesquisarABP()}{PesquisarABP()}}
+{\footnotesize\ttfamily int Pesquisar\+A\+BP (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Search in the binary tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & binary tree with the books \\
+\hline
+{\em X} & the book to search \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+1 if the book exists on the tree or 0 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a61b2bb1e4265be5dc72a61b74f8eba0a}\label{booksOperations_8c_a61b2bb1e4265be5dc72a61b74f8eba0a}} 
+\index{booksOperations.c@{booksOperations.c}!PesquisarABPAuthorYear@{PesquisarABPAuthorYear}}
+\index{PesquisarABPAuthorYear@{PesquisarABPAuthorYear}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{PesquisarABPAuthorYear()}{PesquisarABPAuthorYear()}}
+{\footnotesize\ttfamily void Pesquisar\+A\+B\+P\+Author\+Year (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{char}]{first\+Author\mbox{[}100\mbox{]},  }\item[{int}]{year\+Publish }\end{DoxyParamCaption})}
+
+Search in the tree for a book with a specified first author and publication year. When found the book is shown 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book tree \\
+\hline
+{\em first\+Author} & the first author \\
+\hline
+{\em year\+Publish} & the publication year \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a672acc0e225807d7dbe51a4b5e3d2268}\label{booksOperations_8c_a672acc0e225807d7dbe51a4b5e3d2268}} 
+\index{booksOperations.c@{booksOperations.c}!PesquisarABPEditorCientificArea@{PesquisarABPEditorCientificArea}}
+\index{PesquisarABPEditorCientificArea@{PesquisarABPEditorCientificArea}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{PesquisarABPEditorCientificArea()}{PesquisarABPEditorCientificArea()}}
+{\footnotesize\ttfamily void Pesquisar\+A\+B\+P\+Editor\+Cientific\+Area (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{char}]{editor\mbox{[}100\mbox{]},  }\item[{char}]{cientific\+Area\mbox{[}100\mbox{]} }\end{DoxyParamCaption})}
+
+Search in the tree for a book with a specified editor and cientific\+Area. When found the book is shown 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book tree \\
+\hline
+{\em editor} & the editor \\
+\hline
+{\em cientific\+Area} & the Cientific Area \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a962c667b57607dd0c6193b1232b4a666}\label{booksOperations_8c_a962c667b57607dd0c6193b1232b4a666}} 
+\index{booksOperations.c@{booksOperations.c}!PesquisarABPISBN@{PesquisarABPISBN}}
+\index{PesquisarABPISBN@{PesquisarABPISBN}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{PesquisarABPISBN()}{PesquisarABPISBN()}}
+{\footnotesize\ttfamily void Pesquisar\+A\+B\+P\+I\+S\+BN (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Search in the tree for a book with a specified I\+S\+BN and show the book. 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book tree \\
+\hline
+{\em I\+S\+BN} & the I\+S\+BN of the book to be found \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_acf7b3d1c45fe810d2bca5c38bc6adf63}\label{booksOperations_8c_acf7b3d1c45fe810d2bca5c38bc6adf63}} 
+\index{booksOperations.c@{booksOperations.c}!PesquisarABPTitle@{PesquisarABPTitle}}
+\index{PesquisarABPTitle@{PesquisarABPTitle}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{PesquisarABPTitle()}{PesquisarABPTitle()}}
+{\footnotesize\ttfamily void Pesquisar\+A\+B\+P\+Title (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{char}]{title\mbox{[}100\mbox{]} }\end{DoxyParamCaption})}
+
+Search in the tree for a book with a specified part of a title and show the book. 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book tree \\
+\hline
+{\em title} & the parte of the title to be found \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a670db70dd399cf09008acc534b8104aa}\label{booksOperations_8c_a670db70dd399cf09008acc534b8104aa}} 
+\index{booksOperations.c@{booksOperations.c}!putInArray@{putInArray}}
+\index{putInArray@{putInArray}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{putInArray()}{putInArray()}}
+{\footnotesize\ttfamily void put\+In\+Array (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{char $\ast$}]{cientific\+Area,  }\item[{L\+I\+V\+RO $\ast$}]{list,  }\item[{int $\ast$}]{control }\end{DoxyParamCaption})}
+
+Put in an array the books of a specific cientific area. 
+\begin{DoxyParams}{Parameters}
+{\em T} & Tree that contains the book\textquotesingle{}s \\
+\hline
+{\em cientific\+Area} & Cientific area of a book \\
+\hline
+{\em list} & array that contains the books of a specific cientific area \\
+\hline
+{\em contrl} & control variable to determine how many books have been inserted \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a2298d99ae2a3780c77fb28c904471de6}\label{booksOperations_8c_a2298d99ae2a3780c77fb28c904471de6}} 
+\index{booksOperations.c@{booksOperations.c}!removeBook@{removeBook}}
+\index{removeBook@{removeBook}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{removeBook()}{removeBook()}}
+{\footnotesize\ttfamily P\+Nodo\+AB remove\+Book (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN }\end{DoxyParamCaption})}
+
+Remove a book with a specified I\+S\+BN 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em I\+S\+BN} & the specified I\+S\+BN \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return the book\textquotesingle{}s tree updated 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a29edc64c459807cebb805b0d48631a59}\label{booksOperations_8c_a29edc64c459807cebb805b0d48631a59}} 
+\index{booksOperations.c@{booksOperations.c}!RemoverABP@{RemoverABP}}
+\index{RemoverABP@{RemoverABP}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{RemoverABP()}{RemoverABP()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Remover\+A\+BP (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Remove a book from a tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em X} & the book to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the tree without the book 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a3483a4e70c760dca3b167637810256d3}\label{booksOperations_8c_a3483a4e70c760dca3b167637810256d3}} 
+\index{booksOperations.c@{booksOperations.c}!RemoverNodoABP@{RemoverNodoABP}}
+\index{RemoverNodoABP@{RemoverNodoABP}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{RemoverNodoABP()}{RemoverNodoABP()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Remover\+Nodo\+A\+BP (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Remove a node from the search tree 
+\begin{DoxyParams}{Parameters}
+{\em T} & tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+tree without that node 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a78eb5a824627a8b0acb6e1eabbab644c}\label{booksOperations_8c_a78eb5a824627a8b0acb6e1eabbab644c}} 
+\index{booksOperations.c@{booksOperations.c}!restockBook@{restockBook}}
+\index{restockBook@{restockBook}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{restockBook()}{restockBook()}}
+{\footnotesize\ttfamily void restock\+Book (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN,  }\item[{int}]{qtd }\end{DoxyParamCaption})}
+
+Restock the book 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em I\+S\+BN} & the specified I\+S\+BN \\
+\hline
+{\em qtd} & the quantity to add to the stock \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a83c6fb11bb3e227cce3dc0e6fc92ee31}\label{booksOperations_8c_a83c6fb11bb3e227cce3dc0e6fc92ee31}} 
+\index{booksOperations.c@{booksOperations.c}!setBookQuantity@{setBookQuantity}}
+\index{setBookQuantity@{setBookQuantity}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{setBookQuantity()}{setBookQuantity()}}
+{\footnotesize\ttfamily void set\+Book\+Quantity (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{long int}]{I\+S\+BN,  }\item[{int}]{qtd }\end{DoxyParamCaption})}
+
+set the quantity of a book 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+{\em I\+S\+BN} & the identifier of the book \\
+\hline
+{\em qtd} & the quantity to be removed from that book \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a04f03e9c10e7fadb62591d62347aab61}\label{booksOperations_8c_a04f03e9c10e7fadb62591d62347aab61}} 
+\index{booksOperations.c@{booksOperations.c}!showALL@{showALL}}
+\index{showALL@{showALL}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{showALL()}{showALL()}}
+{\footnotesize\ttfamily void show\+A\+LL (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Show all the books 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a6778aeb2035da9f4b8749acb4f431524}\label{booksOperations_8c_a6778aeb2035da9f4b8749acb4f431524}} 
+\index{booksOperations.c@{booksOperations.c}!showCientificAreaWithMoreBooks@{showCientificAreaWithMoreBooks}}
+\index{showCientificAreaWithMoreBooks@{showCientificAreaWithMoreBooks}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{showCientificAreaWithMoreBooks()}{showCientificAreaWithMoreBooks()}}
+{\footnotesize\ttfamily void show\+Cientific\+Area\+With\+More\+Books (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Check which cientific area has the most books and print in the screen \mbox{\Hypertarget{booksOperations_8c_a8c2aeee4753a4fa31ab60ae8573da035}\label{booksOperations_8c_a8c2aeee4753a4fa31ab60ae8573da035}} 
+\index{booksOperations.c@{booksOperations.c}!showMostRecentCientificArea@{showMostRecentCientificArea}}
+\index{showMostRecentCientificArea@{showMostRecentCientificArea}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{showMostRecentCientificArea()}{showMostRecentCientificArea()}}
+{\footnotesize\ttfamily void show\+Most\+Recent\+Cientific\+Area (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Determine the k most recent books of a cientific area 
+\begin{DoxyParams}{Parameters}
+{\em T} & tree of books \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a3dcc54f76560e58768164fb0e0a185b6}\label{booksOperations_8c_a3dcc54f76560e58768164fb0e0a185b6}} 
+\index{booksOperations.c@{booksOperations.c}!showYearWithMorePublications@{showYearWithMorePublications}}
+\index{showYearWithMorePublications@{showYearWithMorePublications}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{showYearWithMorePublications()}{showYearWithMorePublications()}}
+{\footnotesize\ttfamily void show\+Year\+With\+More\+Publications (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Check which year has more publications and print in the screen \mbox{\Hypertarget{booksOperations_8c_af4e72984a6069b1bcbf8bed8d75bb4c1}\label{booksOperations_8c_af4e72984a6069b1bcbf8bed8d75bb4c1}} 
+\index{booksOperations.c@{booksOperations.c}!SubstituirNodoDireita@{SubstituirNodoDireita}}
+\index{SubstituirNodoDireita@{SubstituirNodoDireita}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{SubstituirNodoDireita()}{SubstituirNodoDireita()}}
+{\footnotesize\ttfamily P\+Nodo\+AB Substituir\+Nodo\+Direita (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T,  }\item[{L\+I\+V\+RO $\ast$}]{X }\end{DoxyParamCaption})}
+
+Change the information of a node to be removed with information from his successor 
+\begin{DoxyParams}{Parameters}
+{\em T} & pointer to the node to be removed \\
+\hline
+{\em X} & element to be removed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+pointer to the first element of the tree and the element removed 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_ad0bd466acc9a3e2f567b740e8cee1d37}\label{booksOperations_8c_ad0bd466acc9a3e2f567b740e8cee1d37}} 
+\index{booksOperations.c@{booksOperations.c}!verificarEquilibrio@{verificarEquilibrio}}
+\index{verificarEquilibrio@{verificarEquilibrio}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{verificarEquilibrio()}{verificarEquilibrio()}}
+{\footnotesize\ttfamily int verificar\+Equilibrio (\begin{DoxyParamCaption}\item[{P\+Nodo\+AB}]{T }\end{DoxyParamCaption})}
+
+Verify if a tree is balanced or not 
+\begin{DoxyParams}{Parameters}
+{\em T} & the book\textquotesingle{}s tree \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if thr tree isn\textquotesingle{}t balanced or 1 otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{booksOperations_8c_a0df818b65d9d1ee70c9765b46229526b}\label{booksOperations_8c_a0df818b65d9d1ee70c9765b46229526b}} 
+\index{booksOperations.c@{booksOperations.c}!verifyIfExistsCientificArea@{verifyIfExistsCientificArea}}
+\index{verifyIfExistsCientificArea@{verifyIfExistsCientificArea}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{verifyIfExistsCientificArea()}{verifyIfExistsCientificArea()}}
+{\footnotesize\ttfamily void verify\+If\+Exists\+Cientific\+Area (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Verify if a specified cientific Area exists. If it didn\textquotesingle{}t exists we put a new cientific area to the struct C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD. if exists we increase the quantity. 
+\begin{DoxyParams}{Parameters}
+{\em X} & the book to see \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{booksOperations_8c_a0183b7625be80f87876f92489e3cc323}\label{booksOperations_8c_a0183b7625be80f87876f92489e3cc323}} 
+\index{booksOperations.c@{booksOperations.c}!verifyIfExistsYear@{verifyIfExistsYear}}
+\index{verifyIfExistsYear@{verifyIfExistsYear}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{verifyIfExistsYear()}{verifyIfExistsYear()}}
+{\footnotesize\ttfamily void verify\+If\+Exists\+Year (\begin{DoxyParamCaption}\item[{L\+I\+V\+RO}]{X }\end{DoxyParamCaption})}
+
+Verify if a specified year exists. If it didn\textquotesingle{}t exists we put a new year to the struct P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR. if exists we increase the quantity. 
+\begin{DoxyParams}{Parameters}
+{\em X} & the book to see \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{booksOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{booksOperations_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{booksOperations.c@{booksOperations.c}!Books@{Books}}
+\index{Books@{Books}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{booksOperations_8c_a2d76d3320774d91c1014dcf6c04e8e3e}\label{booksOperations_8c_a2d76d3320774d91c1014dcf6c04e8e3e}} 
+\index{booksOperations.c@{booksOperations.c}!cientific\_qtd@{cientific\_qtd}}
+\index{cientific\_qtd@{cientific\_qtd}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{cientific\_qtd}{cientific\_qtd}}
+{\footnotesize\ttfamily C\+I\+E\+N\+T\+I\+F\+I\+C\+\_\+\+Q\+TD$\ast$ cientific\+\_\+qtd}
+
+\mbox{\Hypertarget{booksOperations_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}\label{booksOperations_8c_a5d4b4a7a9426cb02e585afeed1d32a9e}} 
+\index{booksOperations.c@{booksOperations.c}!num\_cientific\_qtd@{num\_cientific\_qtd}}
+\index{num\_cientific\_qtd@{num\_cientific\_qtd}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{num\_cientific\_qtd}{num\_cientific\_qtd}}
+{\footnotesize\ttfamily int num\+\_\+cientific\+\_\+qtd}
+
+\mbox{\Hypertarget{booksOperations_8c_a403b730769758428ae61a52225ce9b78}\label{booksOperations_8c_a403b730769758428ae61a52225ce9b78}} 
+\index{booksOperations.c@{booksOperations.c}!num\_publish\_year@{num\_publish\_year}}
+\index{num\_publish\_year@{num\_publish\_year}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{num\_publish\_year}{num\_publish\_year}}
+{\footnotesize\ttfamily int num\+\_\+publish\+\_\+year}
+
+\mbox{\Hypertarget{booksOperations_8c_a251a19153cd871866afa2d0378005133}\label{booksOperations_8c_a251a19153cd871866afa2d0378005133}} 
+\index{booksOperations.c@{booksOperations.c}!publish\_year@{publish\_year}}
+\index{publish\_year@{publish\_year}!booksOperations.c@{booksOperations.c}}
+\doxysubsubsection{\texorpdfstring{publish\_year}{publish\_year}}
+{\footnotesize\ttfamily P\+U\+B\+L\+I\+S\+H\+\_\+\+Y\+E\+AR$\ast$ publish\+\_\+year =N\+U\+LL}
+

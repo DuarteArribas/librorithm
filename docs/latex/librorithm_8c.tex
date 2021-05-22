@@ -1,0 +1,94 @@
+\hypertarget{librorithm_8c}{}\doxysection{src/librorithm.c File Reference}
+\label{librorithm_8c}\index{src/librorithm.c@{src/librorithm.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/utsname.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}handlers.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}menu.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}file\+Handling.\+h\char`\"{}}\newline
+Include dependency graph for librorithm.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{librorithm_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\item 
+void \mbox{\hyperlink{librorithm_8c_aeb94fbd457627182ceee7e505f432541}{cleanup}} (void)
+\item 
+void \mbox{\hyperlink{librorithm_8c_a7fc857a696d7712d065c9dba65c0093b}{setup\+Prompt}} (void)
+\item 
+void \mbox{\hyperlink{librorithm_8c_a2dbe1cf2d8881afe92c984d67cbf8656}{print\+Prompt}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+char \mbox{\hyperlink{librorithm_8c_a280a9739d510f301d415bfb166b3eae4}{prompt}} \mbox{[}100\mbox{]} =\char`\"{}admin@\char`\"{}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{librorithm_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{librorithm_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{librorithm_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{librorithm_8c_aeb94fbd457627182ceee7e505f432541}\label{librorithm_8c_aeb94fbd457627182ceee7e505f432541}} 
+\index{librorithm.c@{librorithm.c}!cleanup@{cleanup}}
+\index{cleanup@{cleanup}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{cleanup()}{cleanup()}}
+{\footnotesize\ttfamily void cleanup (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Frees and cleans up memory to avoid memory leaks \mbox{\Hypertarget{librorithm_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{librorithm_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{librorithm.c@{librorithm.c}!main@{main}}
+\index{main@{main}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{librorithm_8c_a2dbe1cf2d8881afe92c984d67cbf8656}\label{librorithm_8c_a2dbe1cf2d8881afe92c984d67cbf8656}} 
+\index{librorithm.c@{librorithm.c}!printPrompt@{printPrompt}}
+\index{printPrompt@{printPrompt}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{printPrompt()}{printPrompt()}}
+{\footnotesize\ttfamily void print\+Prompt (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Prints the prompt \mbox{\Hypertarget{librorithm_8c_a7fc857a696d7712d065c9dba65c0093b}\label{librorithm_8c_a7fc857a696d7712d065c9dba65c0093b}} 
+\index{librorithm.c@{librorithm.c}!setupPrompt@{setupPrompt}}
+\index{setupPrompt@{setupPrompt}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{setupPrompt()}{setupPrompt()}}
+{\footnotesize\ttfamily void setup\+Prompt (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Sets up the initial admin prompt 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{librorithm_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{librorithm_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{librorithm.c@{librorithm.c}!Books@{Books}}
+\index{Books@{Books}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{librorithm_8c_a86272725e5b2c36822c3a4b13795da37}\label{librorithm_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{librorithm.c@{librorithm.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+
+\mbox{\Hypertarget{librorithm_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{librorithm_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{librorithm.c@{librorithm.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+
+\mbox{\Hypertarget{librorithm_8c_a280a9739d510f301d415bfb166b3eae4}\label{librorithm_8c_a280a9739d510f301d415bfb166b3eae4}} 
+\index{librorithm.c@{librorithm.c}!prompt@{prompt}}
+\index{prompt@{prompt}!librorithm.c@{librorithm.c}}
+\doxysubsubsection{\texorpdfstring{prompt}{prompt}}
+{\footnotesize\ttfamily char prompt\mbox{[}100\mbox{]} =\char`\"{}admin@\char`\"{}}
+

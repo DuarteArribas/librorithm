@@ -1,0 +1,83 @@
+\hypertarget{fileHandling_8c}{}\doxysection{src/file\+Handling.c File Reference}
+\label{fileHandling_8c}\index{src/fileHandling.c@{src/fileHandling.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}file\+Handling.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}librorithm.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}mem.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}client.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}order.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}books\+Operations.\+h\char`\"{}}\newline
+Include dependency graph for file\+Handling.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{fileHandling_8c_a446e4eddadd3ba4fd60da8338a22348a}{new\+File}} (void)
+\item 
+void \mbox{\hyperlink{fileHandling_8c_a09fc034be98a4a376bdad3b4397618b0}{new\+Data\+Structures}} (void)
+\item 
+void \mbox{\hyperlink{fileHandling_8c_a263e80b89d2729ec574a4eddb61966a7}{save\+File}} (void)
+\item 
+void \mbox{\hyperlink{fileHandling_8c_accb26ab015ab355aa06d8827e66286b8}{open\+File}} (void)
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+client\+N\+O\+DE $\ast$ \mbox{\hyperlink{fileHandling_8c_a86272725e5b2c36822c3a4b13795da37}{clientlist}}
+\item 
+O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE $\ast$ \mbox{\hyperlink{fileHandling_8c_a1d9da2154b19b995f161a03bfa0f5c1d}{order\+Queue}}
+\item 
+P\+Nodo\+AB \mbox{\hyperlink{fileHandling_8c_a318c1d91dd5fe260b9449d78247d59d1}{Books}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{fileHandling_8c_a09fc034be98a4a376bdad3b4397618b0}\label{fileHandling_8c_a09fc034be98a4a376bdad3b4397618b0}} 
+\index{fileHandling.c@{fileHandling.c}!newDataStructures@{newDataStructures}}
+\index{newDataStructures@{newDataStructures}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{newDataStructures()}{newDataStructures()}}
+{\footnotesize\ttfamily void new\+Data\+Structures (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Creates and overrides new data\+Structures \mbox{\Hypertarget{fileHandling_8c_a446e4eddadd3ba4fd60da8338a22348a}\label{fileHandling_8c_a446e4eddadd3ba4fd60da8338a22348a}} 
+\index{fileHandling.c@{fileHandling.c}!newFile@{newFile}}
+\index{newFile@{newFile}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{newFile()}{newFile()}}
+{\footnotesize\ttfamily void new\+File (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Creates and overrides new files \mbox{\Hypertarget{fileHandling_8c_accb26ab015ab355aa06d8827e66286b8}\label{fileHandling_8c_accb26ab015ab355aa06d8827e66286b8}} 
+\index{fileHandling.c@{fileHandling.c}!openFile@{openFile}}
+\index{openFile@{openFile}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{openFile()}{openFile()}}
+{\footnotesize\ttfamily void open\+File (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Opens the contents of the three structures on the files to their respective structures \mbox{\Hypertarget{fileHandling_8c_a263e80b89d2729ec574a4eddb61966a7}\label{fileHandling_8c_a263e80b89d2729ec574a4eddb61966a7}} 
+\index{fileHandling.c@{fileHandling.c}!saveFile@{saveFile}}
+\index{saveFile@{saveFile}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{saveFile()}{saveFile()}}
+{\footnotesize\ttfamily void save\+File (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+Saves the contents of the three structures of the program into their respective files 
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{fileHandling_8c_a318c1d91dd5fe260b9449d78247d59d1}\label{fileHandling_8c_a318c1d91dd5fe260b9449d78247d59d1}} 
+\index{fileHandling.c@{fileHandling.c}!Books@{Books}}
+\index{Books@{Books}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{Books}{Books}}
+{\footnotesize\ttfamily P\+Nodo\+AB Books}
+
+\mbox{\Hypertarget{fileHandling_8c_a86272725e5b2c36822c3a4b13795da37}\label{fileHandling_8c_a86272725e5b2c36822c3a4b13795da37}} 
+\index{fileHandling.c@{fileHandling.c}!clientlist@{clientlist}}
+\index{clientlist@{clientlist}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{clientlist}{clientlist}}
+{\footnotesize\ttfamily client\+N\+O\+DE$\ast$ clientlist}
+
+\mbox{\Hypertarget{fileHandling_8c_a1d9da2154b19b995f161a03bfa0f5c1d}\label{fileHandling_8c_a1d9da2154b19b995f161a03bfa0f5c1d}} 
+\index{fileHandling.c@{fileHandling.c}!orderQueue@{orderQueue}}
+\index{orderQueue@{orderQueue}!fileHandling.c@{fileHandling.c}}
+\doxysubsubsection{\texorpdfstring{orderQueue}{orderQueue}}
+{\footnotesize\ttfamily O\+R\+D\+E\+R\+\_\+\+N\+O\+D\+E\+\_\+\+Q\+U\+E\+UE$\ast$ order\+Queue}
+
