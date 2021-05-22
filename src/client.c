@@ -442,7 +442,7 @@ static void copylinkedlist(clientNODE **dest,clientNODE *src){
 }
 
 /**
- * Helps in mergin the left and right parts
+ * Helps in merging the left and right parts
  * @param *list1 the left list
  * @param *list2 the right list
  * @return the merged lists
