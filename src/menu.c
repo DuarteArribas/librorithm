@@ -642,10 +642,10 @@ void operationMenu(void){
           showYearWithMorePublications();
           free(publish_year);
           num_cientific_qtd=1;
-        }else{
+        }
+        else{
           emptybookstreeWarning();
         }
-        
         break;
       case 10:
         getYear(yearTemp,&year);

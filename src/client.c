@@ -667,7 +667,8 @@ void clientThatWastedMore(const uint8_t month,const uint16_t year){
     fprintf(stderr,"\tERROR: There aren't any clients that wasted money on that date!\n");
   }
   else{
-    printf("%lf\n",maxTotalPrice);
+    printf("===========================================\n");
+    printf("\tThe client wasted %lf€\n",maxTotalPrice);
     printClient(client);
   }
 }
