@@ -526,6 +526,10 @@ static void printReverse(clientNODE *head){
  * Shows the clients in reverse order of number of purchases
  */
 void showClientsDec(void){
+  if(clientlist==NULL){
+    fprintf(stderr,"\tERROR: There are no clients on the system!\n");
+    return;
+  }
   clientNODE *clientTemp=NULL;
   copylinkedlist(&clientTemp,clientlist);
   mergeSort(&clientTemp);
