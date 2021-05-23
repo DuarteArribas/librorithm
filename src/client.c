@@ -541,6 +541,9 @@ CLIENT clientWithMostBooks(void){
   size_t max=0,maxTemp=0;
   CLIENT maxClient;
   clientNODE *clientTemp=clientlist;
+  if(clientTemp==NULL){
+    return (CLIENT){.NIF=0};
+  }
   while(clientTemp!=NULL){
     for(size_t i=0;i<clientTemp->data.numOfOrders;i++){
       maxTemp+=clientTemp->data.orders[i].quantity;

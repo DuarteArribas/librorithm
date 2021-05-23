@@ -515,6 +515,10 @@ static void showOrders(const CLIENT client){
  * @param client the client to print
  */
 void printClient(const CLIENT client){
+  if(client.NIF==0){
+    fprintf(stderr,"\tERROR: Client doesn't exist!\n");
+    return;
+  }
   printRegularProperties(client);
   if(client.numOfOrders!=0){
     if(canShowOrders()){
