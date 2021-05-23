@@ -326,36 +326,53 @@ void booksubMenuShow(void){
     option=getOption();
     switch(option){
       case 1:
-        if(!getISBN(&ISBN)){
-          fprintf(stderr,"\tACTION CANCELED: No ISBN read!\n");
-          continue;
+        if(Books==NULL){
+          emptybookstreeWarning();
+        }else{
+          if(!getISBN(&ISBN)){
+            fprintf(stderr,"\tACTION CANCELED: No ISBN read!\n");
+            continue;
+          }
+          PesquisarABPISBN(Books, ISBN);
         }
-        PesquisarABPISBN(Books, ISBN);
         break;
       case 2:
-        printf("     What's the Title? (0 to CANCEL) \n");
-        getString(title, 100);
-        if(strcmp(title, "0")==0){
-          fprintf(stderr,"\tACTION CANCELED: No title read!\n");
-          break;
+        if(Books==NULL){
+          emptybookstreeWarning();
+        }else{
+          printf("     What's the Title? (0 to CANCEL) \n");
+          getString(title, 100);
+          if(strcmp(title, "0")==0){
+            fprintf(stderr,"\tACTION CANCELED: No title read!\n");
+            break;
+          }
+          PesquisarABPTitle(Books, title);
         }
-        PesquisarABPTitle(Books, title);
         break;
       case 3:
-        printf("     What's the First Author? (0 to CANCEL) \n");
-        getString(firstAuthor, 100);
-        if(strcmp(firstAuthor, "0")==0){
-          fprintf(stderr,"\tACTION CANCELED: No first author read!\n");
-          break;
+        if(Books==NULL){
+          emptybookstreeWarning();
+        }else{
+          printf("     What's the First Author? (0 to CANCEL) \n");
+          getString(firstAuthor, 100);
+          if(strcmp(firstAuthor, "0")==0){
+            fprintf(stderr,"\tACTION CANCELED: No first author read!\n");
+            break;
+          }
+          if(!getPublicationYear(&yearPublish)){
+            fprintf(stderr,"\tACTION CANCELED: No year read!\n");
+            continue;
+          }
+          PesquisarABPAuthorYear(Books, firstAuthor,yearPublish);
         }
-        if(!getPublicationYear(&yearPublish)){
-          fprintf(stderr,"\tACTION CANCELED: No year read!\n");
-          continue;
-        }
-        PesquisarABPAuthorYear(Books, firstAuthor,yearPublish);
         break;
       case 4:
-        showALL(Books);
+        if(Books==NULL){
+          emptybookstreeWarning();
+        }else{
+          showALL(Books);
+        }
+        
         break;
       case 0:
         exit=true;
@@ -388,7 +405,7 @@ void bookChangeMenu(void){
         break;
       case 2:
         if(getISBN(&ISBN) && getStock(&stock)){
-          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})!=1){
+          if(PesquisarABP(Books,(LIVRO){.ISBN=ISBN})==0){
             unregisteredBookWarning();
           }else{
             restockBook(Books, ISBN, stock);
@@ -599,12 +616,17 @@ void operationMenu(void){
         showBestSoldBooks(clientlist,3);
         break;
       case 6:
-        num_cientific_qtd=0;
-        cientific_qtd=malloc(1 * sizeof(CIENTIFIC_QTD));
-        cientificAreaAndYearWithMoreBooks(Books,1);
-        showCientificAreaWithMoreBooks();
-        free(cientific_qtd);
-        num_cientific_qtd=1;
+        if(Books!=NULL){
+          num_cientific_qtd=0;
+          cientific_qtd=malloc(1 * sizeof(CIENTIFIC_QTD));
+          cientificAreaAndYearWithMoreBooks(Books,1);
+          showCientificAreaWithMoreBooks();
+          free(cientific_qtd);
+          num_cientific_qtd=1;
+        }else{
+          emptybookstreeWarning();
+        }
+        
         break;
       case 7:
         printClient(clientWithMostBooks());
@@ -613,12 +635,17 @@ void operationMenu(void){
         showClientsDec();
         break;
       case 9:
-        num_publish_year=0;
-        publish_year=malloc(1 * sizeof(PUBLISH_YEAR));
-        cientificAreaAndYearWithMoreBooks(Books, 2);
-        showYearWithMorePublications();
-        free(publish_year);
-        num_cientific_qtd=1;
+        if(Books!=NULL){
+          num_publish_year=0;
+          publish_year=malloc(1 * sizeof(PUBLISH_YEAR));
+          cientificAreaAndYearWithMoreBooks(Books, 2);
+          showYearWithMorePublications();
+          free(publish_year);
+          num_cientific_qtd=1;
+        }else{
+          emptybookstreeWarning();
+        }
+        
         break;
       case 10:
         getYear(yearTemp,&year);

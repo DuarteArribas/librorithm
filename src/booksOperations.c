@@ -358,27 +358,29 @@ void PesquisarABPEditorCientificArea(PNodoAB T, char editor[100], char cientific
  */
 PNodoAB changeBookISBN(PNodoAB P,long int ISBN){
   if (P == NULL)
-    return P;
+    return Books;
+
   if (CompareBooksISBN(P->Elemento, ISBN) == 0){
     LIVRO X = createBook();
     if(X.ISBN==-1){
-      return P;
+      return Books;
     }
-    while(X.ISBN!=ISBN && PesquisarABP(P,X)==1){
+    while(X.ISBN!=ISBN && PesquisarABP(Books,X)==1){
       bookAlreadyExistsWarning();
       X=createBook();
       if(X.ISBN==-1){
-        return P;
+        return Books;
       }  
     }
     
-    P=RemoverNodoABP(P);
-    P=InserirABP(P,X);
+    Books=RemoverABP(Books, P->Elemento);
+    Books=InserirABP(Books,X);
     
-    if(verificarEquilibrio(P)==0){
-      P=CriarABPEquilibradaIB(P);
+    if(verificarEquilibrio(Books)==0){
+      P=CriarABPEquilibradaIB(Books);
     }
-    return P;
+    
+    return Books;
   }
 
   if (CompareBooksISBN(P->Elemento, ISBN)==-1)   
@@ -784,7 +786,7 @@ void restockBook(PNodoAB T, long int ISBN, int qtd){
   }else if(CompareBooksISBN(T->Elemento, ISBN)==-1){
     restockBook(T->Direita, ISBN, qtd);
   }else{
-    restockBook(T->Direita, ISBN, qtd);
+    restockBook(T->Esquerda, ISBN, qtd);
   }
 }
 
